@@ -1,7 +1,7 @@
 #===============================================================================
 # SM 13/9/2016
-# The following code is used to convert kappa, thetaJ to lal_coordinates. 
-# The code returns inclination angle, psi0, and spin components of M1. 
+# The following code is used to convert kappa, thetaJ to lal_coordinates.
+# The code returns inclination angle, psi0, and spin components of M1.
 
 # Note : This version of the code works on lal-version: 6.16.1.1. It may not work in earlier versions (you may have to remove or modify line 53) since the
 # coordinate coversion implemented in LALSimInspiral.c is different in the earlier versions, namely: 6.14.0.1
@@ -34,16 +34,16 @@ def rotateZ(lst, angle):
 	return [lst[0]*cosR - lst[1]*sinR, lst[0]*sinR + lst[1]*cosR, lst[2]]
 
 def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f_inj):
-    
+
     v0 = np.power(np.pi*MTSUN_SI*(m1+m2)*f_inj, 1./3.)
     gamma = m1*chi1*v0/m2
     denom = np.sqrt(1. + 2.*kappa*gamma + gamma*gamma)
     sinB, cosB = gamma*np.sqrt(1.-kappa*kappa)/denom, (1. + kappa*gamma)/denom
     sinA, cosA = np.sin(alpha0), np.cos(alpha0)
-    
+
     lhat = [sinB*cosA, sinB*sinA, cosB]
     shat = [-sinB*cosA/gamma, -sinB*sinA/gamma, (kappa+gamma)/denom]
-    
+
     lhat = rotateZ(rotateY(lhat, thetaJ), psiJ)
     shat = rotateZ(rotateY(shat, thetaJ), psiJ)
 
@@ -52,7 +52,7 @@ def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f_inj):
     shat = rotateZ(shat, -psi0)
 
     shat = rotateY(shat, -incl) # Additional rotation.
-    
+
     spin = chi1*np.array(shat)  # Returns spin, not Shat.
-    
+
     return (incl, psi0, spin)
