@@ -44,8 +44,8 @@ options = {
     'F_MAX'  : 2000.,
     'BAND'   : None}
 
-N = 3
-M = 2
+N = 1
+M = 1
 
 V_MASS1   = np.linspace(10.4, 50.0,  M)
 V_CHI1    = np.linspace(0.5, 1.00,  M)
@@ -78,11 +78,11 @@ for _mass1 in xrange(M):
 
         iter_I   = 0
         MCHIRP, ETA = m1m2_to_mchirpeta(options['M1'], options['M2'])
-        
+
         print 50*"-"
         print "eta: %r \t chi1: %r" %(ETA, V_CHI1[_chi1])
         print 50*"-" + "\n"
-        
+
         filename = "overlaps_eta_%s_chi1_%s_N_%r.npz" \
         %('{:.2f}'.format(ETA),'{:.2f}'.format(V_CHI1[_chi1]) , N)
 
@@ -120,8 +120,8 @@ for _mass1 in xrange(M):
 
 print "Finished creating datasets."
 
-if generate_plots == 1:    
+if generate_plots == 1:
     print "\nGenerating plots..."
     vs.visualize_OVLP(output_dir)
     vsg.visualize_OLVP_grid(output_dir)
-    
+
