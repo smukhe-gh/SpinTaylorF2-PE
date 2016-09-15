@@ -1,7 +1,6 @@
 #=======================================================================
 # Plots the OLVPs over the parameter space.
-# SM 13/ 16
-# TODO: Add support for SpinTaylorF2
+# SM 15/16
 #=======================================================================
 
 import numpy as np
@@ -18,7 +17,7 @@ matplotlib.rcParams.update({
         "xtick.labelsize": 8.0,
         "ytick.labelsize": 8.0,
         "legend.fontsize": 8.0,
-        "figure.figsize": (20.3, 20.3*goldenratio),
+        "figure.figsize": (20.3, 25.3*goldenratio),
         "figure.dpi": 300,
       # "subplots.left": 0.2,
       # "subplots.right": 0.75,
@@ -28,92 +27,96 @@ matplotlib.rcParams.update({
         "text.usetex": True
 })
 
-files = glob.glob("../../output/overlaps_eta_*_chi1_*_N_*.npz")
+def visualize_OVLP(output_dir):
 
-if not os.path.exists("../../output"):
-    os.makedirs("../../output")
+    files = glob.glob("../../output/datasets/%s/overlaps*" %output_dir)
 
-if not os.path.exists("../../output/plots"):
-    os.makedirs("../../output/plots")
+    if not os.path.exists("../../output/plots/%s"%output_dir):
+        os.makedirs("../../output/plots/%s"%output_dir)
 
-for file in files:
-    data = np.load(file)
+    for file in files:
 
-    plt.cm = plt.get_cmap('viridis')
-    fig = plt.figure()
-    fig.suptitle('SpinTaylorF2: Overlaps, '+ r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
-    plt.rc('text', usetex=True)
-    plt.rc('font', family='serif',size=18)
+        data = np.load(file)
 
-    plt.subplot(2,4,1)
-    plt.ylabel(r'$\kappa$')
-    plt.xlabel(r'$\theta_J$')
-    plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_P2'])
-    plt.clim(-0.02,1.)
-    plt.grid()
-    plt.title('Overlap (m = 2)')
-    plt.colorbar()
+        plt.cm = plt.get_cmap('viridis')
+        fig = plt.figure()
+        fig.suptitle('Overlaps + SNR, '+ r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
+        plt.rc('text', usetex=True)
+        plt.rc('font', family='serif',size=18)
 
-    plt.subplot(2,4,2)
-    plt.ylabel(r'$\kappa$')
-    plt.xlabel(r'$\theta_J$')
-    plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_P1'])
-    plt.clim(-0.02,1.)
-    plt.grid()
-    plt.title('Overlap (m = 1)')
-    plt.colorbar()
+        plt.subplot(3,3,1)
+        plt.xlabel(r'$\kappa$')
+        plt.ylabel(r'$\theta_J$')
+        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_P2'])
+        plt.grid()
+        plt.title(r'$O$' + ' (m = 2)')
+        plt.colorbar()
 
-    plt.subplot(2,4,3)
-    plt.ylabel(r'$\kappa$')
-    plt.xlabel(r'$\theta_J$')
-    plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_P0'])
-    plt.clim(-0.02,1.)
-    plt.grid()
-    plt.title('Overlap (m = 0)')
-    plt.colorbar()
+        plt.subplot(3,3,2)
+        plt.xlabel(r'$\kappa$')
+        plt.ylabel(r'$\theta_J$')
+        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_P1'])
+        plt.grid()
+        plt.title(r'$O$' + ' (m = 1)')
+        plt.colorbar()
 
-    plt.subplot(2,4,4)
-    plt.ylabel(r'$\kappa$')
-    plt.xlabel(r'$\theta_J$')
-    plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_M1'])
-    plt.clim(-0.02,1.)
-    plt.grid()
-    plt.title('Overlap (m = -1)')
-    plt.colorbar()
+        plt.subplot(3,3,3)
+        plt.ylabel(r'$\kappa$')
+        plt.ylabel(r'$\theta_J$')
+        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_P0'])
+        plt.grid()
+        plt.title(r'$O$' + ' (m = 0)')
+        plt.colorbar()
 
-    plt.subplot(2,4,5)
-    plt.ylabel(r'$\kappa$')
-    plt.xlabel(r'$\theta_J$')
-    plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_M2'])
-    plt.clim(-0.02,1.)
-    plt.grid()
-    plt.title('Overlap (m = -2)')
-    plt.colorbar()
+        plt.subplot(3,3,4)
+        plt.xlabel(r'$\kappa$')
+        plt.ylabel(r'$\theta_J$')
+        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_M1'])
+        plt.grid()
+        plt.title(r'$O$' + ' (m = -1)')
+        plt.colorbar()
 
-    plt.subplot(2,4,6)
-    plt.ylabel(r'$\kappa$')
-    plt.xlabel(r'$\theta_J$')
-    plt.contourf(data['THETAJ'],data['KAPPA'],data['SNR_00'])
-    plt.grid()
-    plt.title('SNR ($m=0$)')
-    plt.colorbar()
+        plt.subplot(3,3,5)
+        plt.xlabel(r'$\kappa$')
+        plt.ylabel(r'$\theta_J$')
+        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_M2'])
+        plt.grid()
+        plt.title(r'$O$' + ' (m = -2)')
+        plt.colorbar()
 
-    plt.subplot(2,4,7)
-    plt.ylabel(r'$\kappa$')
-    plt.xlabel(r'$\theta_J$')
-    plt.contourf(data['THETAJ'],data['KAPPA'],data['SNR_02'])
-    plt.grid()
-    plt.title('SNR ($m=2$)')
-    plt.colorbar()
+        plt.subplot(3,3,6)
+        plt.xlabel(r'$\kappa$')
+        plt.ylabel(r'$\theta_J$')
+        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_P2P0'])
+        plt.grid()
+        plt.title(r'$O$' + ' ($m=0 + m=2$)')
+        plt.colorbar()
 
-    plt.subplot(2,4,8)
-    plt.ylabel(r'$\kappa$')
-    plt.xlabel(r'$\theta_J$')
-    plt.contourf(data['THETAJ'],data['KAPPA'],data['SNR_0F'])
-    plt.grid()
-    plt.title('SNR (Full waveform)')
-    plt.colorbar()
+        plt.subplot(3,3,7)
+        plt.xlabel(r'$\kappa$')
+        plt.ylabel(r'$\theta_J$')
+        plt.contourf(data['THETAJ'],data['KAPPA'],data['SNR_00'])
+        plt.grid()
+        plt.title('SNR ($m=0$)')
+        plt.colorbar()
 
-    plt.savefig('../../output/plots/' + 'OVLPS_CHI1_%1.2f_'%data['CHI1'] + 'ETA_%1.2f'%data['ETA'] + '.pdf')
+        plt.subplot(3,3,8)
+        plt.xlabel(r'$\kappa$')
+        plt.ylabel(r'$\theta_J$')
+        plt.contourf(data['THETAJ'],data['KAPPA'],data['SNR_02'])
+        plt.grid()
+        plt.title('SNR ($m=2$)')
+        plt.colorbar()
 
+        plt.subplot(3,3,9)
+        plt.xlabel(r'$\kappa$')
+        plt.ylabel(r'$\theta_J$')
+        plt.contourf(data['THETAJ'],data['KAPPA'],data['SNR_0F'])
+        plt.grid()
+        plt.title('SNR (Full waveform)')
+        plt.colorbar()
 
+        plt.savefig('../../output/plots/%s/'%(output_dir) + 'OVLP_CHI1_%1.2f_'%data['CHI1'] + 'ETA_%1.2f'%data['ETA'] + '.pdf')
+        plt.close()
+        
+    return None
