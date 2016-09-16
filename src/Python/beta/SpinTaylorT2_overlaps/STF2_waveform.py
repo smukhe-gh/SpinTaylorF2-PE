@@ -70,6 +70,7 @@ def generate_STT2_template(**options):
 
     # FIXME: Number of samples of the waveform.
     nsamples  = int((options['F_MAX'])/options['DEL_F']) + 1
+    DEL_T = 1./((2*nsamples-1)*options['DEL_F'])
 
     hpluss, hcross = get_td_waveform(
 
@@ -99,11 +100,14 @@ def generate_STT2_template(**options):
         )
 
     sin2Y, cos2Y = np.sin(2.*psi0), np.cos(2.*psi0)
-    
+
     #Converting to frequency domain here.
-    hpluss = hpluss.to_frequencyseries(delta_f)
-    hcross = hrcoss.to_frequencyseries(delta_f)
-    
+    hpluss = hpluss.to_frequencyseries(options['DEL_F'])
+    hcross = hcross.to_frequencyseries(options['DEL_F'])
+
+    F = hpluss.sample_frequencies.data
+    print F[1] - F[0]
+
     hp   = pycbc.DYN_RANGE_FAC*hpluss
     hc   = pycbc.DYN_RANGE_FAC*hcross
 

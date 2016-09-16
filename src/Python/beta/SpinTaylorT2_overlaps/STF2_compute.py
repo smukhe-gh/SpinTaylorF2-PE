@@ -44,8 +44,8 @@ options = {
     'F_MAX'  : 2000.,
     'BAND'   : None}
 
-N = 1
-M = 1
+N = 2
+M = 2
 
 V_MASS1   = np.linspace(10.4, 50.0,  M)
 V_CHI1    = np.linspace(0.5, 1.00,  M)
@@ -105,7 +105,7 @@ for _mass1 in xrange(M):
                     DATE   = strftime("%Y-%m-%d %H:%M:%S", gmtime()),
                     SNR_T2 = OVLP[:, :, 0],
                     SNR_0F = OVLP[:, :, 1],
-                    
+
                     OLVP_T2_0F = OVLP[:, :, 2],
                     OLVP_T2_P2 = OVLP[:, :, 3],
                     OLVP_T2_P1 = OVLP[:, :, 4],
@@ -113,7 +113,7 @@ for _mass1 in xrange(M):
                     OLVP_T2_M1 = OVLP[:, :, 6],
                     OLVP_T2_M2 = OVLP[:, :, 7],
                     OLVP_T2_P2P0 = OVLP[:, :, 8],
-                    
+
                     THETAJ = V_THETAJ,
                     KAPPA  = V_KAPPA,
                     CHI1   = V_CHI1[_chi1],

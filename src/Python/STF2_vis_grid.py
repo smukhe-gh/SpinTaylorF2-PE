@@ -19,22 +19,20 @@ matplotlib.rcParams.update({
         "legend.fontsize": 8.0,
         "figure.figsize": (20.3, 25.3*goldenratio),
         "figure.dpi": 300,
-      # "subplots.left": 0.2,
-      # "subplots.right": 0.75,
-      # "subplots.bottom": 0.15,
-      # "subplots.top": 0.75,
         "savefig.dpi": 600,
         "text.usetex": True
 })
 
 def visualize_OLVP_grid(output_dir):
 
-    files = glob.glob("../../output/datasets/%s/overlaps*" %output_dir)
-    
+    files = set(glob.glob("../../output/datasets/%s/overlaps*" %output_dir))
+
+    files = sorted(files, key=lambda item: (int(item.partition(' ')[0])
+                                   if item[0].isdigit() else float('inf'), item))
     if not os.path.exists("../../output/plots/%s"%output_dir):
         os.makedirs("../../output/plots/%s"%output_dir)
-    
-   
+
+
     fig = plt.figure(1)
     plt.cm = plt.get_cmap('viridis')
     fig.suptitle('Overlap (m=0)')
@@ -42,15 +40,14 @@ def visualize_OLVP_grid(output_dir):
     plt.rc('font', family='serif',size=18)
 
     n = int(np.sqrt(len(files)))
-    
-    for i, file in enumerate(files):
 
+    for i, file in enumerate(files):
         data = np.load(file)
 
         plt.subplot(n, n, i+1)
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
-        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_P0'])
+        plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_0F_P0'])
         plt.colorbar()
         plt.grid()
         plt.title(r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
@@ -58,7 +55,7 @@ def visualize_OLVP_grid(output_dir):
 
     plt.savefig('../../output/plots/%s/'%(output_dir) + 'OVLP_GRID_m_0' + '.pdf')
     plt.close()
-    
+
     fig = plt.figure(2)
     plt.cm = plt.get_cmap('viridis')
     fig.suptitle('Overlap (m=2)')
@@ -72,7 +69,7 @@ def visualize_OLVP_grid(output_dir):
         plt.subplot(n, n, i+1)
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
-        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_0F_P2'])
+        plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_0F_P2'])
         plt.colorbar()
         plt.grid()
         plt.title(r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
@@ -80,5 +77,7 @@ def visualize_OLVP_grid(output_dir):
 
     plt.savefig('../../output/plots/%s/'%(output_dir) + 'OVLP_GRID_m_2' + '.pdf')
     plt.close()
-    
+
     return None
+
+#visualize_OLVP_grid("output-2016_09_15_05_35_49")
