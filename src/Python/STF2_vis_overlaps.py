@@ -34,9 +34,13 @@ def visualize_OVLP(output_dir):
     if not os.path.exists("../../output/plots/%s"%output_dir):
         os.makedirs("../../output/plots/%s"%output_dir)
 
+            
     for file in files:
 
         data = np.load(file)
+        
+        cmax = np.amax(np.vstack((data['OLVP_0F_P2'], data['OLVP_0F_P1'], data['OLVP_0F_P0'], data['OLVP_0F_M1'], data['OLVP_0F_M2'])))
+        cmin = np.amin(np.vstack((data['OLVP_0F_P2'], data['OLVP_0F_P1'], data['OLVP_0F_P0'], data['OLVP_0F_M1'], data['OLVP_0F_M2'])))
 
         plt.cm = plt.get_cmap('viridis')
         fig = plt.figure()
@@ -50,6 +54,7 @@ def visualize_OVLP(output_dir):
         plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_0F_P2'])
         plt.grid()
         plt.title(r'$O$' + ' (m = 2)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
 
         plt.subplot(3,3,2)
@@ -58,6 +63,7 @@ def visualize_OVLP(output_dir):
         plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_0F_P1'])
         plt.grid()
         plt.title(r'$O$' + ' (m = 1)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
 
         plt.subplot(3,3,3)
@@ -66,6 +72,7 @@ def visualize_OVLP(output_dir):
         plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_0F_P0'])
         plt.grid()
         plt.title(r'$O$' + ' (m = 0)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
 
         plt.subplot(3,3,4)
@@ -74,6 +81,7 @@ def visualize_OVLP(output_dir):
         plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_0F_M1'])
         plt.grid()
         plt.title(r'$O$' + ' (m = -1)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
 
         plt.subplot(3,3,5)
@@ -82,6 +90,7 @@ def visualize_OVLP(output_dir):
         plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_0F_M2'])
         plt.grid()
         plt.title(r'$O$' + ' (m = -2)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
 
         plt.subplot(3,3,6)
@@ -90,7 +99,11 @@ def visualize_OVLP(output_dir):
         plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_0F_P2P0'])
         plt.grid()
         plt.title(r'$O$' + ' ($m=0 + m=2$)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
+
+        smax = np.amax(data['SNR_0F'])
+        smin = np.amin(data['SNR_0F'])
 
         plt.subplot(3,3,7)
         plt.xlabel(r'$\kappa$')
@@ -98,6 +111,7 @@ def visualize_OVLP(output_dir):
         plt.contourf(data['KAPPA'],data['THETAJ'],data['SNR_00'])
         plt.grid()
         plt.title('SNR ($m=0$)')
+        plt.clim(smin, smax)
         plt.colorbar()
 
         plt.subplot(3,3,8)
@@ -106,6 +120,7 @@ def visualize_OVLP(output_dir):
         plt.contourf(data['KAPPA'],data['THETAJ'],data['SNR_02'])
         plt.grid()
         plt.title('SNR ($m=2$)')
+        plt.clim(smin, smax)
         plt.colorbar()
 
         plt.subplot(3,3,9)
@@ -114,6 +129,7 @@ def visualize_OVLP(output_dir):
         plt.contourf(data['KAPPA'],data['THETAJ'],data['SNR_0F'])
         plt.grid()
         plt.title('SNR (Full waveform)')
+        plt.clim(smin, smax)
         plt.colorbar()
 
         plt.savefig('../../output/plots/%s/'%(output_dir) + 'OVLP_CHI1_%1.2f_'%data['CHI1'] + 'ETA_%1.2f'%data['ETA'] + '.pdf')
@@ -121,4 +137,4 @@ def visualize_OVLP(output_dir):
 
     return None
 
-#visualize_OVLP("output-2016_09_15_05_35_49")
+visualize_OVLP("output-2016_09_15_12_39_13")

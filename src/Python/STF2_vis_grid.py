@@ -40,14 +40,27 @@ def visualize_OLVP_grid(output_dir):
     plt.rc('font', family='serif',size=18)
 
     n = int(np.sqrt(len(files)))
-
+    
+    cmin = 0.5
+    cmax = 0.5
+    
+    for i, file in enumerate(files):
+        
+        data = np.load(file)
+        
+        if np.amax(data['OLVP_0F_P0']) > cmax:
+            cmax = np.amax(data['OLVP_0F_P0'])
+        if np.amin(data['OLVP_0F_P0']) < cmin:
+            cmin = np.amax(data['OLVP_0F_P0'])
+    
     for i, file in enumerate(files):
         data = np.load(file)
-
+        
         plt.subplot(n, n, i+1)
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
         plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_0F_P0'])
+        plt.clim(cmin, cmax)
         plt.colorbar()
         plt.grid()
         plt.title(r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
@@ -61,6 +74,18 @@ def visualize_OLVP_grid(output_dir):
     fig.suptitle('Overlap (m=2)')
     plt.rc('text', usetex=True)
     plt.rc('font', family='serif',size=18)
+    
+    cmin = 0.5
+    cmax = 0.5
+    
+    for i, file in enumerate(files):
+        
+        data = np.load(file)
+        
+        if np.amax(data['OLVP_0F_P0']) > cmax:
+            cmax = np.amax(data['OLVP_0F_P0'])
+        if np.amin(data['OLVP_0F_P0']) < cmin:
+            cmin = np.amax(data['OLVP_0F_P0'])
 
     for i, file in enumerate(files):
 
@@ -70,6 +95,7 @@ def visualize_OLVP_grid(output_dir):
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
         plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_0F_P2'])
+        plt.clim(cmin, cmax)
         plt.colorbar()
         plt.grid()
         plt.title(r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
@@ -79,5 +105,3 @@ def visualize_OLVP_grid(output_dir):
     plt.close()
 
     return None
-
-#visualize_OLVP_grid("output-2016_09_15_05_35_49")
