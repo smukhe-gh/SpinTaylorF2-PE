@@ -34,11 +34,11 @@ def visualize_OVLP(output_dir):
     if not os.path.exists("../../output/plots/%s"%output_dir):
         os.makedirs("../../output/plots/%s"%output_dir)
 
-            
+
     for file in files:
 
         data = np.load(file)
-        
+
         cmax = np.amax(np.vstack((data['OLVP_0F_P2'], data['OLVP_0F_P1'], data['OLVP_0F_P0'], data['OLVP_0F_M1'], data['OLVP_0F_M2'])))
         cmin = np.amin(np.vstack((data['OLVP_0F_P2'], data['OLVP_0F_P1'], data['OLVP_0F_P0'], data['OLVP_0F_M1'], data['OLVP_0F_M2'])))
 
@@ -137,4 +137,3 @@ def visualize_OVLP(output_dir):
 
     return None
 
-visualize_OVLP("output-2016_09_15_12_39_13")
