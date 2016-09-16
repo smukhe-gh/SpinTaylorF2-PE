@@ -8,7 +8,7 @@
 import numpy as np
 from STF2_overlaps import compute_overlap
 from numpy import sqrt
-from time import gmtime, strftime
+from time import localtime, strftime
 import os
 
 import STF2_vis_overlaps as vs
@@ -59,7 +59,7 @@ generate_plots = 1
 # Main loop for computations.
 #=======================================================================
 
-output_dir = "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", gmtime())
+output_dir = "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime())
 
 if not os.path.exists("./output/datasets/%s" %output_dir):
     os.makedirs("./output/datasets/%s" %output_dir)
@@ -102,7 +102,7 @@ for _mass1 in xrange(M):
         #TODO: Do this better; this is a very crude way of doing this.
 
         np.savez("./output/datasets/%s/%s" %(output_dir, filename),
-                    DATE   = strftime("%Y-%m-%d %H:%M:%S", gmtime()),
+                    DATE   = strftime("%Y-%m-%d %H:%M:%S", localtime()),
                     SNR_T2 = OVLP[:, :, 0],
                     SNR_0F = OVLP[:, :, 1],
 
@@ -122,8 +122,8 @@ for _mass1 in xrange(M):
 
 print "Finished creating datasets."
 
-# if generate_plots == 1:
-#     print "\nGenerating plots..."
-#     vs.visualize_OVLP(output_dir)
-#     vsg.visualize_OLVP_grid(output_dir)
+if generate_plots == 1:
+    print "\nGenerating plots..."
+    vs.visualize_OVLP(output_dir)
+    vsg.visualize_OLVP_grid(output_dir)
 

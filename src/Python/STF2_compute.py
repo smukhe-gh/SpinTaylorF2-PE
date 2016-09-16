@@ -8,7 +8,7 @@
 import numpy as np
 from STF2_overlaps import compute_overlap
 from numpy import sqrt
-from time import gmtime, strftime
+from time import localtime, strftime
 import os
 
 import STF2_vis_overlaps as vs
@@ -44,8 +44,8 @@ options = {
     'F_MAX'  : 2000.,
     'BAND'   : None}
 
-N = 2
-M = 2
+N = 10
+M = 3
 
 V_MASS1   = np.linspace(2.4, 50.0,  M)
 V_CHI1    = np.linspace(0.5, 1.00,  M)
@@ -59,7 +59,7 @@ generate_plots = 1
 # Main loop for computations.
 #=======================================================================
 
-output_dir = "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", gmtime())
+output_dir = "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime())
 
 if not os.path.exists("../../output/datasets/%s" %output_dir):
     os.makedirs("../../output/datasets/%s" %output_dir)
@@ -102,7 +102,7 @@ for _mass1 in xrange(M):
         #TODO: Do this better; this is a very crude way of doing this.
 
         np.savez("../../output/datasets/%s/%s" %(output_dir, filename),
-                    DATE   = strftime("%Y-%m-%d %H:%M:%S", gmtime()),
+                    DATE   = strftime("%Y-%m-%d %H:%M:%S", localtime()),
                     SNR_0F = OVLP[:, :, 0],
                     SNR_02 = OVLP[:, :, 1],
                     SNR_00 = OVLP[:, :, 2],
