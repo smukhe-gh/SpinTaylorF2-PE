@@ -38,7 +38,7 @@ options = {
     'M2'     : 1.4,
     'THETAJ' : 0.7853981633974483,
     'APPROX' : 'SpinTaylorF2',
-    'DEL_F'  : 1./256.,
+    'DEL_F'  : 1./256.0001,
     'F_MIN'  : 20.,
     'F_INJ'  : 20.,
     'F_MAX'  : 2000.,
