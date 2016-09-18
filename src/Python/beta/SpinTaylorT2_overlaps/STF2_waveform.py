@@ -105,9 +105,6 @@ def generate_STT2_template(**options):
     hpluss = hpluss.to_frequencyseries(options['DEL_F'])
     hcross = hcross.to_frequencyseries(options['DEL_F'])
 
-    print "DELTA_F form hpluss: ", hpluss.delta_f
-    print "DELTA_F form option: ", options['DEL_F']
-
     hp   = pycbc.DYN_RANGE_FAC*hpluss
     hc   = pycbc.DYN_RANGE_FAC*hcross
 
