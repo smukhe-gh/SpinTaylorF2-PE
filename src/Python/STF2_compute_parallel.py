@@ -2,12 +2,10 @@
 # Computes the OLVPs over the parameter space.
 # Returns: Overlaps over thetaJ, Chi, eta and Kappa
 # SM 17/ 16
-# TODO: Add support for SpinTaylorF2
 #=======================================================================
 
 import numpy as np
 from STF2_overlaps import compute_overlap
-from numpy import sqrt
 from time import localtime, strftime
 from joblib import Parallel, delayed
 import STF2_vis_overlaps as vs
@@ -19,7 +17,7 @@ import os
 #=======================================================================
 
 options = {
-    
+
     'ALPHA0' : 0.001,
     'KAPPA'  : 0.5,
     'CHI1'   : 0.5,
@@ -35,30 +33,30 @@ options = {
     'F_MAX'  : 2000.,
     'BAND'   : None,
 
-    'N'      : 2,
-    'M'      : 2,
+    'N'      : 50,
+    'M'      : 3,
 
     'V_MASS1_RANGE' : [2.4, 50.0],
     'V_CHI1_RANGE'  : [0.5, 1.00],
 
     'V_KAPPA_RANGE'  : [-0.500, 0.999],
     'V_THETAJ_RANGE' : [0.001, 3.14],
-    
+
     'OUTPUT_DIR'     : "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime()),
     'GENERATE_PLOTS' : 1}
-              
+
 #=======================================================================
 # END CONTROL PANEL
-#=======================================================================                   
+#=======================================================================
 def M1_M2_to_MCHRIP_ETA(mass1, mass2):
     eta = mass1*mass2/(mass1+mass2)/(mass1+mass2)
     mc = (mass1+mass2) * pow(eta, 3./5.)
     return (mc, eta)
-    
+
 def generate_GRID(**options):
-    
+
     OVLP        = np.zeros((options['N'], options['N'], 9))
-    MCHIRP, ETA = M1_M2_to_MCHRIP_ETA(options['M1'], options['M2'])    
+    MCHIRP, ETA = M1_M2_to_MCHRIP_ETA(options['M1'], options['M2'])
 
     V_THETAJ = np.linspace(options['V_THETAJ_RANGE'][0], \
     options['V_THETAJ_RANGE'][1], options['N'])
@@ -75,7 +73,7 @@ def generate_GRID(**options):
 
     filename = "overlaps_eta_%s_chi1_%s_N_%r.npz" %('{:.2f}'.format(ETA),\
     '{:.2f}'.format(options['CHI1']), options['N'])
-    
+
     np.savez("../../output/datasets/%s/%s" %(options['OUTPUT_DIR'], filename),
         DATE         = strftime("%Y-%m-%d %H:%M:%S", localtime()),
         SNR_0F       = OVLP[:, :, 0],
@@ -92,25 +90,25 @@ def generate_GRID(**options):
         CHI1         = options['CHI1'],
         ETA          = ETA,
         OPTIONS      = options)
-        
+
     return None
 
 def parallel_GRID(_MASS, _CHI1, **options):
-    
+
     if not os.path.exists("../../output/datasets/%s" %options['OUTPUT_DIR']):
         os.makedirs("../../output/datasets/%s" %options['OUTPUT_DIR'])
-        
+
     options['M1']         = _MASS
     options['CHI1']       = _CHI1
-        
+
     generate_GRID(**options)
-      
+
 V_MASS1   = np.linspace(options['V_MASS1_RANGE'][0], \
 options['V_MASS1_RANGE'][1], options['M'])
 V_CHI1    = np.linspace(options['V_CHI1_RANGE'][0], \
 options['V_CHI1_RANGE'][1], options['M'])
 
-Parallel(n_jobs=-1, verbose=5)(delayed(parallel_GRID)(_MASS = V_MASS1[m], \
+Parallel(n_jobs=-2, verbose=5)(delayed(parallel_GRID)(_MASS = V_MASS1[m], \
  _CHI1 = V_CHI1[c], **options) for m in xrange(options['M']) for \
  c in xrange(options['M']))
 
