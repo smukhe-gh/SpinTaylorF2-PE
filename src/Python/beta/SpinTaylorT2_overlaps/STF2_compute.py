@@ -38,16 +38,16 @@ options = {
     'M2'     : 1.4,
     'THETAJ' : 0.7853981633974483,
     'APPROX' : 'SpinTaylorF2',
-    'DEL_F'  : 1./256.,
+    'DEL_F'  : 1./256.0001,
     'F_MIN'  : 20.,
     'F_INJ'  : 20.,
     'F_MAX'  : 2000.,
     'BAND'   : None}
 
-N = 2
-M = 2
+N = 50
+M = 3
 
-V_MASS1   = np.linspace(10.4, 50.0,  M)
+V_MASS1   = np.linspace(2.4, 50.0,  M)
 V_CHI1    = np.linspace(0.5, 1.00,  M)
 
 V_KAPPA   = np.linspace(-0.500, 0.999, N)
