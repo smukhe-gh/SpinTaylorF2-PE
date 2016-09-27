@@ -10,7 +10,7 @@ from pycbc.types import TimeSeries, FrequencySeries, zeros
 from pycbc.waveform import get_fd_waveform, get_td_waveform
 from pycbc.waveform import td_approximants, fd_approximants
 from lal import MTSUN_SI
-import STF2_to_lal_coords as coords
+import STT2_to_lal_coords as coords
 
 def generate_template(**options):
 

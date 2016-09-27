@@ -11,12 +11,12 @@ import glob
 
 goldenratio = 2. / (1 + 5**.5)
 matplotlib.rcParams.update({
-        "font.size": 8.0,
-        "axes.titlesize": 8.0,
-        "axes.labelsize": 8.0,
-        "xtick.labelsize": 8.0,
-        "ytick.labelsize": 8.0,
-        "legend.fontsize": 8.0,
+        "font.size": 10.0,
+        "axes.titlesize": 10.0,
+        "axes.labelsize": 10.0,
+        "xtick.labelsize": 10.0,
+        "ytick.labelsize": 10.0,
+        "legend.fontsize": 10.0,
         "figure.figsize": (20.3, 25.3*goldenratio),
         "figure.dpi": 300,
         "savefig.dpi": 600,
@@ -25,17 +25,17 @@ matplotlib.rcParams.update({
 
 def visualize_OLVP_grid(output_dir):
 
-    files = set(glob.glob("../../output/datasets/%s/overlaps*" %output_dir))
+    files = set(glob.glob("../../../output/datasets/%s/overlaps*" %output_dir))
 
     files = sorted(files, key=lambda item: (int(item.partition(' ')[0])
                                    if item[0].isdigit() else float('inf'), item))
-    if not os.path.exists("../../output/plots/%s"%output_dir):
-        os.makedirs("../../output/plots/%s"%output_dir)
+    if not os.path.exists("../../../output/plots/%s"%output_dir):
+        os.makedirs("../../../output/plots/%s"%output_dir)
 
 
     fig = plt.figure(1)
     plt.cm = plt.get_cmap('viridis')
-    fig.suptitle('Overlap (m=0)')
+    fig.suptitle('SpinTaylorF2 Overlap (m=0)')
     plt.rc('text', usetex=True)
     plt.rc('font', family='serif',size=18)
 
@@ -66,12 +66,12 @@ def visualize_OLVP_grid(output_dir):
         plt.title(r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
 
 
-    plt.savefig('../../output/plots/%s/'%(output_dir) + 'OVLP_GRID_m_0' + '.pdf')
+    plt.savefig('../../../output/plots/%s/'%(output_dir) + 'OVLP_GRID_m_0' + '.pdf')
     plt.close()
 
     fig = plt.figure(2)
     plt.cm = plt.get_cmap('viridis')
-    fig.suptitle('Overlap (m=2)')
+    fig.suptitle('SpinTaylorF2 Overlap (m=2)')
     plt.rc('text', usetex=True)
     plt.rc('font', family='serif',size=18)
     
@@ -101,7 +101,7 @@ def visualize_OLVP_grid(output_dir):
         plt.title(r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
 
 
-    plt.savefig('../../output/plots/%s/'%(output_dir) + 'OVLP_GRID_m_2' + '.pdf')
+    plt.savefig('../../../output/plots/%s/'%(output_dir) + 'OVLP_GRID_m_2' + '.pdf')
     plt.close()
 
     return None

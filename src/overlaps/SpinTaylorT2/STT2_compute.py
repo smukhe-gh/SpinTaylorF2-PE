@@ -1,15 +1,15 @@
 #=======================================================================
-# Computes the OLVPs over the parameter space.
+# Computes the OLVPs over the parameter space for SpinTaylorF2
 # Returns: Overlaps over thetaJ, Chi, eta and Kappa
-# SM 17/ 16
+# SM 27/ 16
 #=======================================================================
 
 import numpy as np
-from STF2_overlaps import compute_overlap
+from STT2_overlaps import compute_overlap
 from time import localtime, strftime
 from joblib import Parallel, delayed
-import STF2_vis_overlaps as vs
-import STF2_vis_grid as vsg
+import STT2_vis_overlaps as vs
+import STT2_vis_grid as vsg
 import os
 
 #=======================================================================
@@ -27,17 +27,17 @@ options = {
     'M2'     : 1.4,
     'THETAJ' : 0.7853981633974483,
     'APPROX' : 'SpinTaylorF2',
-    'DEL_F'  : 1./256.,
+    'DEL_F'  : 1./256.0001,
     'F_MIN'  : 20.,
     'F_INJ'  : 20.,
     'F_MAX'  : 2000.,
     'BAND'   : None,
 
-    'N'      : 50,
-    'M'      : 3,
+    'N'      : 2,
+    'M'      : 2,
 
     'V_MASS1_RANGE' : [2.4, 50.0],
-    'V_CHI1_RANGE'  : [0.5, 1.00],
+    'V_CHI1_RANGE'  : [0.20, 0.80],
 
     'V_KAPPA_RANGE'  : [-0.500, 0.999],
     'V_THETAJ_RANGE' : [0.001, 3.14],
@@ -74,17 +74,17 @@ def generate_GRID(**options):
     filename = "overlaps_eta_%s_chi1_%s_N_%r.npz" %('{:.2f}'.format(ETA),\
     '{:.2f}'.format(options['CHI1']), options['N'])
 
-    np.savez("../../output/datasets/%s/%s" %(options['OUTPUT_DIR'], filename),
+    np.savez("../../../output/datasets/%s/%s" %(options['OUTPUT_DIR'], filename),
         DATE         = strftime("%Y-%m-%d %H:%M:%S", localtime()),
-        SNR_0F       = OVLP[:, :, 0],
-        SNR_02       = OVLP[:, :, 1],
-        SNR_00       = OVLP[:, :, 2],
-        OLVP_0F_P2   = OVLP[:, :, 3],
-        OLVP_0F_P1   = OVLP[:, :, 4],
-        OLVP_0F_P0   = OVLP[:, :, 5],
-        OLVP_0F_M1   = OVLP[:, :, 6],
-        OLVP_0F_M2   = OVLP[:, :, 7],
-        OLVP_0F_P2P0 = OVLP[:, :, 8],
+        SNR_T2       = OVLP[:, :, 0],
+        SNR_0F       = OVLP[:, :, 1],
+        OLVP_T2_0F   = OVLP[:, :, 2],
+        OLVP_T2_P2   = OVLP[:, :, 3],
+        OLVP_T2_P1   = OVLP[:, :, 4],
+        OLVP_T2_P0   = OVLP[:, :, 5],
+        OLVP_T2_M1   = OVLP[:, :, 6],
+        OLVP_T2_M2   = OVLP[:, :, 7],
+        OLVP_T2_P2P0 = OVLP[:, :, 8],
         THETAJ       = V_THETAJ,
         KAPPA        = V_KAPPA,
         CHI1         = options['CHI1'],
@@ -95,8 +95,8 @@ def generate_GRID(**options):
 
 def parallel_GRID(_MASS, _CHI1, **options):
 
-    if not os.path.exists("../../output/datasets/%s" %options['OUTPUT_DIR']):
-        os.makedirs("../../output/datasets/%s" %options['OUTPUT_DIR'])
+    if not os.path.exists("../../../output/datasets/%s" %options['OUTPUT_DIR']):
+        os.makedirs("../../../output/datasets/%s" %options['OUTPUT_DIR'])
 
     options['M1']         = _MASS
     options['CHI1']       = _CHI1
@@ -116,4 +116,5 @@ if options['GENERATE_PLOTS'] == 1:
     print "\n[Generating plots]"
     vs.visualize_OVLP(options['OUTPUT_DIR'])
     vsg.visualize_OLVP_grid(options['OUTPUT_DIR'])
+
 

@@ -16,8 +16,8 @@ from pycbc.filter import sigma, overlap, match
 from pycbc.types import TimeSeries, FrequencySeries, zeros
 from pycbc.waveform import get_fd_waveform, get_td_waveform
 
-import STF2_psd_cache as psd_cache
-import STF2_waveform as wave
+import STT2_psd_cache as psd_cache
+import STT2_waveform as wave
 
 def norm(H, psd, f_low, f_cut):
     return pycbc.filter.sigma(H, psd=psd, low_frequency_cutoff=f_low, \

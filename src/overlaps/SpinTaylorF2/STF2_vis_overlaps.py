@@ -11,12 +11,12 @@ import glob
 
 goldenratio = 2. / (1 + 5**.5)
 matplotlib.rcParams.update({
-        "font.size": 8.0,
-        "axes.titlesize": 8.0,
-        "axes.labelsize": 8.0,
-        "xtick.labelsize": 8.0,
-        "ytick.labelsize": 8.0,
-        "legend.fontsize": 8.0,
+        "font.size": 10.0,
+        "axes.titlesize": 10.0,
+        "axes.labelsize": 10.0,
+        "xtick.labelsize": 10.0,
+        "ytick.labelsize": 10.0,
+        "legend.fontsize": 10.0,
         "figure.figsize": (20.3, 25.3*goldenratio),
         "figure.dpi": 300,
       # "subplots.left": 0.2,
@@ -29,10 +29,10 @@ matplotlib.rcParams.update({
 
 def visualize_OVLP(output_dir):
 
-    files = glob.glob("../../output/datasets/%s/overlaps*" %output_dir)
+    files = glob.glob("../../../output/datasets/%s/overlaps*" %output_dir)
 
-    if not os.path.exists("../../output/plots/%s"%output_dir):
-        os.makedirs("../../output/plots/%s"%output_dir)
+    if not os.path.exists("../../../output/plots/%s"%output_dir):
+        os.makedirs("../../../output/plots/%s"%output_dir)
 
 
     for file in files:
@@ -44,7 +44,7 @@ def visualize_OVLP(output_dir):
 
         plt.cm = plt.get_cmap('viridis')
         fig = plt.figure()
-        fig.suptitle('Overlaps + SNR, '+ r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
+        fig.suptitle('Overlaps + SNR (SpinTaylorF2), '+ r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
         plt.rc('text', usetex=True)
         plt.rc('font', family='serif',size=18)
 
@@ -132,7 +132,7 @@ def visualize_OVLP(output_dir):
         plt.clim(smin, smax)
         plt.colorbar()
 
-        plt.savefig('../../output/plots/%s/'%(output_dir) + 'OVLP_CHI1_%1.2f_'%data['CHI1'] + 'ETA_%1.2f'%data['ETA'] + '.pdf')
+        plt.savefig('../../../output/plots/%s/'%(output_dir) + 'OVLP_CHI1_%1.2f_'%data['CHI1'] + 'ETA_%1.2f'%data['ETA'] + '.pdf')
         plt.close()
 
     return None

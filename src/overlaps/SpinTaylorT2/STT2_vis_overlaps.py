@@ -29,14 +29,17 @@ matplotlib.rcParams.update({
 
 def visualize_OVLP(output_dir):
 
-    files = glob.glob("./output/datasets/%s/overlaps*" %output_dir)
+    files = glob.glob("../../../output/datasets/%s/overlaps*" %output_dir)
 
-    if not os.path.exists("./output/plots/%s"%output_dir):
-        os.makedirs("./output/plots/%s"%output_dir)
+    if not os.path.exists("../../../output/plots/%s"%output_dir):
+        os.makedirs("../../../output/plots/%s"%output_dir)
 
     for file in files:
 
         data = np.load(file)
+        
+        cmax = np.amax(np.vstack((data['OLVP_T2_0F'], data['OLVP_T2_P2P0'], data['OLVP_T2_P2'], data['OLVP_T2_P1'], data['OLVP_T2_P0'], data['OLVP_T2_M1'], data['OLVP_T2_M2'])))
+        cmin = np.amin(np.vstack((data['OLVP_T2_0F'], data['OLVP_T2_P2P0'], data['OLVP_T2_P2'], data['OLVP_T2_P1'], data['OLVP_T2_P0'], data['OLVP_T2_M1'], data['OLVP_T2_M2'])))        
 
         plt.cm = plt.get_cmap('viridis')
         fig = plt.figure()
@@ -47,76 +50,94 @@ def visualize_OVLP(output_dir):
         plt.subplot(3,3,1)
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
-        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_T2_0F'])
+        plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_T2_0F'])
         plt.grid()
-        plt.title(r'$O$' + 'SpinTaylorF2')
+        plt.title(r'$O$' + 'F2')
+        plt.clim(cmin, cmax)
         plt.colorbar()
+
 
         plt.subplot(3,3,2)
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
-        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_T2_P2'])
+        plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_T2_P2'])
         plt.grid()
         plt.title(r'$O$' + ' (m = 2)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
+
 
         plt.subplot(3,3,3)
         plt.ylabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
-        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_T2_P1'])
+        plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_T2_P1'])
         plt.grid()
         plt.title(r'$O$' + ' (m = 1)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
+
 
         plt.subplot(3,3,4)
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
-        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_T2_P0'])
+        plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_T2_P0'])
         plt.grid()
         plt.title(r'$O$' + ' (m = 0)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
+
 
         plt.subplot(3,3,5)
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
-        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_T2_M1'])
+        plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_T2_M1'])
         plt.grid()
         plt.title(r'$O$' + ' (m = -1)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
+
 
         plt.subplot(3,3,6)
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
-        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_T2_M2'])
+        plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_T2_M2'])
         plt.grid()
         plt.title(r'$O$' + ' ($m=-2$)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
+
 
         plt.subplot(3,3,7)
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
-        plt.contourf(data['THETAJ'],data['KAPPA'],data['OLVP_T2_P2P0'])
+        plt.contourf(data['KAPPA'],data['THETAJ'],data['OLVP_T2_P2P0'])
         plt.grid()
         plt.title(r'$O$' + ' ($m=0 + m=2$)')
+        plt.clim(cmin, cmax)
         plt.colorbar()
+
+        smax = np.amax(np.vstack((data['SNR_0F'], data['SNR_T2'])))
+        smin = np.amin(np.vstack((data['SNR_0F'], data['SNR_T2'])))
 
         plt.subplot(3,3,8)
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
-        plt.contourf(data['THETAJ'],data['KAPPA'],data['SNR_0F'])
+        plt.contourf(data['KAPPA'],data['THETAJ'],data['SNR_0F'])
         plt.grid()
-        plt.title('SNR SpinTaylor F2')
+        plt.title('SNR F2')
+        plt.clim(smin, smax)
         plt.colorbar()
 
         plt.subplot(3,3,9)
         plt.xlabel(r'$\kappa$')
         plt.ylabel(r'$\theta_J$')
-        plt.contourf(data['THETAJ'],data['KAPPA'],data['SNR_T2'])
+        plt.contourf(data['KAPPA'],data['THETAJ'],data['SNR_T2'])
         plt.grid()
-        plt.title('SNR SpinTaylorT2')
+        plt.title('SNR T2')
+        plt.clim(smin, smax)
         plt.colorbar()
 
-        plt.savefig('./output/plots/%s/'%(output_dir) + 'OVLP_CHI1_%1.2f_'%data['CHI1'] + 'ETA_%1.2f'%data['ETA'] + '.pdf')
+        plt.savefig('../../../output/plots/%s/'%(output_dir) + 'OVLP_CHI1_%1.2f_'%data['CHI1'] + 'ETA_%1.2f'%data['ETA'] + '.pdf')
         plt.close()
-        
+
     return None
