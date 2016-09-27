@@ -10,6 +10,7 @@ from time import localtime, strftime
 from joblib import Parallel, delayed
 import STF2_vis_overlaps as vs
 import STF2_vis_grid as vsg
+import STF2_generate_samples as gs
 import os
 
 #=======================================================================
@@ -43,7 +44,8 @@ options = {
     'V_THETAJ_RANGE' : [0.001, 3.14],
 
     'OUTPUT_DIR'     : "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime()),
-    'GENERATE_PLOTS' : 1}
+    'GENERATE_PLOTS' : 1,
+    'THRESHOLD'      : 0.3}
 
 #=======================================================================
 # END CONTROL PANEL
@@ -54,6 +56,13 @@ def M1_M2_to_MCHRIP_ETA(mass1, mass2):
     mc = (mass1+mass2) * pow(eta, 3./5.)
     return (mc, eta)
 
+def mask(OVLP2, OVLP1, threshold):
+    REGION = np.abs(OVLP2 - OVLP1)
+    for index, value in np.ndenumerate(REGION):
+        if value > threshold:
+            REGION[index[0], index[1]] = np.nan
+    return REGION
+    
 def generate_GRID(**options):
 
     OVLP        = np.zeros((options['N'], options['N'], 9))
@@ -86,6 +95,7 @@ def generate_GRID(**options):
         OLVP_0F_M1   = OVLP[:, :, 6],
         OLVP_0F_M2   = OVLP[:, :, 7],
         OLVP_0F_P2P0 = OVLP[:, :, 8],
+        OLVP_MASK    = mask(OVLP[:, :, 3], OVLP[:, :, 5], options['THRESHOLD']),
         THETAJ       = V_THETAJ,
         KAPPA        = V_KAPPA,
         CHI1         = options['CHI1'],
@@ -117,4 +127,5 @@ if options['GENERATE_PLOTS'] == 1:
     print "\n[Generating plots]"
     vs.visualize_OVLP(options['OUTPUT_DIR'])
     vsg.visualize_OLVP_grid(options['OUTPUT_DIR'])
+    gs.visualize_masked_OLVP_grid(options['OUTPUT_DIR'])
 
