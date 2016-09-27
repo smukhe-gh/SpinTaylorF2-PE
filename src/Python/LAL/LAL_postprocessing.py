@@ -1,1 +1,0 @@
-#SM: Post processing algorithms that handle consolidation of the output files and generating posteriors.
