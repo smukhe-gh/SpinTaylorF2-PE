@@ -1,8 +1,6 @@
 #===============================================================================
 # Computes the Norm, Match and Overlaps.
 # SM 9/ 2016
-# TODO: Add the possibility of computing match between time domian and
-#       fourier domain waveforms.
 #===============================================================================
 
 import numpy as np

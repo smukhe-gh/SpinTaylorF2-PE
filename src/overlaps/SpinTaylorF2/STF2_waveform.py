@@ -1,7 +1,6 @@
 #===============================================================================
 # Generate SpinTaylorF2 waveform with sidebands.
 # Soham M  9/2016
-# TODO: Add support for generating SpinTaylorT2
 #===============================================================================
 
 import numpy as np
