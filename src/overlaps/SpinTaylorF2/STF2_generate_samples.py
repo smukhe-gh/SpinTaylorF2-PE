@@ -1,5 +1,5 @@
 #=======================================================================
-# Plots the region of overlap where the difference in m2 and m0 is less 
+# Plots the region of overlap where the difference in m2 and m0 is less
 # than 0.3
 # SM 15/16
 #=======================================================================
@@ -23,7 +23,7 @@ matplotlib.rcParams.update({
         "savefig.dpi": 600,
         "text.usetex": True
 })
-    
+
 def visualize_masked_OLVP_grid(output_dir):
     files = set(glob.glob("../../../output/datasets/%s/overlaps*" %output_dir))
 
@@ -31,7 +31,7 @@ def visualize_masked_OLVP_grid(output_dir):
                                    if item[0].isdigit() else float('inf'), item))
     if not os.path.exists("../../../output/plots/%s"%output_dir):
         os.makedirs("../../../output/plots/%s"%output_dir)
-    
+
     fig = plt.figure(1)
     plt.cm = plt.get_cmap('viridis')
     fig.suptitle('SpinTaylorF2: ' + r'$O_{2} - O_{0} < 0.3$')
@@ -39,11 +39,12 @@ def visualize_masked_OLVP_grid(output_dir):
     plt.rc('font', family='serif',size=18)
 
     n = int(np.sqrt(len(files)))
-        
+
     for i, file in enumerate(files):
+        if i < 6:
             data = np.load(file)
             REGION = data['OLVP_MASK']
-            plt.subplot(n, n, i+1)
+            plt.subplot(2, 3, i+1)
             plt.xlabel(r'$\kappa$')
             plt.ylabel(r'$\theta_J$')
             plt.contourf(data['KAPPA'],data['THETAJ'], REGION)

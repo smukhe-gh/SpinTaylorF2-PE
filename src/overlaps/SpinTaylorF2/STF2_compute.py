@@ -34,8 +34,8 @@ options = {
     'F_MAX'  : 2000.,
     'BAND'   : None,
 
-    'N'      : 2,
-    'M'      : 2,
+    'N'      : 10,
+    'M'      : 3,
 
     'V_MASS1_RANGE' : [2.4, 50.0],
     'V_CHI1_RANGE'  : [0.20, 0.80],
@@ -62,7 +62,7 @@ def mask(OVLP2, OVLP1, threshold):
         if value > threshold:
             REGION[index[0], index[1]] = np.nan
     return REGION
-    
+
 def generate_GRID(**options):
 
     OVLP        = np.zeros((options['N'], options['N'], 9))
