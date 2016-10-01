@@ -10,7 +10,7 @@ from time import localtime, strftime
 from joblib import Parallel, delayed
 import STF2_vis_overlaps as vs
 import STF2_vis_grid as vsg
-import STF2_generate_samples as gs
+import STF2_mask as gs
 import os
 
 #=======================================================================

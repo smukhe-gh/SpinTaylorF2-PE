@@ -29,16 +29,6 @@ matplotlib.rcParams.update({
 })
 
 
-def extract_boundaries(KAPPA, THETAJ, REGION):
-    
-   REGION[np.isnan(REGION)] = 100
-   EDGES = feature.canny(REGION, sigma=3)
-   print np.shape(EDGES)
-   plt.imshow(EDGES)
-   plt.show()
-   return None
-   
-    
 def visualize_masked_OLVP_grid(output_dir):
     files = set(glob.glob("../../../output/datasets/%s/overlaps*" %output_dir))
 
@@ -61,7 +51,6 @@ def visualize_masked_OLVP_grid(output_dir):
             REGION = data['OLVP_MASK']           
             KAPPA  = data['KAPPA']
             THETAJ = data['THETAJ']
-            extract_boundaries(KAPPA, THETAJ, REGION)
             plt.subplot(2, n, i+1)
             plt.xlabel(r'$\kappa$')
             plt.ylabel(r'$\theta_J$')
@@ -74,5 +63,3 @@ def visualize_masked_OLVP_grid(output_dir):
     plt.close()
 
     return None
-
-visualize_masked_OLVP_grid('output-2016_09_30_20_10_03')
