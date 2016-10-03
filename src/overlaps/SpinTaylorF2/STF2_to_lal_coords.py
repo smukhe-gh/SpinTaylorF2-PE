@@ -14,6 +14,7 @@ from pycbc.types import TimeSeries, FrequencySeries, zeros
 from pycbc.waveform import get_fd_waveform, get_td_waveform
 from pycbc.waveform import td_approximants, fd_approximants
 from lal import MTSUN_SI
+import matplotlib.pyplot as plt
 
 def m1m2_to_mchirpeta(m1, m2):
 	eta    = m1*m2/(m1+m2)/(m1+m2)
@@ -56,3 +57,32 @@ def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f_inj):
     spin = chi1*np.array(shat)  # Returns spin, not Shat.
 
     return (incl, psi0, spin)
+
+
+M1     = np.linspace(2.5, 50,10)
+M2     = 1.4
+CHI1   = np.linspace(0.2, 0.80, 10)
+KAPPA  = np.linspace(-0.500, 0.999, 10)
+THETAJ = np.linspace(0.001, 3.14)
+PSIJ   = 0.001
+ALPHA0 = 0.001
+F_INJ  = 20.
+
+DATA   = []
+
+for m1 in M1:
+    for chi1 in CHI1:
+        for kappa in KAPPA:
+            for thetaJ in THETAJ:
+                incl, psi0, spin = to_lal_coords(m1, M2, chi1, kappa, thetaJ, PSIJ, ALPHA0, F_INJ)
+                DATA.append[[incl, psi0, spin[1], spin[2], spin[3]]]
+
+
+plt.plot(DATA[:,0], DATA[2], 'r.')
+plt.plot(DATA[:,0], DATA[3], 'b.')
+plt.plot(DATA[:,0], DATA[4], 'g.')
+plt.show()
+
+
+
+
