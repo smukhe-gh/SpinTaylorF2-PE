@@ -41,17 +41,15 @@ def visualize_OLVP_grid(output_dir):
 
     n = int(np.sqrt(len(files)))
     
-    cmin = 0.5
-    cmax = 0.5
+    #FIXME: Fixed issue of cmin and cmax set incorrectly.
     
+    DAT = []
     for i, file in enumerate(files):
-        
         data = np.load(file)
-        
-        if np.amax(data['OLVP_0F_P0']) > cmax:
-            cmax = np.amax(data['OLVP_0F_P0'])
-        if np.amin(data['OLVP_0F_P0']) < cmin:
-            cmin = np.amax(data['OLVP_0F_P0'])
+        DAT.append(data['SNR_0F'])
+
+    cmax = np.amax(np.array(DAT))
+    cmin = np.amin(np.array(DAT))
     
     for i, file in enumerate(files):
         data = np.load(file)
@@ -75,17 +73,14 @@ def visualize_OLVP_grid(output_dir):
     plt.rc('text', usetex=True)
     plt.rc('font', family='serif',size=18)
     
-    cmin = 0.5
-    cmax = 0.5
-    
+
+    DAT = []
     for i, file in enumerate(files):
-        
         data = np.load(file)
-        
-        if np.amax(data['OLVP_0F_P0']) > cmax:
-            cmax = np.amax(data['OLVP_0F_P0'])
-        if np.amin(data['OLVP_0F_P0']) < cmin:
-            cmin = np.amax(data['OLVP_0F_P0'])
+        DAT.append(data['SNR_0F'])
+
+    cmax = np.amax(np.array(DAT))
+    cmin = np.amin(np.array(DAT))
 
     for i, file in enumerate(files):
 
