@@ -50,8 +50,10 @@ def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f_inj):
 
     psi0 = np.arctan2(lhat[1], lhat[0])
     incl = np.arccos(lhat[2])
-    shat = rotateZ(shat, -psi0)
 
+    lhat = rotateZ(shat, -psi0) # Test additional rotation
+
+    shat = rotateZ(shat, -psi0)
     shat = rotateY(shat, -incl) # Additional rotation.
 
     spin = chi1*np.array(shat)  # Returns spin, not Shat.
