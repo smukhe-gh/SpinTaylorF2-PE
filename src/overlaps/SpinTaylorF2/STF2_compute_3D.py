@@ -35,7 +35,7 @@ options = {
     'BAND'   : None,
 
     'N'      : 50,
-    'M'      : 50,
+    'M'      : 4,
 
     'V_MASS1_RANGE' : [2.4, 50.0],
     'V_CHI1_RANGE'  : [0.20, 0.80],
@@ -44,7 +44,7 @@ options = {
     'V_THETAJ_RANGE' : [0.001, 3.14],
 
     'OUTPUT_DIR'     : "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime()),
-    'GENERATE_PLOTS' : 1,
+    'GENERATE_PLOTS' : 0,
     'THRESHOLD'      : 0.3}
 
 #=======================================================================
@@ -65,63 +65,60 @@ def mask(OVLP2, OVLP1, threshold):
 
 def generate_GRID(**options):
 
-    OVLP        = np.zeros((options['N'], options['N'], 9))
+    OVLP        = np.zeros((options['N'], options['N'], options['N'], 9))
     MCHIRP, ETA = M1_M2_to_MCHRIP_ETA(options['M1'], options['M2'])
 
     V_THETAJ = np.linspace(options['V_THETAJ_RANGE'][0], \
     options['V_THETAJ_RANGE'][1], options['N'])
     V_KAPPA  = np.linspace(options['V_KAPPA_RANGE'][0],  \
     options['V_KAPPA_RANGE'][1],  options['N'])
+    V_CHI1  = np.linspace(options['V_CHI1_RANGE'][0],  \
+    options['V_CHI1_RANGE'][1],  options['N'])
 
-    for _thetaJ in xrange(options['N']):
-        for _kappa in xrange(options['N']):
+    for _chi1 in xrange(options['N']):
+	    for _thetaJ in xrange(options['N']):
+	        for _kappa in xrange(options['N']):
 
-            options['THETAJ'] = V_THETAJ[_thetaJ]
-            options['KAPPA']  = V_KAPPA[_kappa]
+	            options['CHI1']   = V_CHI1[_chi1]
+	            options['THETAJ'] = V_THETAJ[_thetaJ]
+	            options['KAPPA']  = V_KAPPA[_kappa]
 
-            OVLP[_thetaJ][_kappa][:] = compute_overlap(**options)
+	            OVLP[_chi1][_thetaJ][_kappa][:] = compute_overlap(**options)
 
     filename = "overlaps_eta_%s_chi1_%s_N_%r.npz" %('{:.2f}'.format(ETA),\
     '{:.2f}'.format(options['CHI1']), options['N'])
 
     np.savez("../../../output/datasets/%s/%s" %(options['OUTPUT_DIR'], filename),
         DATE         = strftime("%Y-%m-%d %H:%M:%S", localtime()),
-        SNR_0F       = OVLP[:, :, 0],
-        SNR_02       = OVLP[:, :, 1],
-        SNR_00       = OVLP[:, :, 2],
-        OLVP_0F_P2   = OVLP[:, :, 3],
-        OLVP_0F_P1   = OVLP[:, :, 4],
-        OLVP_0F_P0   = OVLP[:, :, 5],
-        OLVP_0F_M1   = OVLP[:, :, 6],
-        OLVP_0F_M2   = OVLP[:, :, 7],
-        OLVP_0F_P2P0 = OVLP[:, :, 8],
-        OLVP_MASK    = mask(OVLP[:, :, 3], OVLP[:, :, 5], options['THRESHOLD']),
+        SNR_0F       = OVLP[:, :, :, 0],
+        SNR_02       = OVLP[:, :, :, 1],
+        SNR_00       = OVLP[:, :, :, 2],
+        OLVP_0F_P2   = OVLP[:, :, :, 3],
+        OLVP_0F_P1   = OVLP[:, :, :, 4],
+        OLVP_0F_P0   = OVLP[:, :, :, 5],
+        OLVP_0F_M1   = OVLP[:, :, :, 6],
+        OLVP_0F_M2   = OVLP[:, :, :, 7],
+        OLVP_0F_P2P0 = OVLP[:, :, :, 8],
+        # OLVP_MASK    = mask(OVLP[:, :, :, 3], OVLP[:, :, :, 5], options['THRESHOLD']),
         THETAJ       = V_THETAJ,
         KAPPA        = V_KAPPA,
-        CHI1         = options['CHI1'],
+        CHI1         = V_CHI1,
         ETA          = ETA,
         OPTIONS      = options)
 
     return None
 
-def parallel_GRID(_MASS, _CHI1, **options):
-
-    options['M1']         = _MASS
-    options['CHI1']       = _CHI1
-
+def parallel_GRID( _MASS, **options):
+    options['M1'] = _MASS
     generate_GRID(**options)
 
 V_MASS1   = np.linspace(options['V_MASS1_RANGE'][0], \
 options['V_MASS1_RANGE'][1], options['M'])
-V_CHI1    = np.linspace(options['V_CHI1_RANGE'][0], \
-options['V_CHI1_RANGE'][1], options['M'])
 
 if not os.path.exists("../../../output/datasets/%s" %options['OUTPUT_DIR']):
         os.makedirs("../../../output/datasets/%s" %options['OUTPUT_DIR'])
 
-Parallel(n_jobs=-2, verbose=5)(delayed(parallel_GRID)(_MASS = V_MASS1[m], \
- _CHI1 = V_CHI1[c], **options) for m in xrange(options['M']) for \
- c in xrange(options['M']))
+Parallel(n_jobs=-2, verbose=5)(delayed(parallel_GRID)(_MASS = V_MASS1[m], **options) for m in xrange(options['M']))
 
 if options['GENERATE_PLOTS'] == 1:
     print "\n[Generating plots]"
