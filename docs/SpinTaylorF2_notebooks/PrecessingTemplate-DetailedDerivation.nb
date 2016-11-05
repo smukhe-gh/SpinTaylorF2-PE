@@ -1,0 +1,3373 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    112133,       3364]
+NotebookOptionsPosition[    109133,       3260]
+NotebookOutlinePosition[    109491,       3276]
+CellTagsIndexPosition[    109448,       3273]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+PrecessingTemplate-DetailedDerivation\
+\>", "Title",
+ CellChangeTimes->{{3.574378940374092*^9, 3.574378955650833*^9}}],
+
+Cell[TextData[{
+ StyleBox["Goal",
+  FontWeight->"Bold"],
+ ": This notebook documents the derivations in Lundgren and O\
+\[CloseCurlyQuote]Shaughnessy.  At the end, you have the option of generating \
+associated files, containing the explicit expansions described in the text.\n\
+\n\n",
+ StyleBox["What is not provided",
+  FontWeight->"Bold"],
+ ":\nWe do not provide the coefficients for the TaylorT2 expansion; see BIOPS \
+[PRD 80, 084043 (2009) and particularly section II.B and Appendix B3 of ",
+ "http://arxiv.org/pdf/1307.1757v1.pdf"
+}], "Text",
+ CellChangeTimes->{{3.5743789516599894`*^9, 3.574378992203183*^9}, {
+  3.585655374897935*^9, 3.58565541123763*^9}, {3.5856554584185553`*^9, 
+  3.585655474551221*^9}, {3.5856569552894278`*^9, 3.585656987603443*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Abstract derivation: \[Alpha](v), \[Zeta](v)\
+\>", "Section",
+ CellChangeTimes->{{3.57437911709304*^9, 3.5743791888191023`*^9}, {
+  3.574379760500269*^9, 3.574379760659829*^9}}],
+
+Cell[TextData[{
+ StyleBox["Goal",
+  FontWeight->"Bold"],
+ ": We explicitly perform the (velocity or time domain) integrals needed to \
+provide \[Alpha](v) and \[Zeta](v) in closed form, as described in Eqs. \
+(18-19) in LO.  \n\nFor clarity, we do not substitute in the explicit form \
+for ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"dt", "/", "dv"}], TraditionalForm]]],
+ " here"
+}], "Text",
+ CellChangeTimes->{{3.574379143258387*^9, 3.574379156699098*^9}, {
+   3.574379192971805*^9, 3.574379276332491*^9}, 3.574379456265017*^9, {
+   3.574379763380404*^9, 3.5743797764359913`*^9}, {3.5744266330263147`*^9, 
+   3.574426655274276*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "dtdvK", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Format", "[", 
+   RowBox[{"dtdvK", "[", "k_", "]"}], "]"}], " ", ":=", " ", 
+  SubscriptBox[Cell[TextData[Cell[BoxData[
+    FormBox[
+     RowBox[{"(", 
+      FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]], 
+   "k"]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Format", "[", "dtdvN", "]"}], " ", ":=", " ", 
+  SubscriptBox[
+   RowBox[{"(", 
+    FractionBox["dt", "dv"], ")"}], "N"]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Format", "[", "GammaJ", "]"}], " ", ":=", " ", 
+  SubscriptBox["\[CapitalGamma]", "J"]}], "\[IndentingNewLine]", 
+ RowBox[{"dtdvK", "[", "2", "]"}]}], "Input",
+ CellChangeTimes->{{3.5743793043433847`*^9, 3.57437931432075*^9}, {
+  3.5743793520964603`*^9, 3.5743793618795223`*^9}, {3.57437939471516*^9, 
+  3.574379416731262*^9}, {3.5743794929794397`*^9, 3.57437950362017*^9}, {
+  3.5743798377428503`*^9, 3.574379844450408*^9}, {3.5744070356205893`*^9, 
+  3.574407035794488*^9}}],
+
+Cell[BoxData[
+ SubscriptBox[
+  InterpretationBox[Cell[BoxData[Cell[BoxData[
+     FormBox[
+      RowBox[{"(", 
+       FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+   TextCell[
+    RawBoxes[
+     Cell[
+      BoxData[
+       FormBox[
+        RowBox[{"(", 
+          FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+  "2"]], "Output",
+ CellChangeTimes->{
+  3.57437937084629*^9, {3.5743794063524523`*^9, 3.574379419501391*^9}, 
+   3.5743795042522793`*^9, {3.574379842314273*^9, 3.5743798447687883`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Definitions", "Subsubsection",
+ CellChangeTimes->{{3.574379450282208*^9, 3.574379451559783*^9}}],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[CapitalGamma]", "J"], " ", "=", " ", 
+    RowBox[{"|", "J", "|", 
+     RowBox[{"/", 
+      RowBox[{"|", "L", "|"}]}]}]}], TraditionalForm]]],
+ "\nL = ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["L", "N"], TraditionalForm]]],
+ "\n\[Gamma] = |S|/|L| = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Gamma]", "1"], "v"}], TraditionalForm]]],
+ "   with ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Gamma]", 
+     RowBox[{"1", " "}]], "=", " ", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"L", "(", 
+       SubscriptBox["v", "o"], ")"}], "/", 
+      SubscriptBox["v", "0"]}], "S"]}], TraditionalForm]]],
+ "  (i.e., assuming Newtonian-order scaling)\n "
+}], "Text",
+ CellChangeTimes->{{3.5743794676312103`*^9, 3.574379488957561*^9}, {
+  3.5743795394978113`*^9, 3.574379683194525*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GammaJValue", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"Sqrt", "[", 
+     RowBox[{"1", "+", 
+      RowBox[{"2", "\[Kappa]", " ", "\[Gamma]"}], "+", 
+      SuperscriptBox["\[Gamma]", "2"]}], "]"}], "/.", 
+    RowBox[{"\[Gamma]", "\[Rule]", 
+     RowBox[{"\[Gamma]1", " ", "v"}]}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.574379513537075*^9, 3.574379545787168*^9}, {
+  3.574379690166562*^9, 3.5743797009657288`*^9}}],
+
+Cell[TextData[{
+ StyleBox["dt/dv",
+  FontWeight->"Bold"],
+ ": Rather than explicitly provide the (well-known) TaylorT2 expression  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"dt", "/", "dv"}], " ", "=", " ", 
+    RowBox[{
+     SuperscriptBox["v", 
+      RowBox[{"-", "9"}]], 
+     SubscriptBox[
+      RowBox[{"(", 
+       FractionBox["dt", "dv"], ")"}], "N"]}]}], TraditionalForm]]],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Sum]", "k"], " ", 
+    RowBox[{
+     SubscriptBox[
+      RowBox[{"(", 
+       RowBox[{"dt", "/", "dv"}], ")"}], "k"], " ", 
+     SuperscriptBox["v", "k"]}]}], TraditionalForm]]],
+ " we treat the coefficients as abstract parameters  that correct the \
+newtonian-order result.\n\tWhen constructing \[Alpha] and \[Zeta], we limit \
+the expansion to a pure power series, so k<=5 (i.e., to 2.5 PN).  "
+}], "Text",
+ CellChangeTimes->{{3.574379458416216*^9, 3.574379462129896*^9}, {
+  3.574407054708943*^9, 3.574407062283207*^9}, {3.574426657209371*^9, 
+  3.5744267040537853`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"dtdvK", "[", "0", "]"}], " ", "=", " ", "1"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"dtdv", " ", "=", " ", 
+  RowBox[{
+   SuperscriptBox["v", 
+    RowBox[{"-", "9"}]], " ", "dtdvN", " ", 
+   RowBox[{"Sum", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"dtdvK", "[", "k", "]"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"v", " ", "\[Epsilon]"}], ")"}], "k"]}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", " ", "0", ",", " ", "5"}], "}"}]}], 
+    "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"dtdvReduced", "  ", "=", 
+  RowBox[{"Sum", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"dtdvK", "[", "k", "]"}], " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"v", " ", "\[Epsilon]"}], ")"}], "k"]}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", " ", "0", ",", " ", "5"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.574379282233531*^9, 3.5743793215897093`*^9}, {
+   3.574379380898686*^9, 3.574379386295662*^9}, 3.574379490491041*^9, {
+   3.574379900295928*^9, 3.574379901826251*^9}, 3.574407078942595*^9, {
+   3.574426707546536*^9, 3.5744267089462748`*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   SubscriptBox[
+    FractionBox["dt", "dv"], "N"], " ", 
+   RowBox[{"(", 
+    RowBox[{"1", "+", 
+     RowBox[{"v", " ", "\[Epsilon]", " ", 
+      SubscriptBox[
+       InterpretationBox[Cell[BoxData[Cell[BoxData[
+          FormBox[
+           RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+        TextCell[
+         RawBoxes[
+          Cell[
+           BoxData[
+            FormBox[
+             RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "1"]}], 
+     "+", 
+     RowBox[{
+      SuperscriptBox["v", "2"], " ", 
+      SuperscriptBox["\[Epsilon]", "2"], " ", 
+      SubscriptBox[
+       InterpretationBox[Cell[BoxData[Cell[BoxData[
+          FormBox[
+           RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+        TextCell[
+         RawBoxes[
+          Cell[
+           BoxData[
+            FormBox[
+             RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "2"]}], 
+     "+", 
+     RowBox[{
+      SuperscriptBox["v", "3"], " ", 
+      SuperscriptBox["\[Epsilon]", "3"], " ", 
+      SubscriptBox[
+       InterpretationBox[Cell[BoxData[Cell[BoxData[
+          FormBox[
+           RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+        TextCell[
+         RawBoxes[
+          Cell[
+           BoxData[
+            FormBox[
+             RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "3"]}], 
+     "+", 
+     RowBox[{
+      SuperscriptBox["v", "4"], " ", 
+      SuperscriptBox["\[Epsilon]", "4"], " ", 
+      SubscriptBox[
+       InterpretationBox[Cell[BoxData[Cell[BoxData[
+          FormBox[
+           RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+        TextCell[
+         RawBoxes[
+          Cell[
+           BoxData[
+            FormBox[
+             RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "4"]}], 
+     "+", 
+     RowBox[{
+      SuperscriptBox["v", "5"], " ", 
+      SuperscriptBox["\[Epsilon]", "5"], " ", 
+      SubscriptBox[
+       InterpretationBox[Cell[BoxData[Cell[BoxData[
+          FormBox[
+           RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+        TextCell[
+         RawBoxes[
+          Cell[
+           BoxData[
+            FormBox[
+             RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+       "5"]}]}], ")"}]}], 
+  SuperscriptBox["v", "9"]]], "Output",
+ CellChangeTimes->{{3.5743793263134212`*^9, 3.574379357576728*^9}, {
+   3.574379388092802*^9, 3.574379420252475*^9}, 3.574379847008391*^9, 
+   3.5744267094297*^9}],
+
+Cell[BoxData[
+ RowBox[{"1", "+", 
+  RowBox[{"v", " ", "\[Epsilon]", " ", 
+   SubscriptBox[
+    InterpretationBox[Cell[BoxData[Cell[BoxData[
+       FormBox[
+        RowBox[{"(", 
+         FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+     TextCell[
+      RawBoxes[
+       Cell[
+        BoxData[
+         FormBox[
+          RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "1"]}], 
+  "+", 
+  RowBox[{
+   SuperscriptBox["v", "2"], " ", 
+   SuperscriptBox["\[Epsilon]", "2"], " ", 
+   SubscriptBox[
+    InterpretationBox[Cell[BoxData[Cell[BoxData[
+       FormBox[
+        RowBox[{"(", 
+         FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+     TextCell[
+      RawBoxes[
+       Cell[
+        BoxData[
+         FormBox[
+          RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "2"]}], 
+  "+", 
+  RowBox[{
+   SuperscriptBox["v", "3"], " ", 
+   SuperscriptBox["\[Epsilon]", "3"], " ", 
+   SubscriptBox[
+    InterpretationBox[Cell[BoxData[Cell[BoxData[
+       FormBox[
+        RowBox[{"(", 
+         FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+     TextCell[
+      RawBoxes[
+       Cell[
+        BoxData[
+         FormBox[
+          RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "3"]}], 
+  "+", 
+  RowBox[{
+   SuperscriptBox["v", "4"], " ", 
+   SuperscriptBox["\[Epsilon]", "4"], " ", 
+   SubscriptBox[
+    InterpretationBox[Cell[BoxData[Cell[BoxData[
+       FormBox[
+        RowBox[{"(", 
+         FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+     TextCell[
+      RawBoxes[
+       Cell[
+        BoxData[
+         FormBox[
+          RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "4"]}], 
+  "+", 
+  RowBox[{
+   SuperscriptBox["v", "5"], " ", 
+   SuperscriptBox["\[Epsilon]", "5"], " ", 
+   SubscriptBox[
+    InterpretationBox[Cell[BoxData[Cell[BoxData[
+       FormBox[
+        RowBox[{"(", 
+         FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+     TextCell[
+      RawBoxes[
+       Cell[
+        BoxData[
+         FormBox[
+          RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+    "5"]}]}]], "Output",
+ CellChangeTimes->{{3.5743793263134212`*^9, 3.574379357576728*^9}, {
+   3.574379388092802*^9, 3.574379420252475*^9}, 3.574379847008391*^9, 
+   3.574426709439399*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Derivation and simplifications: \[Alpha]\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.5743797090999002`*^9, 3.5743797139949207`*^9}, {
+  3.574380823935328*^9, 3.574380828487732*^9}}],
+
+Cell[TextData[{
+ "\[Alpha] = \[Eta](2+3 ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      SubscriptBox["m", "2"], "/", "2"}], 
+     SubscriptBox["m", "1"]}], ")"}], TraditionalForm]]],
+ "\[Integral] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["v", "5"], 
+    SubscriptBox["\[CapitalGamma]", 
+     RowBox[{"J", " "}]], 
+    RowBox[{"dt", "/", "dv"}], " ", "dv", " "}], TraditionalForm]]],
+ "\n   = \[Eta](2+3 ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      SubscriptBox["m", "2"], "/", "2"}], 
+     SubscriptBox["m", "1"]}], ")"}], TraditionalForm]]],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox[
+     RowBox[{"(", 
+      FractionBox["dt", "dv"], ")"}], "N"], 
+    RowBox[{"\[Integral]", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{
+        SuperscriptBox["v", 
+         RowBox[{"-", "4"}]], "(", 
+        RowBox[{"1", "+", 
+         RowBox[{"2", " ", "\[Kappa]", " ", "\[Gamma]"}], "+", 
+         SuperscriptBox["\[Gamma]", "2"]}], ")"}], 
+       RowBox[{"1", "/", "2"}]], " ", 
+      RowBox[{
+       SubscriptBox["\[Sum]", "k"], 
+       RowBox[{
+        SubscriptBox[
+         RowBox[{"(", 
+          FractionBox["dt", "dv"], ")"}], "k"], 
+        SuperscriptBox["v", "k"]}]}]}]}]}], TraditionalForm]]],
+ " \n\n",
+ StyleBox["Do the integral",
+  FontWeight->"Bold"],
+ ": It has a closed form as an abstract integral.  Keeping in mind ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Gamma]", "=", 
+    RowBox[{
+     SubscriptBox["\[Gamma]", "1"], "v"}]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " at the order used, the integral can be reparameterized in ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " or equivalently x\[Proportional] v.  Each term in the sum resembles the \
+following one-dimensional integral:\n\t",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    SubscriptBox["\[Integral]", 
+     SubscriptBox["x", "ref"]], "x"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SuperscriptBox["x", "n"], " ", "dx"}], " ", "|", " ", 
+    RowBox[{
+     OverscriptBox["z", "^"], " ", "+", " ", 
+     RowBox[{"x", " ", 
+      OverscriptBox["g", "^"]}]}], "|"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "                ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "=", 
+    RowBox[{"k", "-", "4"}]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "\n\n\n",
+ StyleBox["Large-v limit and functional form:\n",
+  FontSlant->"Italic"],
+ "The integral has closed form.    Due to the ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[CapitalGamma]", "J"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " (geometrical) factor, this integral does not respect post-Newtonian order. \
+ The series produced from \[Integral] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["x", "n"], "|", " ", 
+    RowBox[{
+     OverscriptBox["z", "^"], " ", "+", " ", 
+     RowBox[{"x", " ", 
+      OverscriptBox["g", "^"]}]}], "|", "dx"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " is not a standard PN series in any sense. \n\nThe large-v limit of each \
+term scales as ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["v", 
+    RowBox[{"n", "+", "1"}]], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ", except for ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "=", 
+    RowBox[{"-", "1"}]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " which has another ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"ln", " ", "v"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " term."
+}], "Text",
+ CellChangeTimes->{{3.574379800380773*^9, 3.574379892454009*^9}, 
+   3.574380403521822*^9, {3.5743805393558073`*^9, 3.574380542475595*^9}, {
+   3.57438061922027*^9, 3.574380709861329*^9}, {3.5743808621970387`*^9, 
+   3.574380870368898*^9}, {3.574382190790169*^9, 3.5743821945712357`*^9}, 
+   3.574382371838437*^9, {3.5744029863955*^9, 3.57440318655385*^9}, {
+   3.574403223901391*^9, 3.5744032992114277`*^9}, {3.5744035012160892`*^9, 
+   3.574403533207281*^9}, {3.5744035870091743`*^9, 3.5744036580294037`*^9}, {
+   3.574403705955875*^9, 3.574403709383686*^9}, {3.574404524876687*^9, 
+   3.574404682914378*^9}, 3.5744047169160852`*^9, {3.574404820396553*^9, 
+   3.574404833252308*^9}, {3.574404922325481*^9, 3.57440497932587*^9}, {
+   3.574405034148942*^9, 3.574405132661345*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"1", "+", 
+       RowBox[{"a", " ", 
+        SuperscriptBox["x", "2"]}], " ", "+", 
+       RowBox[{"b", " ", "x"}]}], "]"}], " ", 
+     RowBox[{"x", "^", "n"}]}], ",", "x"}], "]"}], "//", 
+  "Simplify"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"1", "+", 
+       RowBox[{"a", " ", 
+        SuperscriptBox["x", "2"]}], " ", "+", 
+       RowBox[{"b", " ", "x"}]}], "]"}], " ", 
+     RowBox[{"x", "^", 
+      RowBox[{"(", 
+       RowBox[{"-", "4"}], ")"}]}]}], ",", "x"}], "]"}], "//", 
+  "FullSimplify"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"1", "+", 
+       RowBox[{"a", " ", 
+        SuperscriptBox["x", "2"]}], " ", "+", 
+       RowBox[{"b", " ", "x"}]}], "]"}], " ", 
+     RowBox[{"x", "^", 
+      RowBox[{"(", "0", ")"}]}]}], ",", "x"}], "]"}], "//", 
+  "FullSimplify"}]}], "Input",
+ CellChangeTimes->{{3.574404687080132*^9, 3.574404701939652*^9}, {
+  3.574404757492893*^9, 3.5744048389593973`*^9}, {3.5744048981272078`*^9, 
+  3.5744049371303864`*^9}, {3.574404981787878*^9, 3.574405005682548*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{
+    SuperscriptBox["2", 
+     RowBox[{
+      FractionBox["1", "2"], "-", "n"}]], " ", 
+    SuperscriptBox["x", "n"], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      FractionBox[
+       RowBox[{"a", " ", "x"}], 
+       RowBox[{
+        RowBox[{"-", "b"}], "+", 
+        SqrtBox[
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "4"}], " ", "a"}], "+", 
+          SuperscriptBox["b", "2"]}]]}]], ")"}], 
+     RowBox[{"-", "n"}]], " ", 
+    RowBox[{"(", 
+     RowBox[{"b", "-", 
+      SqrtBox[
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "4"}], " ", "a"}], "+", 
+        SuperscriptBox["b", "2"]}]], "+", 
+      RowBox[{"2", " ", "a", " ", "x"}]}], ")"}], " ", 
+    SqrtBox[
+     RowBox[{"1", "+", 
+      RowBox[{"b", " ", "x"}], "+", 
+      RowBox[{"a", " ", 
+       SuperscriptBox["x", "2"]}]}]], " ", 
+    RowBox[{"AppellF1", "[", 
+     RowBox[{
+      FractionBox["3", "2"], ",", 
+      RowBox[{"-", 
+       FractionBox["1", "2"]}], ",", 
+      RowBox[{"-", "n"}], ",", 
+      FractionBox["5", "2"], ",", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"-", "b"}], "+", 
+        SqrtBox[
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "4"}], " ", "a"}], "+", 
+          SuperscriptBox["b", "2"]}]], "-", 
+        RowBox[{"2", " ", "a", " ", "x"}]}], 
+       RowBox[{"2", " ", 
+        SqrtBox[
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "4"}], " ", "a"}], "+", 
+          SuperscriptBox["b", "2"]}]]}]], ",", 
+      FractionBox[
+       RowBox[{"b", "-", 
+        SqrtBox[
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "4"}], " ", "a"}], "+", 
+          SuperscriptBox["b", "2"]}]], "+", 
+        RowBox[{"2", " ", "a", " ", "x"}]}], 
+       RowBox[{"b", "-", 
+        SqrtBox[
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "4"}], " ", "a"}], "+", 
+          SuperscriptBox["b", "2"]}]]}]]}], "]"}]}], ")"}], "/", 
+  RowBox[{"(", 
+   RowBox[{"3", " ", "a", " ", 
+    SqrtBox[
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "b"}], " ", 
+        RowBox[{"(", 
+         RowBox[{"b", "+", 
+          SqrtBox[
+           RowBox[{
+            RowBox[{
+             RowBox[{"-", "4"}], " ", "a"}], "+", 
+            SuperscriptBox["b", "2"]}]]}], ")"}]}], "+", 
+       RowBox[{"a", " ", 
+        RowBox[{"(", 
+         RowBox[{"4", "-", 
+          RowBox[{"2", " ", 
+           SqrtBox[
+            RowBox[{
+             RowBox[{
+              RowBox[{"-", "4"}], " ", "a"}], "+", 
+             SuperscriptBox["b", "2"]}]], " ", "x"}]}], ")"}]}]}], 
+      RowBox[{
+       RowBox[{"4", " ", "a"}], "-", 
+       SuperscriptBox["b", "2"]}]]]}], ")"}]}]], "Output",
+ CellChangeTimes->{
+  3.574404704016777*^9, {3.574404758082624*^9, 3.57440483937197*^9}, {
+   3.5744049008185472`*^9, 3.574404937507153*^9}, {3.574404987174754*^9, 
+   3.574405006508924*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", 
+   RowBox[{"48", " ", 
+    SuperscriptBox["x", "3"]}]], 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"2", " ", 
+     SqrtBox[
+      RowBox[{"1", "+", 
+       RowBox[{"x", " ", 
+        RowBox[{"(", 
+         RowBox[{"b", "+", 
+          RowBox[{"a", " ", "x"}]}], ")"}]}]}]], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "8"}], "+", 
+       RowBox[{"x", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "8"}], " ", "a", " ", "x"}], "+", 
+          RowBox[{"b", " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "2"}], "+", 
+             RowBox[{"3", " ", "b", " ", "x"}]}], ")"}]}]}], ")"}]}]}], 
+      ")"}]}], "+", 
+    RowBox[{"3", " ", "b", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "4"}], " ", "a"}], "+", 
+       SuperscriptBox["b", "2"]}], ")"}], " ", 
+     SuperscriptBox["x", "3"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"Log", "[", "x", "]"}], "-", 
+       RowBox[{"Log", "[", 
+        RowBox[{"2", "+", 
+         RowBox[{"b", " ", "x"}], "+", 
+         RowBox[{"2", " ", 
+          SqrtBox[
+           RowBox[{"1", "+", 
+            RowBox[{"x", " ", 
+             RowBox[{"(", 
+              RowBox[{"b", "+", 
+               RowBox[{"a", " ", "x"}]}], ")"}]}]}]]}]}], "]"}]}], ")"}]}]}], 
+   ")"}]}]], "Output",
+ CellChangeTimes->{
+  3.574404704016777*^9, {3.574404758082624*^9, 3.57440483937197*^9}, {
+   3.5744049008185472`*^9, 3.574404937507153*^9}, {3.574404987174754*^9, 
+   3.574405007768395*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   RowBox[{"2", " ", 
+    SqrtBox["a"], " ", 
+    RowBox[{"(", 
+     RowBox[{"b", "+", 
+      RowBox[{"2", " ", "a", " ", "x"}]}], ")"}], " ", 
+    SqrtBox[
+     RowBox[{"1", "+", 
+      RowBox[{"x", " ", 
+       RowBox[{"(", 
+        RowBox[{"b", "+", 
+         RowBox[{"a", " ", "x"}]}], ")"}]}]}]]}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"4", " ", "a"}], "-", 
+      SuperscriptBox["b", "2"]}], ")"}], " ", 
+    RowBox[{"Log", "[", 
+     RowBox[{"b", "+", 
+      RowBox[{"2", " ", "a", " ", "x"}], "+", 
+      RowBox[{"2", " ", 
+       SqrtBox["a"], " ", 
+       SqrtBox[
+        RowBox[{"1", "+", 
+         RowBox[{"x", " ", 
+          RowBox[{"(", 
+           RowBox[{"b", "+", 
+            RowBox[{"a", " ", "x"}]}], ")"}]}]}]]}]}], "]"}]}]}], 
+  RowBox[{"8", " ", 
+   SuperscriptBox["a", 
+    RowBox[{"3", "/", "2"}]]}]]], "Output",
+ CellChangeTimes->{
+  3.574404704016777*^9, {3.574404758082624*^9, 3.57440483937197*^9}, {
+   3.5744049008185472`*^9, 3.574404937507153*^9}, {3.574404987174754*^9, 
+   3.574405007811595*^9}}]
+}, Open  ]],
+
+Cell[TextData[{
+ "\n",
+ StyleBox["Lower limit and reference value:",
+  FontSlant->"Italic"],
+ "\nThe lower limit is required for exponents ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "<=", 
+    RowBox[{"-", "1"}]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ", as the integral diverges.  (Physically, at very early times, an infinite \
+number of precession cyces occur; we set a reference velocity or |L| and \
+count precession cycles relative to it.)\n\nWith a fixed lower limit, the \
+integral converges.\n\nWe will NOT evaluate the integration constant.  \
+Instead, we will simply evaluate \[Alpha](v) as an indefinite integral, with \
+SOME integration constant.\nWhen using the code, we will always employ our \
+expression as\n\t",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[Alpha]", 
+     RowBox[{"(", "v", ")"}]}], "-", 
+    RowBox[{"\[Alpha]", "(", 
+     SubscriptBox["v", "ref"], ")"}], " ", "+", " ", 
+    SubscriptBox["\[Alpha]", "ref"]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " \nwhere \[Alpha](v) is the indefinite integral derived below and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Alpha]", "ref"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " is the value of \[Alpha] we demand at ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["v", "ref"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "\n"
+}], "Text",
+ CellChangeTimes->{{3.574379800380773*^9, 3.574379892454009*^9}, 
+   3.574380403521822*^9, {3.5743805393558073`*^9, 3.574380542475595*^9}, {
+   3.57438061922027*^9, 3.574380709861329*^9}, {3.5743808621970387`*^9, 
+   3.574380870368898*^9}, {3.574382190790169*^9, 3.5743821945712357`*^9}, 
+   3.574382371838437*^9, {3.5744029863955*^9, 3.57440318655385*^9}, {
+   3.574403223901391*^9, 3.5744032992114277`*^9}, {3.5744035012160892`*^9, 
+   3.574403533207281*^9}, {3.5744035870091743`*^9, 3.5744036580294037`*^9}, {
+   3.574403705955875*^9, 3.574403709383686*^9}, {3.574404524876687*^9, 
+   3.574404682914378*^9}, 3.5744047169160852`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"exprFullAlphaIntegral", " ", "=", " ", 
+  RowBox[{"Integrate", "[", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"GammaJValue", " ", "/", 
+      SuperscriptBox["v", "4"]}], " ", "dtdvReduced"}], ",", " ", "v"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.574379795800933*^9, 3.5743797975415382`*^9}, {
+  3.574380723943615*^9, 3.574380785344368*^9}, {3.5743808222976418`*^9, 
+  3.574380822536339*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", "2"], " ", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{
+     FractionBox["1", 
+      RowBox[{"3", " ", 
+       SuperscriptBox["v", "3"], " ", 
+       SuperscriptBox["\[Gamma]1", "2"]}]], 
+     RowBox[{
+      SqrtBox[
+       RowBox[{"1", "+", 
+        RowBox[{
+         SuperscriptBox["v", "2"], " ", 
+         SuperscriptBox["\[Gamma]1", "2"]}], "+", 
+        RowBox[{"2", " ", "v", " ", "\[Gamma]1", " ", "\[Kappa]"}]}]], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         SuperscriptBox["v", "2"], " ", 
+         SuperscriptBox["\[Gamma]1", "4"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "2"}], "+", 
+           RowBox[{"3", " ", 
+            SuperscriptBox["\[Kappa]", "2"]}]}], ")"}]}], "-", 
+        RowBox[{"v", " ", 
+         SuperscriptBox["\[Gamma]1", "3"], " ", "\[Kappa]", " ", 
+         RowBox[{"(", 
+          RowBox[{"1", "+", 
+           RowBox[{"3", " ", "v", " ", "\[Epsilon]", " ", 
+            SubscriptBox[
+             InterpretationBox[Cell[BoxData[Cell[BoxData[
+                FormBox[
+                 RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+              TextCell[
+               RawBoxes[
+                Cell[
+                 BoxData[
+                  FormBox[
+                   RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+             "1"]}]}], ")"}]}], "+", 
+        RowBox[{
+         SuperscriptBox["v", "3"], " ", 
+         SuperscriptBox["\[Epsilon]", "5"], " ", 
+         RowBox[{"(", 
+          RowBox[{"2", "-", 
+           RowBox[{"3", " ", 
+            SuperscriptBox["\[Kappa]", "2"]}]}], ")"}], " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "5"]}], "+", 
+        RowBox[{
+         SuperscriptBox["v", "3"], " ", "\[Gamma]1", " ", 
+         SuperscriptBox["\[Epsilon]", "4"], " ", "\[Kappa]", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"3", " ", 
+            SubscriptBox[
+             InterpretationBox[Cell[BoxData[Cell[BoxData[
+                FormBox[
+                 RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+              TextCell[
+               RawBoxes[
+                Cell[
+                 BoxData[
+                  FormBox[
+                   RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+             "4"]}], "+", 
+           RowBox[{"v", " ", "\[Epsilon]", " ", 
+            SubscriptBox[
+             InterpretationBox[Cell[BoxData[Cell[BoxData[
+                FormBox[
+                 RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+              TextCell[
+               RawBoxes[
+                Cell[
+                 BoxData[
+                  FormBox[
+                   RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+             "5"]}]}], ")"}]}], "+", 
+        RowBox[{
+         SuperscriptBox["\[Gamma]1", "2"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "2"}], "-", 
+           RowBox[{"3", " ", "v", " ", "\[Epsilon]", " ", 
+            SubscriptBox[
+             InterpretationBox[Cell[BoxData[Cell[BoxData[
+                FormBox[
+                 RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+              TextCell[
+               RawBoxes[
+                Cell[
+                 BoxData[
+                  FormBox[
+                   RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+             "1"]}], "-", 
+           RowBox[{"6", " ", 
+            SuperscriptBox["v", "2"], " ", 
+            SuperscriptBox["\[Epsilon]", "2"], " ", 
+            SubscriptBox[
+             InterpretationBox[Cell[BoxData[Cell[BoxData[
+                FormBox[
+                 RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+              TextCell[
+               RawBoxes[
+                Cell[
+                 BoxData[
+                  FormBox[
+                   RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+             "2"]}], "+", 
+           RowBox[{"6", " ", 
+            SuperscriptBox["v", "3"], " ", 
+            SuperscriptBox["\[Epsilon]", "3"], " ", 
+            SubscriptBox[
+             InterpretationBox[Cell[BoxData[Cell[BoxData[
+                FormBox[
+                 RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+              TextCell[
+               RawBoxes[
+                Cell[
+                 BoxData[
+                  FormBox[
+                   RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+             "3"]}], "+", 
+           RowBox[{"3", " ", 
+            SuperscriptBox["v", "4"], " ", 
+            SuperscriptBox["\[Epsilon]", "4"], " ", 
+            SubscriptBox[
+             InterpretationBox[Cell[BoxData[Cell[BoxData[
+                FormBox[
+                 RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+              TextCell[
+               RawBoxes[
+                Cell[
+                 BoxData[
+                  FormBox[
+                   RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+             "4"]}], "+", 
+           RowBox[{"2", " ", 
+            SuperscriptBox["v", "5"], " ", 
+            SuperscriptBox["\[Epsilon]", "5"], " ", 
+            SubscriptBox[
+             InterpretationBox[Cell[BoxData[Cell[BoxData[
+                FormBox[
+                 RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+              TextCell[
+               RawBoxes[
+                Cell[
+                 BoxData[
+                  FormBox[
+                   RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+             "5"]}]}], ")"}]}]}], ")"}]}]}], "+", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        SuperscriptBox["\[Gamma]1", "3"], " ", "\[Kappa]", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          SuperscriptBox["\[Kappa]", "2"]}], ")"}]}], "-", 
+       RowBox[{
+        SuperscriptBox["\[Gamma]1", "2"], " ", "\[Epsilon]", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "1"]}], "+", 
+       RowBox[{"2", " ", "\[Gamma]1", " ", 
+        SuperscriptBox["\[Epsilon]", "2"], " ", "\[Kappa]", " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "2"]}], "+", 
+       RowBox[{"2", " ", 
+        SuperscriptBox["\[Epsilon]", "3"], " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "3"]}]}], ")"}], " ", 
+     RowBox[{"Log", "[", "v", "]"}]}], "+", 
+    FractionBox[
+     RowBox[{
+      SuperscriptBox["\[Epsilon]", "2"], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"2", " ", 
+         SuperscriptBox["\[Gamma]1", "3"], " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "2"]}], "+", 
+        RowBox[{"2", " ", 
+         SuperscriptBox["\[Gamma]1", "2"], " ", "\[Epsilon]", " ", "\[Kappa]",
+          " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "3"]}], "-", 
+        RowBox[{"\[Gamma]1", " ", 
+         SuperscriptBox["\[Epsilon]", "2"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", 
+           SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "4"]}], "+", 
+        RowBox[{
+         SuperscriptBox["\[Epsilon]", "3"], " ", "\[Kappa]", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", 
+           SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "5"]}]}], ")"}], " ", 
+      RowBox[{"Log", "[", 
+       RowBox[{
+        RowBox[{"v", " ", "\[Gamma]1"}], "+", "\[Kappa]", "+", 
+        SqrtBox[
+         RowBox[{"1", "+", 
+          RowBox[{
+           SuperscriptBox["v", "2"], " ", 
+           SuperscriptBox["\[Gamma]1", "2"]}], "+", 
+          RowBox[{"2", " ", "v", " ", "\[Gamma]1", " ", "\[Kappa]"}]}]]}], 
+       "]"}]}], 
+     SuperscriptBox["\[Gamma]1", "2"]], "-", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        SuperscriptBox["\[Gamma]1", "3"], " ", "\[Kappa]", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          SuperscriptBox["\[Kappa]", "2"]}], ")"}]}], "-", 
+       RowBox[{
+        SuperscriptBox["\[Gamma]1", "2"], " ", "\[Epsilon]", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "1"]}], "+", 
+       RowBox[{"2", " ", "\[Gamma]1", " ", 
+        SuperscriptBox["\[Epsilon]", "2"], " ", "\[Kappa]", " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "2"]}], "+", 
+       RowBox[{"2", " ", 
+        SuperscriptBox["\[Epsilon]", "3"], " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "3"]}]}], ")"}], " ", 
+     RowBox[{"Log", "[", 
+      RowBox[{"1", "+", 
+       RowBox[{"v", " ", "\[Gamma]1", " ", "\[Kappa]"}], "+", 
+       SqrtBox[
+        RowBox[{"1", "+", 
+         RowBox[{
+          SuperscriptBox["v", "2"], " ", 
+          SuperscriptBox["\[Gamma]1", "2"]}], "+", 
+         RowBox[{"2", " ", "v", " ", "\[Gamma]1", " ", "\[Kappa]"}]}]]}], 
+      "]"}]}]}], ")"}]}]], "Output",
+ CellChangeTimes->{{3.57438076216227*^9, 3.5743807741723423`*^9}, 
+   3.5743808303330917`*^9, 3.574381652743162*^9, 3.57440321709554*^9, 
+   3.5744267173051863`*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Identify common terms",
+  FontWeight->"Bold"],
+ ": They are straightforward to back-substitute out\n\t",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[CapitalGamma]", "J"], "(", "v", ")"}], "=", 
+    RowBox[{
+     SqrtBox[
+      RowBox[{"1", "+", 
+       RowBox[{
+        SuperscriptBox["v", "2"], " ", 
+        SuperscriptBox["\[Gamma]1", "2"]}], "+", 
+       RowBox[{"2", " ", "v", " ", "\[Gamma]1", " ", "\[Kappa]"}]}]], "    ", 
+     
+     RowBox[{"(", 
+      RowBox[{"=", " ", 
+       RowBox[{"|", "J", "|", 
+        RowBox[{"/", 
+         RowBox[{"|", "L", "|"}]}]}]}], ")"}]}]}], TraditionalForm]]],
+ "\n\t",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["Q", "L"], " ", "=", " ", 
+    RowBox[{
+     RowBox[{"1", "+", "\[Gamma]\[Kappa]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"J", "\[CenterDot]", " ", "L"}], ")"}], "/"}], "|", "L", 
+      SuperscriptBox["|", "2"]}]}]}], TraditionalForm]]],
+ "\n\t",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["Q", "S"], " ", "=", "  "}], TraditionalForm]]],
+ "\[Kappa]+\[Gamma]     ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"J", "\[CenterDot]", "S"}], ")"}], "/"}], "|", "L", 
+     SuperscriptBox["|", "2"]}]}], TraditionalForm]]],
+ "\n\t\nThe arguments of the logs are a bit annoying, so we will give them \
+particularly special names\n\t",
+ Cell[BoxData[{
+  FormBox[
+   RowBox[{
+    SubscriptBox["B", 
+     RowBox[{"L", " "}]], " ", "=", " ", 
+    RowBox[{
+     SubscriptBox["Q", "L"], "+", 
+     SubscriptBox["\[CapitalGamma]", "J"]}]}], 
+   TraditionalForm], "\[IndentingNewLine]", 
+  FormBox[
+   RowBox[{
+    SubscriptBox["B", 
+     RowBox[{"S", " "}]], " ", "=", " ", 
+    RowBox[{
+     SubscriptBox["Q", "S"], " ", "+", " ", 
+     SubscriptBox["\[CapitalGamma]", "J"]}]}], TraditionalForm]}]],
+ "   \nFinally, note ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["B", "S"], TraditionalForm]]],
+ " enters only in the combination  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["B", "S"], "/", " ", "v"}], TraditionalForm]]],
+ ", so define ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["B", "SV"], "=", 
+    RowBox[{
+     SubscriptBox["B", "S"], "/", "v"}]}], TraditionalForm]]],
+ ".\nUnfortunately, no other significant simplifications suggest themselves \
+which hold at all orders. "
+}], "Text",
+ CellChangeTimes->{{3.5743808722392473`*^9, 3.5743808785597897`*^9}, {
+  3.574380939670611*^9, 3.574381010326001*^9}, {3.574381124113393*^9, 
+  3.574381230983099*^9}, {3.574381280566951*^9, 3.574381424590414*^9}, {
+  3.574381462360834*^9, 3.574381509222703*^9}, {3.574381690741995*^9, 
+  3.5743817344173737`*^9}, {3.5743818518078547`*^9, 3.5743818535579967`*^9}, {
+  3.5744037318078938`*^9, 3.574403732153953*^9}, {3.5744037930090714`*^9, 
+  3.574403805471648*^9}, {3.574403853013763*^9, 3.574403853373723*^9}, {
+  3.574403920588429*^9, 3.5744039490547543`*^9}, {3.574404039657638*^9, 
+  3.574404064167714*^9}, {3.574405271991632*^9, 3.574405298744883*^9}, {
+  3.5744059238678083`*^9, 3.574405924168322*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"exprAlphaIntegralNewNotation", " ", "=", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"exprFullAlphaIntegral", "/.", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"v", " ", "\[Gamma]1"}], "+", "\[Kappa]", "+", 
+          SqrtBox[
+           RowBox[{"1", "+", 
+            RowBox[{
+             SuperscriptBox["v", "2"], " ", 
+             SuperscriptBox["\[Gamma]1", "2"]}], "+", 
+            RowBox[{"2", " ", "v", " ", "\[Gamma]1", " ", "\[Kappa]"}]}]]}], 
+         "\[Rule]", "BL"}], ",", 
+        RowBox[{
+         RowBox[{"1", "+", 
+          RowBox[{"v", " ", "\[Gamma]1", " ", "\[Kappa]"}], "+", 
+          SqrtBox[
+           RowBox[{"1", "+", 
+            RowBox[{
+             SuperscriptBox["v", "2"], " ", 
+             SuperscriptBox["\[Gamma]1", "2"]}], "+", 
+            RowBox[{"2", " ", "v", " ", "\[Gamma]1", " ", "\[Kappa]"}]}]]}], 
+         "\[Rule]", "BS"}]}], "}"}]}], "/.", 
+     RowBox[{"{", " ", 
+      RowBox[{
+       SqrtBox[
+        RowBox[{"1", "+", 
+         RowBox[{
+          SuperscriptBox["v", "2"], " ", 
+          SuperscriptBox["\[Gamma]1", "2"]}], "+", 
+         RowBox[{"2", " ", "v", " ", "\[Gamma]1", " ", "\[Kappa]"}]}]], " ", 
+       "\[Rule]", "\[CapitalGamma]J"}], "}"}]}], ")"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"exprAlphaIntegralNewNotationReduced", " ", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"exprAlphaIntegralNewNotation", "/.", 
+      RowBox[{"BS", "\[Rule]", 
+       RowBox[{"BSv", " ", "v"}]}]}], "//", "PowerExpand"}], "//", "Expand"}],
+    "//", "Simplify"}]}]}], "Input",
+ CellChangeTimes->{{3.574381566863275*^9, 3.574381602507756*^9}, {
+   3.574381660621161*^9, 3.574381704943302*^9}, {3.5743817389380913`*^9, 
+   3.574381829705408*^9}, 3.574381871255295*^9, {3.574381921374116*^9, 
+   3.574381923781678*^9}, {3.5744037453183603`*^9, 3.574403847339127*^9}, {
+   3.5744041481028147`*^9, 3.574404214411479*^9}, {3.574404442353297*^9, 
+   3.574404455080345*^9}, {3.574405164081048*^9, 3.5744051708462152`*^9}, {
+   3.574405302937155*^9, 3.574405303616993*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", 
+   RowBox[{"6", " ", 
+    SuperscriptBox["v", "3"], " ", 
+    SuperscriptBox["\[Gamma]1", "2"]}]], 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"\[CapitalGamma]J", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        SuperscriptBox["v", "2"], " ", 
+        SuperscriptBox["\[Gamma]1", "4"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "2"}], "+", 
+          RowBox[{"3", " ", 
+           SuperscriptBox["\[Kappa]", "2"]}]}], ")"}]}], "-", 
+       RowBox[{"v", " ", 
+        SuperscriptBox["\[Gamma]1", "3"], " ", "\[Kappa]", " ", 
+        RowBox[{"(", 
+         RowBox[{"1", "+", 
+          RowBox[{"3", " ", "v", " ", "\[Epsilon]", " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "1"]}]}], ")"}]}], "+", 
+       RowBox[{
+        SuperscriptBox["v", "3"], " ", 
+        SuperscriptBox["\[Epsilon]", "5"], " ", 
+        RowBox[{"(", 
+         RowBox[{"2", "-", 
+          RowBox[{"3", " ", 
+           SuperscriptBox["\[Kappa]", "2"]}]}], ")"}], " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "5"]}], "+", 
+       RowBox[{
+        SuperscriptBox["v", "3"], " ", "\[Gamma]1", " ", 
+        SuperscriptBox["\[Epsilon]", "4"], " ", "\[Kappa]", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"3", " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "4"]}], "+", 
+          RowBox[{"v", " ", "\[Epsilon]", " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "5"]}]}], ")"}]}], "+", 
+       RowBox[{
+        SuperscriptBox["\[Gamma]1", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "2"}], "-", 
+          RowBox[{"3", " ", "v", " ", "\[Epsilon]", " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "1"]}], "-", 
+          RowBox[{"6", " ", 
+           SuperscriptBox["v", "2"], " ", 
+           SuperscriptBox["\[Epsilon]", "2"], " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "2"]}], "+", 
+          RowBox[{"6", " ", 
+           SuperscriptBox["v", "3"], " ", 
+           SuperscriptBox["\[Epsilon]", "3"], " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "3"]}], "+", 
+          RowBox[{"3", " ", 
+           SuperscriptBox["v", "4"], " ", 
+           SuperscriptBox["\[Epsilon]", "4"], " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "4"]}], "+", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["v", "5"], " ", 
+           SuperscriptBox["\[Epsilon]", "5"], " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "5"]}]}], ")"}]}]}], ")"}]}], "+", 
+    RowBox[{"3", " ", 
+     SuperscriptBox["v", "3"], " ", 
+     SuperscriptBox["\[Epsilon]", "2"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"2", " ", 
+        SuperscriptBox["\[Gamma]1", "3"], " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "2"]}], "+", 
+       RowBox[{"2", " ", 
+        SuperscriptBox["\[Gamma]1", "2"], " ", "\[Epsilon]", " ", "\[Kappa]", 
+        " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "3"]}], "-", 
+       RowBox[{"\[Gamma]1", " ", 
+        SuperscriptBox["\[Epsilon]", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "4"]}], "+", 
+       RowBox[{
+        SuperscriptBox["\[Epsilon]", "3"], " ", "\[Kappa]", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "5"]}]}], ")"}], " ", 
+     RowBox[{"Log", "[", "BL", "]"}]}], "-", 
+    RowBox[{"3", " ", 
+     SuperscriptBox["v", "3"], " ", 
+     SuperscriptBox["\[Gamma]1", "2"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        SuperscriptBox["\[Gamma]1", "3"], " ", "\[Kappa]", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          SuperscriptBox["\[Kappa]", "2"]}], ")"}]}], "-", 
+       RowBox[{
+        SuperscriptBox["\[Gamma]1", "2"], " ", "\[Epsilon]", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "1"]}], "+", 
+       RowBox[{"2", " ", "\[Gamma]1", " ", 
+        SuperscriptBox["\[Epsilon]", "2"], " ", "\[Kappa]", " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "2"]}], "+", 
+       RowBox[{"2", " ", 
+        SuperscriptBox["\[Epsilon]", "3"], " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "3"]}]}], ")"}], " ", 
+     RowBox[{"Log", "[", "BSv", "]"}]}]}], ")"}]}]], "Output",
+ CellChangeTimes->{
+  3.574381872982273*^9, 3.5743819253235292`*^9, {3.574403727089745*^9, 
+   3.574403848034082*^9}, 3.5744041416361723`*^9, {3.574404176055172*^9, 
+   3.574404214741805*^9}, {3.5744044484166517`*^9, 3.574404455745864*^9}, 
+   3.5744051715815763`*^9, 3.5744053040089397`*^9, 3.574426724135746*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Treat as series, EXCEPT for geometric factors",
+  FontWeight->"Bold"],
+ ": The geometrical factors Q,B,\[CapitalGamma] are not to be expanded...but \
+everything else can be.\n\nWe therefore arrive at the expression we\
+\[CloseCurlyQuote]ll use in the code.\nThis expression will MULTIPLY the \
+dimensionless prefactor from the previous step"
+}], "Text",
+ CellChangeTimes->{{3.5743819030574923`*^9, 3.5743819490572844`*^9}, {
+  3.5744055526637917`*^9, 3.574405561457323*^9}, {3.574406179589305*^9, 
+  3.574406190868455*^9}, {3.574406372591982*^9, 3.574406392295806*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"exprToExportAlpha", " ", "=", 
+  RowBox[{"Normal", "[", " ", 
+   RowBox[{"Simplify", "/@", " ", 
+    RowBox[{"Series", "[", 
+     RowBox[{"exprAlphaIntegralNewNotationReduced", ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"v", ",", "0", ",", "0"}], "}"}]}], "]"}]}], "]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.574381566863275*^9, 3.574381602507756*^9}, {
+   3.574381660621161*^9, 3.574381704943302*^9}, {3.5743817389380913`*^9, 
+   3.574381829705408*^9}, 3.574381871255295*^9, {3.574381968408984*^9, 
+   3.574381982294475*^9}, {3.574382317152975*^9, 3.574382322959798*^9}, 
+   3.574405176723646*^9, {3.574405659051901*^9, 3.5744057049165363`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   FractionBox["\[CapitalGamma]J", 
+    RowBox[{"3", " ", 
+     SuperscriptBox["v", "3"]}]]}], "-", 
+  FractionBox[
+   RowBox[{"\[CapitalGamma]J", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[Gamma]1", " ", "\[Kappa]"}], "+", 
+      RowBox[{"3", " ", "\[Epsilon]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+        "1"]}]}], ")"}]}], 
+   RowBox[{"6", " ", 
+    SuperscriptBox["v", "2"]}]], "+", 
+  FractionBox[
+   RowBox[{"\[CapitalGamma]J", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       SuperscriptBox["\[Gamma]1", "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "2"}], "+", 
+         RowBox[{"3", " ", 
+          SuperscriptBox["\[Kappa]", "2"]}]}], ")"}]}], "-", 
+      RowBox[{
+      "3", " ", "\[Gamma]1", " ", "\[Epsilon]", " ", "\[Kappa]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "1"]}],
+       "-", 
+      RowBox[{"6", " ", 
+       SuperscriptBox["\[Epsilon]", "2"], " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+        "2"]}]}], ")"}]}], 
+   RowBox[{"6", " ", "v"}]], "+", 
+  RowBox[{
+   FractionBox["1", 
+    RowBox[{"6", " ", 
+     SuperscriptBox["\[Gamma]1", "2"]}]], 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"\[CapitalGamma]J", " ", 
+      SuperscriptBox["\[Epsilon]", "3"], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"6", " ", 
+         SuperscriptBox["\[Gamma]1", "2"], " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "3"]}], "+", 
+        RowBox[{
+        "3", " ", "\[Gamma]1", " ", "\[Epsilon]", " ", "\[Kappa]", " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "4"]}], "+", 
+        RowBox[{
+         SuperscriptBox["\[Epsilon]", "2"], " ", 
+         RowBox[{"(", 
+          RowBox[{"2", "-", 
+           RowBox[{"3", " ", 
+            SuperscriptBox["\[Kappa]", "2"]}]}], ")"}], " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "5"]}]}], ")"}]}], "+", 
+     RowBox[{"3", " ", 
+      SuperscriptBox["\[Epsilon]", "2"], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"2", " ", 
+         SuperscriptBox["\[Gamma]1", "3"], " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "2"]}], "+", 
+        RowBox[{"2", " ", 
+         SuperscriptBox["\[Gamma]1", "2"], " ", "\[Epsilon]", " ", "\[Kappa]",
+          " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "3"]}], "-", 
+        RowBox[{"\[Gamma]1", " ", 
+         SuperscriptBox["\[Epsilon]", "2"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", 
+           SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "4"]}], "+", 
+        RowBox[{
+         SuperscriptBox["\[Epsilon]", "3"], " ", "\[Kappa]", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", 
+           SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "5"]}]}], ")"}], " ", 
+      RowBox[{"Log", "[", "BL", "]"}]}], "-", 
+     RowBox[{"3", " ", 
+      SuperscriptBox["\[Gamma]1", "2"], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         SuperscriptBox["\[Gamma]1", "3"], " ", "\[Kappa]", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", 
+           SuperscriptBox["\[Kappa]", "2"]}], ")"}]}], "-", 
+        RowBox[{
+         SuperscriptBox["\[Gamma]1", "2"], " ", "\[Epsilon]", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", 
+           SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "1"]}], "+", 
+        RowBox[{"2", " ", "\[Gamma]1", " ", 
+         SuperscriptBox["\[Epsilon]", "2"], " ", "\[Kappa]", " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "2"]}], "+", 
+        RowBox[{"2", " ", 
+         SuperscriptBox["\[Epsilon]", "3"], " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "3"]}]}], ")"}], " ", 
+      RowBox[{"Log", "[", "BSv", "]"}]}]}], ")"}]}]}]], "Output",
+ CellChangeTimes->{{3.574381581473032*^9, 3.574381602971002*^9}, {
+   3.5743816569076366`*^9, 3.574381661469301*^9}, {3.5743817515738077`*^9, 
+   3.574381858522241*^9}, {3.574381969519478*^9, 3.574381982736823*^9}, {
+   3.574382318314158*^9, 3.5743823237438374`*^9}, 3.5744051772751083`*^9, {
+   3.574405667270114*^9, 3.574405705355111*^9}, 3.574426726688176*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Derivation and simplifications: \[Zeta]\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.574406320215164*^9, 3.574406327039363*^9}}],
+
+Cell[TextData[{
+ "\[Zeta] = \[Eta](2+3 ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      SubscriptBox["m", "2"], "/", "2"}], 
+     SubscriptBox["m", "1"]}], ")"}], TraditionalForm]]],
+ "\[Integral] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SuperscriptBox["v", "5"], "(", 
+     RowBox[{"1", "+", 
+      RowBox[{"\[Kappa]", " ", "\[Gamma]"}]}], ")"}], " ", 
+    RowBox[{"dt", "/", "dv"}], " ", "dv", " "}], TraditionalForm]]],
+ "\n\n",
+ StyleBox["Do the integral",
+  FontWeight->"Bold"],
+ ": As before, the integral can be done...here, as a simple polynomial in v, \
+with a log term arising from the ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"k", "=", "2"}], ",", "3"}], TraditionalForm]]],
+ " terms"
+}], "Text",
+ CellChangeTimes->{{3.574379800380773*^9, 3.574379892454009*^9}, 
+   3.574380403521822*^9, {3.5743805393558073`*^9, 3.574380542475595*^9}, {
+   3.57438061922027*^9, 3.574380709861329*^9}, {3.5743808621970387`*^9, 
+   3.574380870368898*^9}, {3.574382190790169*^9, 3.5743821945712357`*^9}, 
+   3.574382371838437*^9, {3.5744029863955*^9, 3.57440318655385*^9}, {
+   3.574403223901391*^9, 3.5744032992114277`*^9}, {3.5744035012160892`*^9, 
+   3.574403533207281*^9}, {3.5744035870091743`*^9, 3.5744036580294037`*^9}, {
+   3.574403705955875*^9, 3.574403709383686*^9}, {3.574404524876687*^9, 
+   3.574404682914378*^9}, 3.5744047169160852`*^9, {3.574404820396553*^9, 
+   3.574404833252308*^9}, {3.574404922325481*^9, 3.57440497932587*^9}, {
+   3.574405034148942*^9, 3.574405132661345*^9}, {3.574406363329088*^9, 
+   3.574406364821801*^9}, {3.5744064649898987`*^9, 3.574406487017006*^9}, {
+   3.5744065482607393`*^9, 3.574406557578416*^9}, {3.574406721143063*^9, 
+   3.574406753095441*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"exprFullZetaIntegral", " ", "=", " ", 
+   RowBox[{"Integrate", "[", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"\[Kappa]", " ", "\[Gamma]1", " ", "v"}]}], ")"}], " ", 
+      RowBox[{"dtdvReduced", "/", 
+       SuperscriptBox["v", "4"]}]}], ",", "v"}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"exprToExportZeta", " ", "=", 
+  RowBox[{"Normal", "[", 
+   RowBox[{"Series", "[", " ", 
+    RowBox[{"exprFullZetaIntegral", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"v", ",", "0", ",", "5"}], "}"}]}], "]"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.574406627134227*^9, 3.5744066635530853`*^9}, {
+  3.574406770323262*^9, 3.5744068318533278`*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   RowBox[{"-", "2"}], "-", 
+   RowBox[{"3", " ", "v", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[Gamma]1", " ", "\[Kappa]"}], "+", 
+      RowBox[{"\[Epsilon]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+        "1"]}]}], ")"}]}], "-", 
+   RowBox[{"6", " ", 
+    SuperscriptBox["v", "2"], " ", "\[Epsilon]", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[Gamma]1", " ", "\[Kappa]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "1"]}],
+       "+", 
+      RowBox[{"\[Epsilon]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+        "2"]}]}], ")"}]}], "+", 
+   RowBox[{"6", " ", 
+    SuperscriptBox["v", "4"], " ", 
+    SuperscriptBox["\[Epsilon]", "3"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[Gamma]1", " ", "\[Kappa]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "3"]}],
+       "+", 
+      RowBox[{"\[Epsilon]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+        "4"]}]}], ")"}]}], "+", 
+   RowBox[{"2", " ", 
+    SuperscriptBox["v", "6"], " ", "\[Gamma]1", " ", 
+    SuperscriptBox["\[Epsilon]", "5"], " ", "\[Kappa]", " ", 
+    SubscriptBox[
+     InterpretationBox[Cell[BoxData[Cell[BoxData[
+        FormBox[
+         RowBox[{"(", 
+          FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+      TextCell[
+       RawBoxes[
+        Cell[
+         BoxData[
+          FormBox[
+           RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "5"]}], 
+   "+", 
+   RowBox[{"3", " ", 
+    SuperscriptBox["v", "5"], " ", 
+    SuperscriptBox["\[Epsilon]", "4"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[Gamma]1", " ", "\[Kappa]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "4"]}],
+       "+", 
+      RowBox[{"\[Epsilon]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+        "5"]}]}], ")"}]}], "+", 
+   RowBox[{"6", " ", 
+    SuperscriptBox["v", "3"], " ", 
+    SuperscriptBox["\[Epsilon]", "2"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[Gamma]1", " ", "\[Kappa]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "2"]}],
+       "+", 
+      RowBox[{"\[Epsilon]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+        "3"]}]}], ")"}], " ", 
+    RowBox[{"Log", "[", "v", "]"}]}]}], 
+  RowBox[{"6", " ", 
+   SuperscriptBox["v", "3"]}]]], "Output",
+ CellChangeTimes->{{3.574406647549385*^9, 3.5744066642030687`*^9}, {
+   3.574406781871855*^9, 3.57440683227897*^9}, 3.574426730231081*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   FractionBox["1", 
+    RowBox[{"3", " ", 
+     SuperscriptBox["v", "3"]}]]}], "+", 
+  FractionBox[
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{"\[Gamma]1", " ", "\[Kappa]"}], "2"]}], "-", 
+    FractionBox[
+     RowBox[{"\[Epsilon]", " ", 
+      SubscriptBox[
+       InterpretationBox[Cell[BoxData[Cell[BoxData[
+          FormBox[
+           RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+        TextCell[
+         RawBoxes[
+          Cell[
+           BoxData[
+            FormBox[
+             RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "1"]}], 
+     "2"]}], 
+   SuperscriptBox["v", "2"]], "+", 
+  FractionBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "\[Gamma]1"}], " ", "\[Epsilon]", " ", "\[Kappa]", " ", 
+     SubscriptBox[
+      InterpretationBox[Cell[BoxData[Cell[BoxData[
+         FormBox[
+          RowBox[{"(", 
+           FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+       TextCell[
+        RawBoxes[
+         Cell[
+          BoxData[
+           FormBox[
+            RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "1"]}], 
+    "-", 
+    RowBox[{
+     SuperscriptBox["\[Epsilon]", "2"], " ", 
+     SubscriptBox[
+      InterpretationBox[Cell[BoxData[Cell[BoxData[
+         FormBox[
+          RowBox[{"(", 
+           FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+       TextCell[
+        RawBoxes[
+         Cell[
+          BoxData[
+           FormBox[
+            RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "2"]}]}],
+    "v"], "+", 
+  RowBox[{"v", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"\[Gamma]1", " ", 
+      SuperscriptBox["\[Epsilon]", "3"], " ", "\[Kappa]", " ", 
+      SubscriptBox[
+       InterpretationBox[Cell[BoxData[Cell[BoxData[
+          FormBox[
+           RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+        TextCell[
+         RawBoxes[
+          Cell[
+           BoxData[
+            FormBox[
+             RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "3"]}], 
+     "+", 
+     RowBox[{
+      SuperscriptBox["\[Epsilon]", "4"], " ", 
+      SubscriptBox[
+       InterpretationBox[Cell[BoxData[Cell[BoxData[
+          FormBox[
+           RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+        TextCell[
+         RawBoxes[
+          Cell[
+           BoxData[
+            FormBox[
+             RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+       "4"]}]}], ")"}]}], "+", 
+  RowBox[{
+   FractionBox["1", "3"], " ", 
+   SuperscriptBox["v", "3"], " ", "\[Gamma]1", " ", 
+   SuperscriptBox["\[Epsilon]", "5"], " ", "\[Kappa]", " ", 
+   SubscriptBox[
+    InterpretationBox[Cell[BoxData[Cell[BoxData[
+       FormBox[
+        RowBox[{"(", 
+         FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+     TextCell[
+      RawBoxes[
+       Cell[
+        BoxData[
+         FormBox[
+          RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "5"]}], 
+  "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   SuperscriptBox["v", "2"], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"\[Gamma]1", " ", 
+      SuperscriptBox["\[Epsilon]", "4"], " ", "\[Kappa]", " ", 
+      SubscriptBox[
+       InterpretationBox[Cell[BoxData[Cell[BoxData[
+          FormBox[
+           RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+        TextCell[
+         RawBoxes[
+          Cell[
+           BoxData[
+            FormBox[
+             RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "4"]}], 
+     "+", 
+     RowBox[{
+      SuperscriptBox["\[Epsilon]", "5"], " ", 
+      SubscriptBox[
+       InterpretationBox[Cell[BoxData[Cell[BoxData[
+          FormBox[
+           RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+        TextCell[
+         RawBoxes[
+          Cell[
+           BoxData[
+            FormBox[
+             RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+       "5"]}]}], ")"}]}], "+", 
+  RowBox[{"\[Gamma]1", " ", 
+   SuperscriptBox["\[Epsilon]", "2"], " ", "\[Kappa]", " ", 
+   SubscriptBox[
+    InterpretationBox[Cell[BoxData[Cell[BoxData[
+       FormBox[
+        RowBox[{"(", 
+         FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+     TextCell[
+      RawBoxes[
+       Cell[
+        BoxData[
+         FormBox[
+          RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "2"], " ", 
+   
+   RowBox[{"Log", "[", "v", "]"}]}], "+", 
+  RowBox[{
+   SuperscriptBox["\[Epsilon]", "3"], " ", 
+   SubscriptBox[
+    InterpretationBox[Cell[BoxData[Cell[BoxData[
+       FormBox[
+        RowBox[{"(", 
+         FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+     TextCell[
+      RawBoxes[
+       Cell[
+        BoxData[
+         FormBox[
+          RowBox[{"(", 
+            FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "3"], " ", 
+   
+   RowBox[{"Log", "[", "v", "]"}]}]}]], "Output",
+ CellChangeTimes->{{3.574406647549385*^9, 3.5744066642030687`*^9}, {
+   3.574406781871855*^9, 3.57440683227897*^9}, 3.574426730243989*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Export: C-code-like expression ", "Subsubsection",
+ CellChangeTimes->{{3.5743821202504807`*^9, 3.574382126433996*^9}, {
+  3.574406124163474*^9, 3.5744061244437227`*^9}}],
+
+Cell[TextData[{
+ "The following expressions won\[CloseCurlyQuote]t be evaluated by default, \
+to avoid breaking the rest of the code\n\n",
+ StyleBox["Prefactor: ",
+  FontWeight->"Bold"],
+ "These expressions multiplies the dimensionless factor that occurs at \
+Newtonian order:\n\t \[Eta](2+3 ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      SubscriptBox["m", "2"], "/", "2"}], 
+     SubscriptBox["m", "1"]}], ")"}], TraditionalForm]]],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox[
+    RowBox[{"(", 
+     RowBox[{"dt", "/", "dv"}], ")"}], "N"], TraditionalForm]]]
+}], "Text",
+ CellChangeTimes->{{3.574406285670114*^9, 3.574406296886114*^9}, {
+  3.5744063962240887`*^9, 3.574406458937581*^9}, {3.5744071396330643`*^9, 
+  3.57440714073631*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"dtdvK", "[", "a_", "]"}], " ", ":=", " ", 
+  RowBox[{"Symbol", "[", 
+   RowBox[{"\"\<dtdv\>\"", "<>", 
+    RowBox[{"ToString", "[", "a", "]"}]}], "]"}]}], "\n", 
+ RowBox[{"CForm", "[", 
+  RowBox[{"exprToExportAlpha", "/.", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\[CapitalGamma]J", "\[Rule]", "sqrtfac"}], ",", " ", 
+     RowBox[{"\[Epsilon]", "\[Rule]", "1"}], ",", 
+     RowBox[{"\[Kappa]", "\[Rule]", "kappa"}], ",", 
+     RowBox[{"\[Gamma]1", "\[Rule]", "gamma0"}], ",", " ", 
+     RowBox[{"Power", "\[Rule]", "pow"}], ",", " ", 
+     RowBox[{
+      RowBox[{"Log", "[", "BL", "]"}], "\[Rule]", "logfac1"}], ",", " ", 
+     RowBox[{
+      RowBox[{"Log", "[", "BSv", "]"}], "\[Rule]", 
+      RowBox[{"logfac2", " ", "+", " ", 
+       RowBox[{"log", "[", "v", "]"}]}]}]}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Clear", "[", "dtdvK", "]"}]}], "Input",
+ Evaluatable->False,
+ CellChangeTimes->{{3.574405800774372*^9, 3.574405813251224*^9}, {
+  3.574406035416128*^9, 3.574406040548275*^9}}],
+
+Cell["\<\
+(pow(gamma0,-2)*(sqrtfac*pow(1,3)*(3*dtdv4*gamma0*kappa + \
+6*dtdv3*pow(gamma0,2) + 
+           dtdv5*pow(1,2)*(2 - 3*pow(kappa,2))) + 
+        3*logfac1*pow(1,2)*(2*dtdv3*kappa*pow(gamma0,2) + \
+2*dtdv2*pow(gamma0,3) - 
+           dtdv4*gamma0*pow(1,2)*(-1 + pow(kappa,2)) + 
+           dtdv5*kappa*pow(1,3)*(-1 + pow(kappa,2))) - 
+        3*(logfac2 + log(v))*pow(gamma0,2)*
+         (2*dtdv2*gamma0*kappa*pow(1,2) + 2*dtdv3*pow(1,3) - 
+           dtdv1*pow(gamma0,2)*(-1 + pow(kappa,2)) + 
+           kappa*pow(gamma0,3)*(-1 + pow(kappa,2)))))/6. - \
+(sqrtfac*pow(v,-3))/3. - 
+   ((3*dtdv1 + gamma0*kappa)*sqrtfac*pow(v,-2))/6. + 
+   (sqrtfac*(-3*dtdv1*gamma0*kappa - 6*dtdv2*pow(1,2) + 
+        pow(gamma0,2)*(-2 + 3*pow(kappa,2)))*pow(v,-1))/6.\
+\>", "Output",
+ CellChangeTimes->{
+  3.574405708665753*^9, 3.57440575246977*^9, 3.574405786856551*^9, {
+   3.57440581719864*^9, 3.574405871717396*^9}, {3.5744059843026133`*^9, 
+   3.5744059968970003`*^9}, 3.5744060409655647`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"dtdvK", "[", "a_", "]"}], " ", ":=", " ", 
+  RowBox[{"Symbol", "[", 
+   RowBox[{"\"\<dtdv\>\"", "<>", 
+    RowBox[{"ToString", "[", "a", "]"}]}], "]"}]}], "\n", 
+ RowBox[{"CForm", "[", 
+  RowBox[{"exprToExportZeta", "/.", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\[CapitalGamma]J", "\[Rule]", "sqrtfac"}], ",", " ", 
+     RowBox[{"\[Epsilon]", "\[Rule]", "1"}], ",", 
+     RowBox[{"\[Kappa]", "\[Rule]", "kappa"}], ",", 
+     RowBox[{"\[Gamma]1", "\[Rule]", "gamma0"}], ",", " ", 
+     RowBox[{"Power", "\[Rule]", "pow"}], ",", " ", 
+     RowBox[{"Log", "\[Rule]", "log"}]}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Clear", "[", "dtdvK", "]"}], ";", " ", 
+  RowBox[{
+   RowBox[{"Format", "[", 
+    RowBox[{"dtdvK", "[", "k_", "]"}], "]"}], " ", ":=", " ", 
+   SubscriptBox[Cell[TextData[Cell[BoxData[
+     FormBox[
+      RowBox[{"(", 
+       FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]], "k"], 
+   " "}]}]}], "Input",
+ CellChangeTimes->{{3.574406875358294*^9, 3.574406959245215*^9}, {
+  3.5744069897809687`*^9, 3.574406990067868*^9}}],
+
+Cell["\<\
+dtdv2*gamma0*kappa*log(v)*pow(1,2) + dtdv3*log(v)*pow(1,3) + 
+   v*(dtdv3*gamma0*kappa*pow(1,3) + dtdv4*pow(1,4)) - pow(v,-3)/3. + 
+   (-dtdv1/2. - (gamma0*kappa)/2.)*pow(v,-2) + 
+   (-(dtdv1*gamma0*kappa) - dtdv2*pow(1,2))*pow(v,-1) + 
+   ((dtdv4*gamma0*kappa*pow(1,4) + dtdv5*pow(1,5))*pow(v,2))/2. + 
+   ((dtdv5*gamma0*kappa*pow(1,5) + dtdv6*pow(1,6))*pow(v,3))/3. + 
+   ((dtdv6*gamma0*kappa*pow(1,6) + dtdv7*pow(1,7))*pow(v,4))/4. + 
+   (dtdv7*gamma0*kappa*pow(1,7)*pow(v,5))/5.\
+\>", "Output",
+ CellChangeTimes->{{3.574406883952093*^9, 3.5744069599186296`*^9}, 
+   3.5744069905607967`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Export: Neat, C-code-like expressions\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.5744255354406548`*^9, 3.574425540808073*^9}}],
+
+Cell["\<\
+As above, but organized in a human-readable form AND minimizing calls to \
+\[OpenCurlyQuote]pow\[CloseCurlyQuote].\
+\>", "Text",
+ CellChangeTimes->{{3.5744255423993998`*^9, 3.574425546190158*^9}, {
+  3.574425614708528*^9, 3.5744256340902*^9}, {3.574426802673367*^9, 
+  3.574426804872566*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"exprToCForm", "[", "expr_", " ", "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "reps", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"reps", " ", "=", " ", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"dtdvK", "[", "k", "]"}], "\[Rule]", 
+         RowBox[{"(", 
+          RowBox[{"Symbol", "[", 
+           RowBox[{"\"\<dtdv\>\"", "<>", 
+            RowBox[{"ToString", "[", "k", "]"}]}], "]"}], ")"}]}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "1", ",", "7"}], "}"}]}], "]"}]}], ";", 
+     RowBox[{"CForm", "[", 
+      RowBox[{
+       RowBox[{"expr", "/.", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"\[CapitalGamma]J", "\[Rule]", "sqrtfac"}], ",", 
+          RowBox[{"\[Epsilon]", "\[Rule]", "1"}], ",", " ", 
+          RowBox[{
+           SuperscriptBox["\[Epsilon]", "a_"], "\[Rule]", "1"}], ",", 
+          RowBox[{
+           SuperscriptBox["v", 
+            RowBox[{"-", "2"}]], "\[Rule]", 
+           RowBox[{"1", "/", "v2"}]}], ",", 
+          RowBox[{
+           SuperscriptBox["v", 
+            RowBox[{"-", "3"}]], "\[Rule]", 
+           RowBox[{"1", "/", "v3"}]}], ",", 
+          RowBox[{
+           SuperscriptBox["v", 
+            RowBox[{"-", "1"}]], "\[Rule]", 
+           RowBox[{"1", "/", "v1"}]}], ",", 
+          RowBox[{"\[Kappa]", "\[Rule]", "kappa"}], ",", 
+          RowBox[{
+           SuperscriptBox["\[Kappa]", "2"], "\[Rule]", "kappa2"}], ",", 
+          RowBox[{
+           SuperscriptBox["\[Kappa]", "3"], "\[Rule]", "kappa3"}], ",", 
+          RowBox[{
+           SuperscriptBox["\[Kappa]", "4"], "\[Rule]", "kappa4"}], ",", 
+          RowBox[{"\[Gamma]1", "\[Rule]", "gamma0"}], ",", "  ", 
+          RowBox[{
+           RowBox[{"Log", "[", "BL", "]"}], "\[Rule]", "logfac1"}], ",", " ", 
+          
+          RowBox[{
+           RowBox[{"Log", "[", "BSv", "]"}], "\[Rule]", 
+           RowBox[{"logfac2", " ", "+", " ", "logv"}]}], ",", " ", 
+          RowBox[{"Power", "\[Rule]", "pow"}], ",", " ", 
+          RowBox[{
+           RowBox[{"Log", "[", "v", "]"}], "\[Rule]", "logv"}]}], "}"}]}], "/.",
+        "reps"}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"tableOfTermsAlpha", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"k", ",", 
+       RowBox[{
+        RowBox[{"v", "^", "k"}], " ", 
+        RowBox[{"Coefficient", "[", 
+         RowBox[{
+          RowBox[{"exprToExportAlpha", "//", "Normal"}], ",", "v", ",", "k"}],
+          "]"}]}]}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", 
+       RowBox[{"-", "3"}], ",", "0"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"%", "//", "TableForm"}]}], "Input",
+ CellChangeTimes->{{3.5744256759480143`*^9, 3.574425682243492*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     RowBox[{"-", "3"}], 
+     RowBox[{"-", 
+      FractionBox["\[CapitalGamma]J", 
+       RowBox[{"3", " ", 
+        SuperscriptBox["v", "3"]}]]}]},
+    {
+     RowBox[{"-", "2"}], 
+     RowBox[{"-", 
+      FractionBox[
+       RowBox[{"\[CapitalGamma]J", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"\[Gamma]1", " ", "\[Kappa]"}], "+", 
+          RowBox[{"3", " ", "\[Epsilon]", " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "1"]}]}], ")"}]}], 
+       RowBox[{"6", " ", 
+        SuperscriptBox["v", "2"]}]]}]},
+    {
+     RowBox[{"-", "1"}], 
+     FractionBox[
+      RowBox[{"\[CapitalGamma]J", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          SuperscriptBox["\[Gamma]1", "2"], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "2"}], "+", 
+            RowBox[{"3", " ", 
+             SuperscriptBox["\[Kappa]", "2"]}]}], ")"}]}], "-", 
+         RowBox[{
+         "3", " ", "\[Gamma]1", " ", "\[Epsilon]", " ", "\[Kappa]", " ", 
+          SubscriptBox[
+           InterpretationBox[Cell[BoxData[Cell[BoxData[
+              FormBox[
+               RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+            TextCell[
+             RawBoxes[
+              Cell[
+               BoxData[
+                FormBox[
+                 RowBox[{"(", 
+                   FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+           "1"]}], "-", 
+         RowBox[{"6", " ", 
+          SuperscriptBox["\[Epsilon]", "2"], " ", 
+          SubscriptBox[
+           InterpretationBox[Cell[BoxData[Cell[BoxData[
+              FormBox[
+               RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+            TextCell[
+             RawBoxes[
+              Cell[
+               BoxData[
+                FormBox[
+                 RowBox[{"(", 
+                   FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+           "2"]}]}], ")"}]}], 
+      RowBox[{"6", " ", "v"}]]},
+    {"0", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"\[CapitalGamma]J", " ", 
+        SuperscriptBox["\[Epsilon]", "3"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"6", " ", 
+           SuperscriptBox["\[Gamma]1", "2"], " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "3"]}], "+", 
+          RowBox[{
+          "3", " ", "\[Gamma]1", " ", "\[Epsilon]", " ", "\[Kappa]", " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "4"]}], "+", 
+          RowBox[{
+           SuperscriptBox["\[Epsilon]", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{"2", "-", 
+             RowBox[{"3", " ", 
+              SuperscriptBox["\[Kappa]", "2"]}]}], ")"}], " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "5"]}]}], ")"}]}], "+", 
+       RowBox[{"3", " ", 
+        SuperscriptBox["\[Epsilon]", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", " ", 
+           SuperscriptBox["\[Gamma]1", "3"], " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "2"]}], "+", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["\[Gamma]1", "2"], " ", "\[Epsilon]", " ", 
+           "\[Kappa]", " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "3"]}], "-", 
+          RowBox[{"\[Gamma]1", " ", 
+           SuperscriptBox["\[Epsilon]", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "1"}], "+", 
+             SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "4"]}], "+", 
+          RowBox[{
+           SuperscriptBox["\[Epsilon]", "3"], " ", "\[Kappa]", " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "1"}], "+", 
+             SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "5"]}]}], ")"}], " ", 
+        RowBox[{"Log", "[", "BL", "]"}]}], "-", 
+       RowBox[{"3", " ", 
+        SuperscriptBox["\[Gamma]1", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           SuperscriptBox["\[Gamma]1", "3"], " ", "\[Kappa]", " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "1"}], "+", 
+             SuperscriptBox["\[Kappa]", "2"]}], ")"}]}], "-", 
+          RowBox[{
+           SuperscriptBox["\[Gamma]1", "2"], " ", "\[Epsilon]", " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "1"}], "+", 
+             SuperscriptBox["\[Kappa]", "2"]}], ")"}], " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "1"]}], "+", 
+          RowBox[{"2", " ", "\[Gamma]1", " ", 
+           SuperscriptBox["\[Epsilon]", "2"], " ", "\[Kappa]", " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "2"]}], "+", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["\[Epsilon]", "3"], " ", 
+           SubscriptBox[
+            InterpretationBox[Cell[BoxData[Cell[BoxData[
+               FormBox[
+                RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+             TextCell[
+              RawBoxes[
+               Cell[
+                BoxData[
+                 FormBox[
+                  RowBox[{"(", 
+                    FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+            "3"]}]}], ")"}], " ", 
+        RowBox[{"Log", "[", "BSv", "]"}]}]}], 
+      RowBox[{"6", " ", 
+       SuperscriptBox["\[Gamma]1", "2"]}]]}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.574425682637486*^9, {3.57442673881399*^9, 3.574426774313439*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"tableOfTermsZeta", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"k", ",", 
+       RowBox[{
+        RowBox[{"v", "^", "k"}], " ", 
+        RowBox[{"Coefficient", "[", 
+         RowBox[{
+          RowBox[{"exprToExportZeta", "//", "Normal"}], ",", "v", ",", "k"}], 
+         "]"}]}]}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", 
+       RowBox[{"-", "3"}], ",", "0"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"%", "//", "TableForm"}]}], "Input"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     RowBox[{"-", "3"}], 
+     RowBox[{"-", 
+      FractionBox["1", 
+       RowBox[{"3", " ", 
+        SuperscriptBox["v", "3"]}]]}]},
+    {
+     RowBox[{"-", "2"}], 
+     FractionBox[
+      RowBox[{
+       RowBox[{"-", 
+        FractionBox[
+         RowBox[{"\[Gamma]1", " ", "\[Kappa]"}], "2"]}], "-", 
+       FractionBox[
+        RowBox[{"\[Epsilon]", " ", 
+         SubscriptBox[
+          InterpretationBox[Cell[BoxData[Cell[BoxData[
+             FormBox[
+              RowBox[{"(", 
+               FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+           TextCell[
+            RawBoxes[
+             Cell[
+              BoxData[
+               FormBox[
+                RowBox[{"(", 
+                  FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+          "1"]}], "2"]}], 
+      SuperscriptBox["v", "2"]]},
+    {
+     RowBox[{"-", "1"}], 
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "\[Gamma]1"}], " ", "\[Epsilon]", " ", "\[Kappa]", " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "1"]}], "-", 
+       RowBox[{
+        SuperscriptBox["\[Epsilon]", "2"], " ", 
+        SubscriptBox[
+         InterpretationBox[Cell[BoxData[Cell[BoxData[
+            FormBox[
+             RowBox[{"(", 
+              FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+          TextCell[
+           RawBoxes[
+            Cell[
+             BoxData[
+              FormBox[
+               RowBox[{"(", 
+                 FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], 
+         "2"]}]}], "v"]},
+    {"0", 
+     RowBox[{
+      RowBox[{"\[Gamma]1", " ", 
+       SuperscriptBox["\[Epsilon]", "2"], " ", "\[Kappa]", " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "2"], 
+       " ", 
+       RowBox[{"Log", "[", "v", "]"}]}], "+", 
+      RowBox[{
+       SuperscriptBox["\[Epsilon]", "3"], " ", 
+       SubscriptBox[
+        InterpretationBox[Cell[BoxData[Cell[BoxData[
+           FormBox[
+            RowBox[{"(", 
+             FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]],
+         TextCell[
+          RawBoxes[
+           Cell[
+            BoxData[
+             FormBox[
+              RowBox[{"(", 
+                FractionBox["dt", "dv"], ")"}], TraditionalForm]]]]]], "3"], 
+       " ", 
+       RowBox[{"Log", "[", "v", "]"}]}]}]}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.57442568347598*^9, 3.5744267758276157`*^9, 
+  3.574426810280785*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", "alpha", " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"k", "-", "4"}], ",", " ", 
+       RowBox[{"exprToCForm", "[", 
+        RowBox[{"tableOfTermsAlpha", "[", 
+         RowBox[{"[", 
+          RowBox[{"k", ",", "2"}], "]"}], "]"}], "]"}]}], "}"}], " ", ",", 
+     " ", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", "4"}], "}"}]}], "]"}], "//", 
+   "TableForm"}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     RowBox[{"-", "3"}], 
+     InterpretationBox["\<\"-sqrtfac/(3.*v3)\"\>",
+      CForm[Rational[-1, 3] $CellContext`sqrtfac/$CellContext`v3],
+      AutoDelete->True,
+      Editable->True]},
+    {
+     RowBox[{"-", "2"}], 
+     InterpretationBox["\<\"-((3*dtdv1 + gamma0*kappa)*sqrtfac)/(6.*v2)\"\>",
+      CForm[
+      Rational[-1, 6] (
+        3 $CellContext`dtdv1 + $CellContext`gamma0 $CellContext`kappa) \
+$CellContext`sqrtfac/$CellContext`v2],
+      AutoDelete->True,
+      Editable->True]},
+    {
+     RowBox[{"-", "1"}], 
+     InterpretationBox["\<\"(sqrtfac*(-6*dtdv2 - 3*dtdv1*gamma0*kappa + (-2 + \
+3*kappa2)*pow(gamma0,2)))/(6.*v1)\"\>",
+      CForm[
+      Rational[1, 
+         6] $CellContext`sqrtfac $CellContext`v1^(-1) ((-6) \
+$CellContext`dtdv2 - 
+        3 $CellContext`dtdv1 $CellContext`gamma0 $CellContext`kappa + (-2 + 
+          3 $CellContext`kappa2) $CellContext`pow[$CellContext`gamma0, 2])],
+      AutoDelete->True,
+      Editable->True]},
+    {"0", 
+     InterpretationBox["\<\"(pow(gamma0,-2)*(sqrtfac*(3*dtdv4*gamma0*kappa + \
+dtdv5*(2 - 3*kappa2) + 6*dtdv3*pow(gamma0,2)) + 3*logfac1*(-(dtdv4*gamma0*(-1 \
++ kappa2)) + dtdv5*kappa*(-1 + kappa2) + 2*dtdv3*kappa*pow(gamma0,2) + \
+2*dtdv2*pow(gamma0,3)) - 3*(logfac2 + logv)*pow(gamma0,2)*(2*dtdv3 + \
+2*dtdv2*gamma0*kappa - dtdv1*(-1 + kappa2)*pow(gamma0,2) + kappa*(-1 + \
+kappa2)*pow(gamma0,3))))/6.\"\>",
+      CForm[
+      Rational[1, 
+         6] $CellContext`pow[$CellContext`gamma0, -2] ($CellContext`sqrtfac (
+          3 $CellContext`dtdv4 $CellContext`gamma0 $CellContext`kappa + \
+$CellContext`dtdv5 (2 - 3 $CellContext`kappa2) + 
+          6 $CellContext`dtdv3 $CellContext`pow[$CellContext`gamma0, 2]) + 
+        3 $CellContext`logfac1 (-$CellContext`dtdv4 $CellContext`gamma0 (-1 + \
+$CellContext`kappa2) + $CellContext`dtdv5 $CellContext`kappa (-1 + \
+$CellContext`kappa2) + 
+          2 $CellContext`dtdv3 $CellContext`kappa \
+$CellContext`pow[$CellContext`gamma0, 2] + 
+          2 $CellContext`dtdv2 $CellContext`pow[$CellContext`gamma0, 3]) - 
+        3 ($CellContext`logfac2 + $CellContext`logv) \
+$CellContext`pow[$CellContext`gamma0, 2] (2 $CellContext`dtdv3 + 
+         2 $CellContext`dtdv2 $CellContext`gamma0 $CellContext`kappa - \
+$CellContext`dtdv1 (-1 + $CellContext`kappa2) \
+$CellContext`pow[$CellContext`gamma0, 
+           2] + $CellContext`kappa (-1 + $CellContext`kappa2) \
+$CellContext`pow[$CellContext`gamma0, 3]))],
+      AutoDelete->True,
+      Editable->True]}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.574425658388221*^9, 3.5744256848582*^9}, 
+   3.574426810905644*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", "zeta", " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"k", "-", "4"}], ",", " ", 
+       RowBox[{"exprToCForm", "[", 
+        RowBox[{"tableOfTermsZeta", "[", 
+         RowBox[{"[", 
+          RowBox[{"k", ",", "2"}], "]"}], "]"}], "]"}]}], "}"}], " ", ",", 
+     " ", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", "4"}], "}"}]}], "]"}], "//", 
+   "TableForm"}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     RowBox[{"-", "3"}], 
+     InterpretationBox["\<\"-1/(3.*v3)\"\>",
+      CForm[Rational[-1, 3]/$CellContext`v3],
+      AutoDelete->True,
+      Editable->True]},
+    {
+     RowBox[{"-", "2"}], 
+     InterpretationBox["\<\"(-dtdv1/2. - (gamma0*kappa)/2.)/v2\"\>",
+      CForm[(Rational[-1, 2] $CellContext`dtdv1 + 
+        Rational[-1, 
+           2] $CellContext`gamma0 $CellContext`kappa)/$CellContext`v2],
+      AutoDelete->True,
+      Editable->True]},
+    {
+     RowBox[{"-", "1"}], 
+     InterpretationBox["\<\"(-dtdv2 - dtdv1*gamma0*kappa)/v1\"\>",
+      CForm[(-$CellContext`dtdv2 - $CellContext`dtdv1 $CellContext`gamma0 \
+$CellContext`kappa)/$CellContext`v1],
+      AutoDelete->True,
+      Editable->True]},
+    {"0", 
+     InterpretationBox["\<\"dtdv3*logv + dtdv2*gamma0*kappa*logv\"\>",
+      CForm[$CellContext`dtdv3 $CellContext`logv + $CellContext`dtdv2 \
+$CellContext`gamma0 $CellContext`kappa $CellContext`logv],
+      AutoDelete->True,
+      Editable->True]}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.574425658971212*^9, 3.5744256854248962`*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1298, 838},
+WindowMargins->{{Automatic, 10}, {19, Automatic}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 128, 3, 76, "Title"],
+Cell[710, 27, 764, 15, 86, "Text"],
+Cell[CellGroupData[{
+Cell[1499, 46, 187, 4, 67, "Section"],
+Cell[1689, 52, 631, 15, 56, "Text"],
+Cell[CellGroupData[{
+Cell[2345, 71, 1013, 23, 126, "Input"],
+Cell[3361, 96, 514, 16, 42, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3912, 117, 102, 1, 24, "Subsubsection"],
+Cell[4017, 120, 885, 31, 90, "Text"],
+Cell[4905, 153, 451, 11, 33, "Input"],
+Cell[5359, 166, 1032, 30, 54, "Text"],
+Cell[CellGroupData[{
+Cell[6416, 200, 1193, 33, 84, "Input"],
+Cell[7612, 235, 2752, 88, 62, "Output"],
+Cell[10367, 325, 2378, 82, 42, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12794, 413, 192, 4, 24, "Subsubsection"],
+Cell[12989, 419, 4422, 137, 211, "Text"],
+Cell[CellGroupData[{
+Cell[17436, 560, 1304, 39, 73, "Input"],
+Cell[18743, 601, 2912, 98, 155, "Output"],
+Cell[21658, 701, 1590, 52, 48, "Output"],
+Cell[23251, 755, 1097, 36, 54, "Output"]
+}, Open  ]],
+Cell[24363, 794, 2017, 46, 176, "Text"],
+Cell[CellGroupData[{
+Cell[26405, 844, 425, 10, 33, "Input"],
+Cell[26833, 856, 13848, 395, 237, "Output"]
+}, Open  ]],
+Cell[40696, 1254, 3159, 94, 183, "Text"],
+Cell[CellGroupData[{
+Cell[43880, 1352, 2128, 52, 64, "Input"],
+Cell[46011, 1406, 10968, 313, 114, "Output"]
+}, Open  ]],
+Cell[56994, 1722, 596, 10, 71, "Text"],
+Cell[CellGroupData[{
+Cell[57615, 1736, 672, 13, 27, "Input"],
+Cell[58290, 1751, 9082, 266, 136, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[67421, 2023, 138, 3, 24, "Subsubsection"],
+Cell[67562, 2028, 1743, 42, 60, "Text"],
+Cell[CellGroupData[{
+Cell[69330, 2074, 760, 19, 64, "Input"],
+Cell[70093, 2095, 5533, 173, 62, "Output"],
+Cell[75629, 2270, 5336, 177, 72, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[81014, 2453, 175, 2, 24, "Subsubsection"],
+Cell[81192, 2457, 770, 23, 73, "Text"],
+Cell[CellGroupData[{
+Cell[81987, 2484, 1043, 25, 58, "Input",
+ Evaluatable->False],
+Cell[83033, 2511, 990, 20, 170, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[84060, 2536, 1106, 28, 87, "Input"],
+Cell[85169, 2566, 604, 11, 118, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[85822, 2583, 138, 3, 24, "Subsubsection"],
+Cell[85963, 2588, 302, 6, 26, "Text"],
+Cell[86268, 2596, 2261, 56, 128, "Input"],
+Cell[CellGroupData[{
+Cell[88554, 2656, 631, 18, 43, "Input"],
+Cell[89188, 2676, 9952, 282, 169, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[99177, 2963, 561, 17, 43, "Input"],
+Cell[99741, 2982, 3586, 113, 163, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[103364, 3100, 519, 16, 43, "Input"],
+Cell[103886, 3118, 3081, 71, 77, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[107004, 3194, 517, 16, 43, "Input"],
+Cell[107524, 3212, 1557, 42, 77, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

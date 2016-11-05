@@ -35,12 +35,12 @@ options = {
     'THETAJ' : 0.7853981633974483,
     'APPROX' : 'SpinTaylorF2',
     'DEL_F'  : 1./256.,
-    'F_MIN'  : 20.,
-    'F_INJ'  : 20.,
+    'F_MIN'  : 50.,
+    'F_INJ'  : 50.,
     'F_MAX'  : 2000.,
     'BAND'   : None,
 
-    'N'      : 10,
+    'N'      : 50,
     'M'      : 3,
 
     'V_MASS1_RANGE' : [2.4, 50.0],
@@ -55,20 +55,10 @@ options = {
 #=======================================================================
 
 
+V_THETAJ = np.linspace(options['V_THETAJ_RANGE'][0], options['V_THETAJ_RANGE'][1], options['N'])
+V_KAPPA  = np.linspace(options['V_KAPPA_RANGE'][0], options['V_KAPPA_RANGE'][1],  options['N'])
 
-#======================================================================================
-
-V_THETAJ = np.linspace(options['V_THETAJ_RANGE'][0], \
-options['V_THETAJ_RANGE'][1], options['N'])
-V_KAPPA  = np.linspace(options['V_KAPPA_RANGE'][0],  \
-options['V_KAPPA_RANGE'][1],  options['N'])
-
-ZEROS_thetaJ = np.zeros((options['N'], options['N']))
-ZEROS_kappa  = np.zeros((options['N'], options['N']))
-
-ZEROS_lhatx  = np.zeros((options['N'], options['N']))
-ZEROS_lhaty  = np.zeros((options['N'], options['N']))
-ZEROS_lhatz  = np.zeros((options['N'], options['N']))
+ZEROS = np.zeros((options['N'], options['N']))
 
 for _thetaJ in xrange(options['N']):
     for _kappa in xrange(options['N']):
@@ -76,12 +66,12 @@ for _thetaJ in xrange(options['N']):
         options['THETAJ'] = V_THETAJ[_thetaJ]
         options['KAPPA']  = V_KAPPA[_kappa]
 
-        print '\n'
-        
-        incl, psi0, spin, lhat = tlc.to_lal_coords(options['M1'], options['M2'], options['CHI1'], \
+        # get inclination, psi0, and spin from to_lal_coords
+        incl, psi0, spin, lhat, chi1, v0 = tlc.to_lal_coords(options['M1'], options['M2'], options['CHI1'], \
         	options['KAPPA'], options['THETAJ'], \
         	options['PSIJ'], options['ALPHA0'], options['F_INJ'])
 
+        # set coords
         coords = {
         'f_lower' : options['F_MIN'],
         'delta_f' : options['DEL_F'],
@@ -94,38 +84,43 @@ for _thetaJ in xrange(options['N']):
         'coa_phase' : options['PHI0'],
         'phase_order' : 7,
         'amplitude_order' : 0,
-        'inclination' : incl
+        'inclination' : incl,
+        'lnhat' : lhat,
+        'v0' : v0
         }
 
-        thetaJ, kappa, lnhatx, lnhaty, lnhatz = tlc.spintaylorf2_coords(**coords)
+        #pass these values to spintaylorF2 PyCBC code. 
+        kappa, thetaJ, lnhat, spin_pycbc, chi_pycbc = tlc.spintaylorf2(**coords)
 
-        ZEROS_thetaJ[_kappa, _thetaJ] = thetaJ - V_THETAJ[_thetaJ]
-        ZEROS_kappa[_kappa, _thetaJ]  = kappa  - V_KAPPA[_kappa]
+        # compute the difference:
+        Q1 = kappa
+        Q2 = V_KAPPA[_kappa]
+        # Q1 = thetaJ
+        # Q2 = V_THETAJ[_thetaJ]
+        # Q1 = spin[2]
+        # Q2 = spin_pycbc[2]
+        # Q1 = lhat[0]
+        # Q2 = lnhat[0]
 
-        ZEROS_lhatx[_kappa, _thetaJ] = int(lnhatx - lhat[0])
-        ZEROS_lhaty[_kappa, _thetaJ] = int(lnhaty - lhat[1])
-        ZEROS_lhatz[_kappa, _thetaJ] = int(lnhatz - lhat[2])
+        # Q1 = chi1
+        # Q2 = chi_pycbc
 
+        # if Q2 < 0 or Q1 < 0:
+        #     print 'N'
+
+        
+        ZEROS[_thetaJ, _kappa] = np.abs(Q1 - Q2)
+       
 
 plt.figure(1)
-plt.subplot(1,3,1)
-plt.contourf(V_KAPPA, V_THETAJ, ZEROS_lhatx)
+plt.imshow(np.flipud(ZEROS))
 plt.colorbar()
-plt.title('lhaty')
-plt.xlabel('kappa')
-plt.ylabel('thetaJ')
-
-plt.subplot(1,3,2)
-plt.contourf(V_KAPPA, V_THETAJ, ZEROS_lhaty)
-plt.colorbar()
-plt.title('lhaty')
-
-plt.subplot(1,3,3)
-plt.contourf(V_KAPPA, V_THETAJ, ZEROS_lhatz)
-plt.colorbar()
-plt.title('lhatz')
-
 plt.show()
+print ZEROS[ZEROS != 0.0]
+
+# plt.plot(ZEROS[:,15])
+# print np.argmax(ZEROS[:,15][5:45])
+# plt.show()
 
 
 

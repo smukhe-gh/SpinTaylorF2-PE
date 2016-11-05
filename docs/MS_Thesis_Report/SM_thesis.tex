@@ -1,0 +1,182 @@
+%=========================================================================
+% SM 11/2016
+% Mid Term Report IISER Thiruvananthapuram
+% Overlap analysis of SpinTaylorF2
+%=========================================================================
+
+\documentclass[12pt, a4wide]{report}
+
+\usepackage{amsthm,amssymb,mathrsfs,setspace,pstcol}
+\usepackage{amsmath}
+\usepackage{play}
+\usepackage{epsfig}
+\usepackage[nottoc]{tocbibind}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage[en-US]{datetime2}
+
+%setup packages
+\geometry{margin=1.2in}
+% \geometry{bindingoffset=1cm}
+\geometry{textwidth=390pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=magenta,
+    citecolor=magenta,
+}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+\input xy
+\xyoption{all}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\renewcommand{\baselinestretch}{1.5}
+\begin{document}
+
+%\pagenumbering{arabic} \setcounter{page}{1}
+
+%=========================================================================
+% TITLE PAGE
+%=========================================================================
+
+\begin{titlepage}
+\enlargethispage{10mm}
+\begin{center}
+\vspace*{-10mm}
+
+\textbf{\textsc{\Large Harmonic Analysis of Single Spin Precessing Waveform SpinTalyorF2}}\\
+
+\vspace*{10mm}
+
+A Project Report Submitted \\
+in Partial Fulfilment of the Requirements  \\
+for the Degree of  \\
+
+\vspace{5mm}
+
+\textbf{\textsc{\Large Master of Science}}\\
+in \\
+{\large \bf Physics} \\
+\vspace{7mm}
+{\textit{by}} \\ \vspace{2mm}
+{\textbf{\large Soham Mukherjee}}\\
+{\textbf{IMS12109}}\\
+
+\vspace*{5.5mm}
+
+\begin{figure}[h]
+  \begin{center}
+  \includegraphics[scale=0.15, angle=-90]{./images/IISER_Logo.pdf}
+  \end{center}
+\end{figure}
+\vspace*{3.5mm}
+{\em to} \\ 
+\vspace{2mm}
+{\bf\large School of Physics} \\
+{\bf\large \mbox{Indian Institute of Science Education and Research}}\\
+{\bf\large Thiruvananthapuram -- 695016, India}\\ 
+\vspace{2mm}
+\DTMlangsetup{showdayofmonth=false}
+\today
+\DTMlangsetup{showdayofmonth=true}
+\end{center}
+\end{titlepage}
+\clearpage
+
+
+%=========================================================================
+% CERTIFICATE
+%=========================================================================
+
+% \pagenumbering{roman} \setcounter{page}{2}
+% \begin{center}
+% {\large{\bf{CERTIFICATE}}}
+% \end{center}
+% %\thispagestyle{empty}
+
+
+% \noindent
+% This is to certify that the work contained in this project report
+% entitled \textbf{``[Title of the project report]''}  submitted
+% by \textbf{[Your Name]} (\textbf{Roll No: [Your roll number]}) to Indian Institute of Science Education and Research Thiruvananthapuram
+% towards partial requirement of {\bf Master of Science} in Mathematics   has been carried out
+% by [him/her] under my supervision and that it has not been submitted elsewhere
+% for the award of any degree.
+
+
+% \vspace{4cm}
+
+% \noindent Thiruvananthapuram - 695 016 \hfill (Dr. XYZ)
+% \noindent April  2013 \hfill Project Supervisor
+
+% \clearpage
+
+%=========================================================================
+% ABSTRACT
+%=========================================================================
+
+\begin{center}
+\textbf{ABSTRACT}\\
+\end{center}
+
+We study the SpinTaylorF2 waveform, a closed-form, single spin, frequency 
+domain waveform. The the dominant (2,2) mode can be further decomposed 
+into sidebands. The SpinTaylorF2 waveform is most suited for neutron star 
+black hole binaries, since in such systems the neutron star is expected to 
+have negligible spin compared to that of the black hole. In thus study, we 
+compare the contribution to the total SNR from the sidebands. We find that 
+(2,2,2) and (2,2,0) are dominant in complimentary regions of the parameter 
+space -- (2,2,2) mode dominates when there is no precession and (2,2,0) is 
+seen to dominate when the system is highly precessing. This would allow us 
+to use a particular sideband of the SpinTaylorF2 waveform, instead of the
+full SpinTaylorF2 (which more significantly more computationally expensive) 
+for parameter estimation. 
+
+\clearpage
+
+\tableofcontents
+\clearpage
+% \listoffigures
+% \listoftables
+
+\newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+%=========================================================================
+% CHAPTERS
+%=========================================================================
+
+\input SM_thesis_C1.tex
+\input SM_thesis_C2.tex
+\input SM_thesis_C3.tex
+
+%=========================================================================
+% CHAPTERS
+%=========================================================================
+
+\bibliographystyle{abbrv}
+\bibliography{SM_thesis_bib}
+\end{document}
+

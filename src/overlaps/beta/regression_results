@@ -1,0 +1,62 @@
+------------------------------------------------------------
+A fit
+------------------------------------------------------------
+/Users/apple/pycbc/lib/python2.7/site-packages/statsmodels/stats/stattools.py:72: UserWarning: omni_normtest is not valid with less than 8 observations; 4 samples were given.
+  "samples were given." % int(n))
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      z   R-squared:                       0.210
+Model:                            OLS   Adj. R-squared:                 -1.370
+Method:                 Least Squares   F-statistic:                    0.1328
+Date:                Tue, 18 Oct 2016   Prob (F-statistic):              0.889
+Time:                        23:33:06   Log-Likelihood:                 1.8700
+No. Observations:                   4   AIC:                             2.260
+Df Residuals:                       1   BIC:                            0.4188
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [95.0% Conf. Int.]
+------------------------------------------------------------------------------
+Intercept      0.5337      0.983      0.543      0.683       -11.962    13.029
+x             -0.1566      0.953     -0.164      0.896       -12.264    11.951
+y              0.6761      3.632      0.186      0.883       -45.471    46.823
+==============================================================================
+Omnibus:                          nan   Durbin-Watson:                   1.719
+Prob(Omnibus):                    nan   Jarque-Bera (JB):                0.386
+Skew:                           0.357   Prob(JB):                        0.825
+Kurtosis:                       1.656   Cond. No.                         29.4
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+------------------------------------------------------------
+B fit
+------------------------------------------------------------
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      z   R-squared:                       0.364
+Model:                            OLS   Adj. R-squared:                 -0.908
+Method:                 Least Squares   F-statistic:                    0.2862
+Date:                Tue, 18 Oct 2016   Prob (F-statistic):              0.797
+Time:                        23:33:06   Log-Likelihood:                 1.6872
+No. Observations:                   4   AIC:                             2.626
+Df Residuals:                       1   BIC:                            0.7844
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [95.0% Conf. Int.]
+------------------------------------------------------------------------------
+Intercept      2.2619      1.029      2.197      0.272       -10.818    15.341
+x              0.3032      0.997      0.304      0.812       -12.370    12.977
+y             -0.7966      3.802     -0.210      0.868       -49.101    47.508
+==============================================================================
+Omnibus:                          nan   Durbin-Watson:                   1.719
+Prob(Omnibus):                    nan   Jarque-Bera (JB):                0.386
+Skew:                          -0.357   Prob(JB):                        0.825
+Kurtosis:                       1.656   Cond. No.                         29.4
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

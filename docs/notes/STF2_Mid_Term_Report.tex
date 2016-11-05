@@ -1,0 +1,95 @@
+\documentclass[nofootinbib,preprintnumbers,superscriptaddress,notitlepage]{revtex4-1}
+
+\usepackage{times}
+\usepackage[usenames]{color}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{dcolumn}
+\usepackage{enumerate}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage[latin1]{inputenc}
+\usepackage{latexsym}
+\usepackage{rotating}
+\usepackage{hyperref}
+\usepackage[caption=false]{subfig}
+
+
+%setup packages
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+    filecolor=magenta,      
+    urlcolor=magenta,
+    citecolor=magenta,
+}
+
+%Define equation environment shorthand
+\newcommand{\<}{\begin{equation}}
+\newcommand{\?}{\end{equation}}
+
+\begin{document}
+
+\title{Overlap analysis of sidebands of SpinTaylorF2}
+
+\author{Soham Mukherjee}
+\affiliation{Indian Institute of Science Education and Research, 
+Thiruvananthapuram, India}
+\date{\today}
+
+\begin{abstract}
+We study the SpinTaylorF2 waveform, a closed-form, single spin, frequency 
+domain waveform. The the dominant (2,2) mode can be further decomposed 
+into sidebands. The SpinTaylorF2 waveform is most suited for neutron star 
+black hole binaries, since in such systems the neutron star is expected to 
+have negligible spin compared to that of the black hole. In thus study, we 
+compare the contribution to the total SNR from the sidebands. We find that 
+(2,2,2) and (2,2,0) are dominant in complimentary regions of the parameter 
+space -- (2,2,2) mode dominates when there is no precession and (2,2,0) is 
+seen to dominate when the system is highly precessing. This would allow us 
+to use a particular sideband of the SpinTaylorF2 waveform, instead of the
+full SpinTaylorF2 (which more significantly more computationally expensive) 
+for parameter estimation. 
+\end{abstract}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%
+With the discovery of GW150194, gravitational wave astronomy has ushered into
+a new era. Among the most likely candidates that is expected to be detected by
+LIGO, neutron star-black hole binaries are yet to be discovered. In fact we 
+don't know if they even exist, and thus it would be very interesting if LIGO
+is able to detect and discern if the observed signal is from a NS-BH binary. 
+Such systems can be formed in dynamical capture, which may lead to orbits with 
+high eccentricity, or can be formed in the common envelope phase where one star 
+collapses into a black hole before the other. However, in both cases, the spin 
+of the neutron star is expected to be significantly smaller than the black hole,
+primarily for two reasons: neutron stars can only spin as fast as the rotational 
+breakup frequency and black holes can be spun up with accretion. 
+
+To detect such systems, LIGO current uses a matched filter approach, which 
+necessitates the use of highly accurate waveforms. 
+
+See ~\cite{Lundgren2014}.
+
+%%%%%%%%%%%%%%%%%
+\section{Parameter Estimation}
+%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%
+\section{Results}
+%%%%%%%%%%%%%%%%%
+
+
+\acknowledgments
+
+Acknowledge people here.
+
+\bibliography{STF2_PE}
+
+\end{document}

@@ -37,7 +37,7 @@ def visualize_OLVP_grid(output_dir):
 
     fig, axes = plt.subplots(nrows=3, ncols=3)
     plt.cm = plt.get_cmap('gray_r')
-    fig.suptitle('SpinTaylorF2 SNR/SNR(max)')
+    fig.suptitle('SpinTaylorF2 SNR RATIO')
     plt.rc('text', usetex=True)
     plt.rc('font', family='serif',size=18)
 
@@ -47,16 +47,19 @@ def visualize_OLVP_grid(output_dir):
     DAT = []
     for i, file in enumerate(files):
         data = np.load(file)
-        DAT.append(data['SNR_0F'])
+        DAT.append(data['OLVP_0F_P2P0']/data['OLVP_0F_P2'])
 
     cmax = np.amax(np.array(DAT))
     cmin = np.amin(np.array(DAT))
 
-    smax = np.amax(np.array(DAT)/cmax)
-    smin = np.amin(np.array(DAT)/cmax)
+    print cmax
+    print cmin
 
-    print smax
-    print smin
+    # smax = np.amax(np.array(DAT)/cmax)
+    # smin = np.amin(np.array(DAT)/cmax)
+
+    # print smax
+    # print smin
 
     files_ordered = files[6:9] + files[3:6] + files[0:3]
 
@@ -76,10 +79,10 @@ def visualize_OLVP_grid(output_dir):
         ax.grid()
 
         ax.set_title(r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
-        im = ax.imshow(np.flipud(np.log(data['SNR_0F']/cmax)),cmap='gray_r', vmin=np.log(smin), vmax=np.log(smax))
+        im = ax.imshow(np.flipud(data['OLVP_0F_P2P0']/data['OLVP_0F_P2']),cmap='gray_r', vmin=cmin, vmax=cmax)
 
     fig.colorbar(im, ax=axes.ravel().tolist())
-    plt.savefig('../../../output/plots/%s/'%(output_dir) + 'CM_OVLP_GRID_0F_SNR_LOG' + '.pdf')
+    plt.savefig('../../../output/plots/%s/'%(output_dir) + 'CM_OVLP_GRID_0F_SNR_RATIO' + '.pdf')
     plt.close()
 
     return None
