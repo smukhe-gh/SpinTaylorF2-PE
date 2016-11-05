@@ -110,4 +110,4 @@ def visualize_masked_OLVP_grid(output_dir):
 
     return None
 
-visualize_masked_OLVP_grid('output-2016_09_30_20_10_03')
+visualize_masked_OLVP_grid('output-2016_10_18_21_00_49')

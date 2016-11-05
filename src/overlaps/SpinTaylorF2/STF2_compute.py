@@ -34,8 +34,8 @@ options = {
     'F_MAX'  : 2000.,
     'BAND'   : None,
 
-    'N'      : 10,
-    'M'      : 3,
+    'N'      : 50,
+    'M'      : 50,
 
     'V_MASS1_RANGE' : [2.4, 50.0],
     'V_CHI1_RANGE'  : [0.20, 0.80],
@@ -106,9 +106,6 @@ def generate_GRID(**options):
 
 def parallel_GRID(_MASS, _CHI1, **options):
 
-    if not os.path.exists("../../../output/datasets/%s" %options['OUTPUT_DIR']):
-        os.makedirs("../../../output/datasets/%s" %options['OUTPUT_DIR'])
-
     options['M1']         = _MASS
     options['CHI1']       = _CHI1
 
@@ -118,6 +115,9 @@ V_MASS1   = np.linspace(options['V_MASS1_RANGE'][0], \
 options['V_MASS1_RANGE'][1], options['M'])
 V_CHI1    = np.linspace(options['V_CHI1_RANGE'][0], \
 options['V_CHI1_RANGE'][1], options['M'])
+
+if not os.path.exists("../../../output/datasets/%s" %options['OUTPUT_DIR']):
+        os.makedirs("../../../output/datasets/%s" %options['OUTPUT_DIR'])
 
 Parallel(n_jobs=-2, verbose=5)(delayed(parallel_GRID)(_MASS = V_MASS1[m], \
  _CHI1 = V_CHI1[c], **options) for m in xrange(options['M']) for \
