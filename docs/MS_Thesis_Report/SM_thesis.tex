@@ -16,18 +16,21 @@
 \usepackage{hyperref}
 \usepackage{geometry}
 \usepackage[en-US]{datetime2}
+\usepackage{mwe}
+% \usepackage{subfig}
+\usepackage{subcaption} 
 
 %setup packages
-\geometry{margin=1.2in}
+\geometry{margin=1in}
 % \geometry{bindingoffset=1cm}
 \geometry{textwidth=390pt}
 
 \hypersetup{
     colorlinks=true,
-    linkcolor=black,
-    filecolor=magenta,      
-    urlcolor=magenta,
-    citecolor=magenta,
+    linkcolor=darkgray,
+    filecolor=blue,      
+    urlcolor=blue,
+    citecolor=blue,
 }
 
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
@@ -64,11 +67,11 @@
 \begin{center}
 \vspace*{-10mm}
 
-\textbf{\textsc{\Large Harmonic Analysis of Single Spin Precessing Waveform SpinTalyorF2}}\\
+\textbf{\textsc{\Large Analysis of SpinTalyorF2: A Single Spin Precessing Frequency Domain Waveform }}\\
 
 \vspace*{10mm}
 
-A Project Report Submitted \\
+A Mid-Term Project Report Submitted \\
 in Partial Fulfilment of the Requirements  \\
 for the Degree of  \\
 
@@ -135,31 +138,31 @@ in \\
 % ABSTRACT
 %=========================================================================
 
-\begin{center}
-\textbf{ABSTRACT}\\
-\end{center}
+% \begin{center}
+% \textbf{ABSTRACT}\\
+% \end{center}
 
-We study the SpinTaylorF2 waveform, a closed-form, single spin, frequency 
-domain waveform. The the dominant (2,2) mode can be further decomposed 
-into sidebands. The SpinTaylorF2 waveform is most suited for neutron star 
-black hole binaries, since in such systems the neutron star is expected to 
-have negligible spin compared to that of the black hole. In thus study, we 
-compare the contribution to the total SNR from the sidebands. We find that 
-(2,2,2) and (2,2,0) are dominant in complimentary regions of the parameter 
-space -- (2,2,2) mode dominates when there is no precession and (2,2,0) is 
-seen to dominate when the system is highly precessing. This would allow us 
-to use a particular sideband of the SpinTaylorF2 waveform, instead of the
-full SpinTaylorF2 (which more significantly more computationally expensive) 
-for parameter estimation. 
+% We study the SpinTaylorF2 waveform, a closed-form, single spin, frequency 
+% domain waveform. The the dominant (2,2) mode can be further decomposed 
+% into sidebands. The SpinTaylorF2 waveform is most suited for neutron star 
+% black hole binaries, since in such systems the neutron star is expected to 
+% have negligible spin compared to that of the black hole. In thus study, we 
+% compare the contribution to the total SNR from the sidebands. We find that 
+% (2,2,2) and (2,2,0) are dominant in complimentary regions of the parameter 
+% space -- (2,2,2) mode dominates when there is no precession and (2,2,0) is 
+% seen to dominate when the system is highly precessing. This would allow us 
+% to use a particular sideband of the SpinTaylorF2 waveform, instead of the
+% full SpinTaylorF2 (which more significantly more computationally expensive) 
+% for parameter estimation. 
 
-\clearpage
+% \clearpage
 
-\tableofcontents
-\clearpage
-% \listoffigures
-% \listoftables
+% % \tableofcontents
+% % \clearpage
+% % \listoffigures
+% % \listoftables
 
-\newpage
+% \newpage
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
@@ -170,13 +173,12 @@ for parameter estimation.
 
 \input SM_thesis_C1.tex
 \input SM_thesis_C2.tex
-\input SM_thesis_C3.tex
 
 %=========================================================================
 % CHAPTERS
 %=========================================================================
 
-\bibliographystyle{abbrv}
+\bibliographystyle{unsrt}
 \bibliography{SM_thesis_bib}
 \end{document}
 
