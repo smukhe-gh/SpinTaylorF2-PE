@@ -2,7 +2,6 @@
 
 \label{chap:SpinTaylorF2} 
 \section{Construction of SpinTaylorF2} 
-
 The SpinTaylorF2 waveform~\cite{Lundgren2014} is a single spin, frequency domain
 waveform that incorporates the effects of precession.  The waveform model
 assumes one component of the binary to have negligible or zero spin, and
@@ -39,7 +38,6 @@ nearly fixed during the inspiral, and $\mathbf{L}$ and $\mathbf{S}$ precesses
 about $\mathbf{J}$ with a uniform angular velocity. The SpinTaylorF2 waveform
 assumes simple precession~\cite{Lundgren2014}, and breaks down  when the
 assumption is no longer applicable.
-
 \label{fig:waveforms} 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{./images/TD_waveforms_comparison.pdf}
@@ -48,7 +46,6 @@ The modulations in the waveform amplitude due to precession is clearly visible i
 bottom figure.} 
 \centering 
 \end{figure}
-
 The precession of the orbital plane leads to modulations in the gravitational
 wave amplitude and phase in the observer's frame of reference (see Fig.~\ref{fig:waveforms}).
 However, the precessing waveform in the observer's frame can be decomposed into
@@ -58,7 +55,6 @@ aligned with $\mathbf{J}$ to a frame that co-rotates with the precession of the
 orbital angular momentum vector $\mathbf{L}$. The precessing waveform can then
 be expressed as a weighted sum of the co-rotating frame amplitudes
 $\tilde{h}^{l,m}$ (see Eq. (3) in~\cite{Lundgren2014}):
-
 \begin{equation}   
 h_{+} + i h_{\times} = e^{-2 \psi}
 \sum_{l,m,m^{\prime}} \mathcal{D}^{l}_{m^{\prime},m} \left(\alpha, \beta, \gamma\right)
@@ -72,7 +68,6 @@ the leading order $(l=2, |m| = 2)$ mode, we can express the above expression in
 frequency domain using the stationary phase approximation~\cite{Lundgren2014,
 Creighton}.  Upon simplification, one arrives at the following expression for
 the SpinTaylorF2 waveform (see Eq. (12--13) in~\cite{Lundgren2014}):
-
 \begin{equation}  
 \label{STF2_main} 
 h_{+}(f) =
@@ -82,7 +77,7 @@ f)^{-7/6}\sum_{m}z_{m}e^{i(\Psi - 2\zeta) + i m \alpha},
 where $D$ corresponds to the distance to the source, and $M_{c}$ corresponds to
 chirp mass~\cite{Creighton} of the binary. The expressions for $z_{m}, \alpha,
 \Psi$ and $\zeta$  can be found in~\cite{Lundgren2014}, we omit them for
-brevity. Fig.~(\ref{fig:waveforms}), shows  time-domian plot of the full
+brevity. Fig.~(\ref{fig:waveforms}), shows  time-domain plot of the full
 SpinTaylorF2 waveform for a precessing and non-precessing case. Each term in the
 summation in Eq.~(\ref{STF2_main}) represents a single sideband that is
 modulated in amplitude and phase depending on the value of $m$.  We observed
@@ -94,12 +89,9 @@ the individual sidebands in case of precession systems. In the following section
 we discuss how the SNR of the total waveform is distributed among the sidebands
 by computing overlap between the particular sideband and the full waveform.
 
-
 \section{Computation of SNR and Overlaps}
-
 The signal-to-noise ratio (SNR) of a frequency domain waveform $h(f)$ is given by 
 $(h|h)$, where $(a|b)$ is the noise-weighted scalar product defined as 
-
 \label{inner_product}  
 \begin{equation} (a|b) = 4 \text{Re} \left[
 \int_{f_{1}}^{f_{2}}  \dfrac{a^{*}(f)b(f)}{S_{n}(f)} df\right] 
@@ -151,45 +143,47 @@ The fact that the SNR also peaks near $\theta_J = \pi/2$ for lower values of
 $\kappa$, can aslo be explained using Eq.~(\ref{amplitudes}); the argument
 however, is more involved.
 
-To evaluate the fractional SNR contribution by the sidebands to the total SNR, 
-we computed the overlap of each of the sidebands with the full waveform. 
-The overlap between two frequency series amplitudes $a(f)$ and $b(f)$ is defined as (see~\cite{Lundgren2014}):
+To evaluate the fractional SNR contribution by the sidebands to the total SNR of
+the SpinTaylorF2 waveform,  we computed the overlap of each of the sidebands
+with the full waveform. The overlap between two frequency domain amplitudes
+$a(f)$ and $b(f)$ is defined as (see~\cite{Lundgren2014}):
+
 \begin{equation} 
 O_{ab} \equiv \dfrac{(a|b)}{\sqrt{(a|a)(b|b)}},
 \end{equation} 
-where $(a|b)$ is the noise-weighted inner product defined in Eq.~(\ref{inner_product}).
+where $(a|b)$ is the noise-weighted inner product defined in
+Eq.~(\ref{inner_product}). We computed the overlaps for all the sidebands $m=-2$
+to $m=2$ and observed that the $m=0$ and  $m=2$ sidebands are the dominant
+contributors to the total SNR of the full SpinTaylorF2 waveform. In addition, we
+found  that the sidebands $m=2$ and $m=0$ dominate in roughly complimentary
+regions of the  $(\theta_J, \kappa)$ parameter space -- if the system is highly
+precessing, most of the SNR is captured by the $m=0$ sideband, whereas if the
+system is mildly precessing the $m=2$ has the dominant contribution to the SNR of
+the signal. See Fig.~(\ref{fig:P2}), which shows overlap  of the sidebands $m=2$
+and $m=0$ with the full SpinTaylorF2 waveform: regions of high overlap
+correspond to regions where the fractional contribution  to the total SNR would
+be high. Therefore, the ratio of the SNR's of the two sidebands i.e.
+$\text{SNR}_{20}/\text{SNR}_{22}$ can be used as a diagnostic to quantify the
+extent of precession in the system. Most importantly, the overlap plots indicate
+that the $m=2$ and $m=0$ sidebands can be used for parameter estimation in
+appropriate regions of parameter space (i.e regions with high overlap), instead
+of the full SpinTaylorF2 waveform, which would to lead a massive reduction in
+computational cost associated with waveform generation. 
 
- % We computed the
-% overlaps for all the sidebands i.e. $m=-2$ to $m=2$ and found that the $m=0$ to
-% $m=2$ modes are the dominant contributors to the total SNR of the full
-% SpinTaylorF2 waveform. We also found that $m=0$ to $m=2$ dominate are different
-% regions of the parameter space -- if the system is hihgly precessing, most of
-% the SNR is captured by the $m=0$ sideband, and when the system is not precessing
-% the $m=2$ has the dominant contribution to the SNR of the signal. Fig.~(3) shows
-% the overlap plots for $m=2$ and $m=0$ sidebands with the full SpinTaylorF2
-% waveform. This suggests that one can use the sidebands -- which are
-% computationally cheaper to generate than the full SpinTaylorF2 waveform -- to
-% estimate parameters in the regions where their overlap with the full
-% SpinTaylorF2 waveform is very high i.e. for precessing systems one can use the
-% $m=0$ for parameter estimation since the maximum contribution to the SNR is
-% coming from the $m=0$ mode when the system is precessing. This would allow for a
-% massive reduction in computational cost associated with waveform generation.
+It would be therefore very interesting to see how faithfully one can infer the parameters of the source, 
+if one uses --- instead of the full SpinTaylorF2 waveform --- a specific sideband of the waveform model, 
+which would be the main focus of our future work.
 
-\label{fig:P2} 
-\begin{figure}[t]
+\label{fig:P2}  \begin{figure}[t]
 \includegraphics[width=\textwidth]{./images/OVLP_GRID_P2.pdf}
-\includegraphics[width=\textwidth]{./images/OVLP_GRID_P0.pdf}
-\caption{Overlaps plots} 
-\centering 
+\includegraphics[width=\textwidth]{./images/OVLP_GRID_P0.pdf} \caption{Variation
+of overlap of $m=2$ and $m=0$ sideband with the SpinTaylorF2
+waveform in the $(\theta_J, \kappa)$ parameter space for  different $\chi$ and
+$\eta$ values, where $\chi$ changes over the horizontal  axis of the grid and
+$\eta$ varies over the vertical axis of the grid.}  
+\centering  
 \end{figure}
 
-% \section{Future Work} 
-% Our future work would be to investigate this claim by
-% performing parameter estimation with the full SpinTaylorF2 waveform and compare
-% the results when a specific sideband is used in the appropriate region of
-% parameter space (precessing or non-precessing) which would help us figure out
-% how faithfully do we recover parameters if we use sidebands instead of the full
-% waveform in parameter estimation.
 
 
 
