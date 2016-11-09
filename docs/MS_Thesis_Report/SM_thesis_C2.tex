@@ -6,6 +6,8 @@
 
 \chapter{SpinTaylorF2 waveform -- Overlap Study}
 
+\label{chap:SpinTaylorF2 waveform}
+\section{SpinTaylorF2 waveform}
 The SpinTaylorF2 waveform~\cite{Lundgren2014} is a single spin, frequency domain
 waveform that incorporates the effects of precession.  The waveform model
 assumes one component of the binary to have negligible or zero spin; we will
@@ -69,7 +71,11 @@ represents a single sideband, corresponding to a particular value of $m$ ranging
 therefore modulated in amplitude $(z_{m})$ and phase $(e^{i m \alpha})$ depending on the value of $m$. See Fig.~(\ref{wf_compare}), which 
 compares time-domian plot of the waveform for a precessing and non-precessing case. In the non-precessing case, 
 only the $m=2$ sideband has a non-zero amplitude; however, for a precessing system, all the sidebands
-develop a non-zero amplitude. Thus, one would expect that the single to noise ratio (SNR) from the total waveform would be sub-divided
+develop a non-zero amplitude. 
+
+\section{Computation of Overlap and SNR}
+
+Thus, one would expect that the single to noise ratio (SNR) from the total waveform would be sub-divided
 into the SNR contribution from each of the individual sidebands in case of precession. 
 
 \label{SNR}
@@ -94,22 +100,7 @@ O_{ab} \equiv \dfrac{(a|b)}{\sqrt{(a|a)(b|b)}}
 \end{equation}
 The overlap of a particular sideband corresponds to the fractional SNR contribution of that sideband to the total SNR. We computed the overlaps for all the sidebands i.e. $m=-2$ to $m=2$ and found that the $m=0$ to $m=2$ modes are the dominant contributors to the total SNR of the full SpinTaylorF2 waveform. We also found that $m=0$ to $m=2$ dominate are different regions of the parameter space -- if the system is hihgly precessing, most of the SNR is captured by the $m=0$ sideband, and when the system is not precessing the $m=2$ has the dominant contribution to the SNR of the signal. Fig.~(3) shows the overlap plots for $m=2$ and $m=0$ sidebands with the full SpinTaylorF2 waveform. This suggests that one can use the sidebands -- which are computationally cheaper to generate than the full SpinTaylorF2 waveform -- to estimate parameters in the regions where their overlap with the full SpinTaylorF2 waveform is very high i.e. for precessing systems one can use the $m=0$ for parameter estimation since the maximum contribution to the SNR is coming from the $m=0$ mode when the system is precessing. This would allow for a massive reduction in computational cost associated with waveform generation. 
 
-\begin{figure}
-  \begin{subfigure}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{./images/OVLP_GRID_P2.pdf}
-    \caption{Picture 1}
-    \centering
-    \label{fig:1}
-  \end{subfigure}
-  %
-  \begin{subfigure}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{./images/OVLP_GRID_P0.pdf}
-    \caption{Picture 2}
-    \centering
-    \label{fig:2}
-  \end{subfigure}
-\end{figure}
-
+\section{Future Work}
 Our future work would be to investigate this claim by performing parameter estimation with the full SpinTaylorF2 waveform and compare the results when a specific sideband is used in the appropriate region of parameter space (precessing or non-precessing) which would help us figure out how faithfully do we recover parameters if we use sidebands instead of the full waveform in parameter estimation.
 
 
