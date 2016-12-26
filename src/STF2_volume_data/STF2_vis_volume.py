@@ -14,8 +14,8 @@ The code below should allow you to explore the [chi1, kappa, thetaJ] 3D space.
 The funtion cube_show_slider takes the entire npz file as input and the axis along
 which you would like to slice the volume. In our case:
     axis 0: chi1
-    axis 1: kappa
-    axis 2: thetaJ
+    axis 1: theta_J
+    axis 2: kappa
 Therefore, you can set the axis appropriately to see the variation in that plane.
 Also, you can set what to plot in the first line of cube_show_slider. I've commented
 out the line where I plot the ratio between SNR_02, and SNR_00.
@@ -64,11 +64,11 @@ def cube_show_slider(cube, axis=0, **kwargs):
     fig.subplots_adjust(left=0.25, bottom=0.25)
 
     if axis == 0:
-        im = cube[0, :, :]  #select the kappa, theta_J plane
+        im = cube[0, :, :]  #select the thetaJ, kappa plane
     elif axis == 1:
-        im = cube[:, 0, :]  #select the chi1, theta_J plane
+        im = cube[:, 0, :]  #select the chi1, kappa plane
     elif axis == 2:
-        im = cube[:, :, 0]  #select the chi1, kappa plane
+        im = cube[:, :, 0]  #select the chi1, thetaJ plane
 
 
     x = np.array([0, 10, 20, 30, 40, 49])
@@ -130,4 +130,4 @@ def cube_show_slider(cube, axis=0, **kwargs):
     plt.show()
 
 data = np.load('../../output/datasets/output-2016_10_19_19_24_50/overlaps_eta_0.04_chi1_0.80_N_50.npz')
-cube_show_slider(data, axis=2)
+cube_show_slider(data, axis=1)
