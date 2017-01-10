@@ -25,3 +25,4 @@
 *.npz
 *.pyc
 *.lb
+*.DS_store
