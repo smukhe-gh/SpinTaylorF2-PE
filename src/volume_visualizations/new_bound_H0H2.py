@@ -78,10 +78,7 @@ for index_file, _file in enumerate(FILES):
 	"""
 
 	for index, value in np.ndenumerate(SRATIO):
-		if np.abs(value - 1.0) > 0.25:
-			SPMATRIX[index] = np.nan
-		else:
-			SPMATRIX[index] = value*HRATIO(DATA, index[1])
+		SPMATRIX[index] = value*HRATIO(DATA, index[1])
 
 	print "\nFinished computing the scalar product matrix."
 
