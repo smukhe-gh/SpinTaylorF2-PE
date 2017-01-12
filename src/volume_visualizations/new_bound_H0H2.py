@@ -93,7 +93,7 @@ for index_file, _file in enumerate(FILES):
 
 
 	for index_psiJ, _psiJ in enumerate(PSIJ):
-		print "Working on iteration: ", index_psiJ
+		print "Working on psiJ iteration: ", index_psiJ
 		for index, value in np.ndenumerate(SRATIO):
 			_thetaJ = index[1]
 			SNR_RATIO_GENERIC_PSIJ[index[0], index[1], index[2], index_psiJ, index_file] = SPMATRIX[index]*H0H2RATIO[_thetaJ][index_psiJ]
