@@ -45,7 +45,7 @@ def HRATIO(CUBE, _thetaJ, psiJ = 0.001, A0 = 1, F = 1):
 BOUNDS = np.zeros((2, 50))
 SNR    = [0.8, 1.2]
 COLORS = ['magenta', 'red', 'green', 'blue']
-files = glob.glob("/Users/apple/Documents/Mars/output/datasets/output-2017_01_10_17_08_30/overlaps*")
+files = glob.glob("/Users/apple/Documents/Mars/output/datasets/output-2017_01_10_16_34_51/overlaps*")
 
 select_plot = "KAPPA"
 select_plot = "CHI"
@@ -54,18 +54,17 @@ select_plot = "CHI"
 
 
 DATA = np.load(files[2])
-# DATA = np.load("./overlaps_eta_0.04_chi1_0.50_N_30.npz")
 
 SNR_2 = DATA["SNR_02"]
 SNR_0 = DATA["SNR_00"]
-SRATIO = SNR_0 #/SNR_0
+SRATIO = SNR_2/SNR_0
 
-# for index, value in np.ndenumerate(SRATIO):
-# 	if np.abs(value - 1.0) > 0.25:
-# 		SRATIO[index] = np.nan
-# 		# SRATIO[index] = value*(HRATIO(DATA, index[1]))
-# 	else:
-# 		SRATIO[index] = value*(HRATIO(DATA, index[1]))
+for index, value in np.ndenumerate(SRATIO):
+	if np.abs(value - 1.0) > 0.25:
+		SRATIO[index] = np.nan
+		# SRATIO[index] = value*(HRATIO(DATA, index[1]))
+	else:
+		SRATIO[index] = value*(HRATIO(DATA, index[1]))
 
 print "Finished modidying the array."
 
@@ -117,7 +116,7 @@ for _chi in range(30):
 		plt.title(r"$\psi_{J}=%1.2f$"%CHI1)
 		plt.colorbar()
 		plt.tight_layout()
-		plt.savefig("./bounds/SNR0_thetaJ_kappa_slice_psiJ_%1.2f.pdf"%(CHI1))
+		plt.savefig("./bounds/SNR2_SNR0_thetaJ_kappa_slice_psiJ_%1.2f.pdf"%(CHI1))
 		plt.close()
 
 #=======================================================================
