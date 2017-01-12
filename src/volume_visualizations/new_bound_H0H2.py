@@ -31,8 +31,8 @@ def HRATIO(cube, _thetaJ, psiJ=0.001, A0 = 1, F = 1):
 	H2 = A0*F*np.power(np.power((1.0 + np.cos(thetaJ)**2.0)/2.0, 2.0)*np.cos(2*psiJ)**2.0 + (np.cos(thetaJ)*np.sin(2*psiJ))**2.0, 0.5)
 	return H0/H2
 
-def HRATIO_PSIJ(cube, PSIJ, _thetaJ, _psiJ, A0 = 1, F = 1):
-	thetaJ = DATA["THETAJ"][_thetaJ]
+def HRATIO_PSIJ(THETAJ, PSIJ, _thetaJ, _psiJ, A0 = 1, F = 1):
+	thetaJ = THETAJ[_thetaJ]
 	psiJ   = PSIJ[_psiJ]
 
 	H0 = (3.0/4.0)*A0*F*np.cos(2.0*psiJ)*np.sin(thetaJ)**2.0
@@ -40,9 +40,18 @@ def HRATIO_PSIJ(cube, PSIJ, _thetaJ, _psiJ, A0 = 1, F = 1):
 	return H0/H2
 
 FILES = glob.glob("../../output/datasets/output-2016_10_19_19_24_50/overlaps*")
-PSIJ  = np.linspace(0, 2*np.pi, 50) 
+PSIJ   = np.linspace(0, 2*np.pi, 50) 
+THETAJ = np.linspace(0, np.pi, 50)
 
 SNR_RATIO_GENERIC_PSIJ = np.zeros((50, 50, 50, 50, 4))
+
+H0H2RATIO = np.zeros((50, 50))
+
+for index_thetaJ, _thetaJ in enumerate(THETAJ):
+	for index_psiJ, _psiJ in enumerate(PSIJ):
+		H0H2RATIO[index_thetaJ][index_psiJ] = HRATIO_PSIJ(THETAJ, PSIJ, index_thetaJ, index_psiJ)
+
+print "Finished computing H0/H2."
 
 for index_file, _file in enumerate(FILES):
 	DATA  = np.load(_file)
@@ -74,6 +83,8 @@ for index_file, _file in enumerate(FILES):
 		else:
 			SPMATRIX[index] = value*HRATIO(DATA, index[1])
 
+	print "\nFinished computing the scalar product matrix."
+
 	"""
 	Having generated the scalar product matrix, we now compute
 	SNR_2/SNR_0(chi1, thetaJ, kappa, *psiJ*) for a particular value 
@@ -84,11 +95,11 @@ for index_file, _file in enumerate(FILES):
 	for index_psiJ, _psiJ in enumerate(PSIJ):
 		print "Working on iteration: ", index_psiJ
 		for index, value in np.ndenumerate(SRATIO):
-			SNR_RATIO_GENERIC_PSIJ[index[0], index[1], index[2], index_psiJ, index_file] = SPMATRIX[index]*HRATIO_PSIJ(DATA, PSIJ, index[1], index_psiJ)
+			_thetaJ = index[1]
+			SNR_RATIO_GENERIC_PSIJ[index[0], index[1], index[2], index_psiJ, index_file] = SPMATRIX[index]*H0H2RATIO[_thetaJ][index_psiJ]
+	print "------------------------------"
 
-
-
-
+print "Saving the matrix."
 np.savez("./SNR_RATIO_GENERIC_PSIJ",
 	SNR_RATIO_GENERIC_PSIJ_GRID = SNR_RATIO_GENERIC_PSIJ)
 
