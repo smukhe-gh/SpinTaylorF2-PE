@@ -1,5 +1,5 @@
 #===============================================================================
-# SM: Code to visualize SpinTaylorF2 
+# SM: Code to visualize
 #     SpinTaylorT2 and SpinTaylorF2
 #===============================================================================
 
@@ -23,18 +23,15 @@ matplotlib.rcParams.update({
         "legend.fontsize": 10.0,
         "figure.figsize": (15.3, 15.3*goldenratio),
         "figure.dpi": 200,
-      # "subplots.left": 0.2,
-      # "subplots.right": 0.75,
-      # "subplots.bottom": 0.15,
-      # "subplots.top": 0.75,
-        "savefig.dpi": 600,
+        "savefig.dpi": 300,
         "text.usetex": True     # render all text with TeX
 })
 
+#==============================================================================
 options = {
 
     'ALPHA0' : 0.001,
-    'KAPPA'  : 1.0,
+    'KAPPA'  : -0.3,
     'CHI1'   : 0.5,
     'PSIJ'   : 0.001,
     'M1'     : 50.0,
@@ -46,33 +43,29 @@ options = {
     'F_MIN'  : 20.,
     'F_INJ'  : 20.,
     'F_MAX'  : 2000.,
-    'BAND'   : None,
-
-    'N'      : 50,
-    'M'      : 50,
-
-    'V_MASS1_RANGE' : [2.4, 50.0],
-    'V_CHI1_RANGE'  : [0.20, 0.80],
-
-    'V_KAPPA_RANGE'  : [-0.500, 0.999],
-    'V_THETAJ_RANGE' : [0.001, 3.14],
-
-    'OUTPUT_DIR'     : "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime()),
-    'GENERATE_PLOTS' : 1,
-    'THRESHOLD'      : 0.3}
+    'BAND'   : 0,
+    }
 
 SAMPLES = int(options['F_MAX']/options['DEL_F']) + 1
 BANDS   = [None, 2, 1, 0, -1 ,-2]
-KAPPA   = [0.0, 1.0]
+KAPPA   = np.linspace(-0.5, 1.0, 5)
+CHI1    = np.linspace( 0.1, 1.0, 5)
+
+string  = 'plot_param'
+
+#==============================================================================
 
 FD = np.zeros((7, SAMPLES))
 TD = np.zeros((7, SAMPLES))
 
+"""
+Chaning things here to iterate over
+chi for a fixed value of kappa.
+"""
+for index, chi1 in enumerate(CHI1):
 
-for index, kappa in enumerate(KAPPA):
-
-    options['KAPPA'] = kappa
-    print "Generating SpinTaylorF2  \t kappa: %r" %kappa
+    options['CHI1'] = chi1
+    print "Generating SpinTaylorF2  \t chi1: %1.1 \t kappa: %1.1" %(chi1, options["KAPPA"])
 
     FDW = STF2.generate_template(**options)
     TDW = FDW.to_timeseries()
@@ -83,58 +76,64 @@ for index, kappa in enumerate(KAPPA):
 FD[0] = FDW.sample_frequencies
 TD[0] = TDW[len(TDW)/2 - 1:].sample_times
 
-# for j in range(6):
-#     temp = 610 + j + 1
-#     ax = plt.subplot(temp)
-#     if j == 0:
-#         plt.plot(FD[0], FD[j+1], 'r-', alpha=0.8, linewidth=0.5, label="SpinTaylorF2 SB: %r"%BANDS[j])
-#     else:
-#         plt.plot(FD[0], FD[j+1], 'b-', alpha=0.8, linewidth=0.5, label="SpinTaylorF2 SB: %r"%BANDS[j])
+print "\nGenerating visualizations."
 
-#     plt.subplots_adjust(hspace = .001)
-#     temp = tic.MaxNLocator(3)
-#     ax.yaxis.set_major_locator(temp)
-#     plt.legend(fontsize='x-small', loc='lower right', frameon=False)
+if string == "plot_SB":
+    for j in range(6):
+        temp = 610 + j + 1
+        ax = plt.subplot(temp)
+        if j == 0:
+            plt.plot(FD[0], FD[j+1], 'r-', alpha=0.8, linewidth=0.5, label="SpinTaylorF2 SB: %r"%BANDS[j])
+        else:
+            plt.plot(FD[0], FD[j+1], 'b-', alpha=0.8, linewidth=0.5, label="SpinTaylorF2 SB: %r"%BANDS[j])
 
-# plt.savefig('./FD_waveforms.pdf')
-# plt.close()
+        plt.subplots_adjust(hspace = .001)
+        temp = tic.MaxNLocator(3)
+        ax.yaxis.set_major_locator(temp)
+        plt.legend(fontsize='x-small', loc='lower right', frameon=False)
 
-# TD = TD[:, 300000:]
+    plt.savefig('./FD_waveforms.pdf')
+    plt.close()
 
-# for j in range(6):
-#     temp = 610 + j + 1
-#     ax = plt.subplot(temp)
-#     if j == 0:
-#         plt.plot(TD[0], TD[j+1], 'r-', alpha=0.8, linewidth=0.5, label="SpinTaylorF2 SB: %r"%BANDS[j])
-#     else:
-#         plt.plot(TD[0], TD[j+1], 'b-', alpha=0.8, linewidth=0.5, label="SpinTaylorF2 SB: %r"%BANDS[j])
+    TD = TD[:, 300000:]
 
-#     plt.subplots_adjust(hspace = 0.25)
-#     temp = tic.MaxNLocator(3)
-#     ax.yaxis.set_major_locator(temp)
-#     plt.ylabel(r'$h_{(2,2)}$')
-#     plt.legend(fontsize='x-small', loc='lower right', frameon=False)
+    for j in range(6):
+        temp = 610 + j + 1
+        ax = plt.subplot(temp)
+        if j == 0:
+            plt.plot(TD[0], TD[j+1], 'r-', alpha=0.8, linewidth=0.5, label="SpinTaylorF2 SB: %r"%BANDS[j])
+        else:
+            plt.plot(TD[0], TD[j+1], 'b-', alpha=0.8, linewidth=0.5, label="SpinTaylorF2 SB: %r"%BANDS[j])
 
-# plt.xlabel(r'$t$')
-# plt.savefig('./TD_waveforms.pdf')
-# plt.close()
+        plt.subplots_adjust(hspace = 0.25)
+        temp = tic.MaxNLocator(3)
+        ax.yaxis.set_major_locator(temp)
+        plt.ylabel(r'$h_{(2,2)}$')
+        plt.legend(fontsize='x-small', loc='lower right', frameon=False)
 
-TD = TD[:, 450000:]
+    plt.xlabel(r'$t$')
+    plt.savefig('./TD_waveforms.pdf')
+    plt.close()
 
-for j in range(2):
-    temp = 610 + j + 1
-    ax = plt.subplot(temp)
-    if j == 0:
-        plt.plot(TD[0], TD[j+1], 'r-', alpha=0.8, linewidth=0.5, label=r"$\kappa=%r$"%KAPPA[j])
-    else:
-        plt.plot(TD[0], TD[j+1], 'b-', alpha=0.8, linewidth=0.5, label=r"$\kappa=%r$"%KAPPA[j])
+if string == "plot_param":
+    TD = TD[:, 450000:]
 
-    plt.subplots_adjust(hspace = 1.0)
-    temp = tic.MaxNLocator(3)
-    ax.yaxis.set_major_locator(temp)
-    plt.ylabel(r'$h_{(2,2)}$')
-    plt.legend(fontsize='x-small', loc='lower left', frameon=False)
+    # TODO: Pull this range from the length of TD or FD.
+    for j in range(5):
+        temp = 610 + j + 1
+        ax = plt.subplot(temp)
+        if j % 2 == 0:
+            plt.plot(TD[0], TD[j+1], 'r-', alpha=0.8, linewidth=0.5, label=r"$SB=%r, \chi_1=%1.2f, \kappa=%1.2f$"%(options["BAND"], CHI1[j], options["KAPPA"]))
+        else:
+            plt.plot(TD[0], TD[j+1], 'b-', alpha=0.8, linewidth=0.5, label=r"$SB=%r, \chi_1=%1.2f, \kappa=%1.2f$"%(options["BAND"], CHI1[j], options["KAPPA"]))
 
-plt.xlabel(r'$t$')
-plt.savefig('./TD_waveforms_comparison.pdf')
-plt.close()
+        plt.subplots_adjust(hspace = 1.0)
+        temp = tic.MaxNLocator(3)
+        ax.yaxis.set_major_locator(temp)
+        plt.ylabel(r'$h_{(2,2)}$')
+        plt.legend(fontsize='x-small', loc='lower left', frameon=False)
+
+    # Change the file name here if you like.
+    plt.xlabel(r'$t$')
+    plt.savefig('./SB_%1.2f.pdf'%options["BAND"])
+    plt.close()
