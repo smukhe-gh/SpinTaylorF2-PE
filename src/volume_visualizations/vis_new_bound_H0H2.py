@@ -27,7 +27,7 @@ SNR_RATIO  = MATRIX["SNR_RATIO_GENERIC_PSIJ_GRID"]
 H0H2_RATIO = np.zeros(np.shape(SNR_RATIO))
 
 
-PSIJ   = np.linspace(0, 2*np.pi, 50) 
+PSIJ   = np.linspace(0, 2*np.pi, 50)
 THETAJ = np.linspace(0, np.pi, 50)
 GRIDH0H2 = np.zeros((50, 50))
 
@@ -37,6 +37,7 @@ for index_thetaJ, _thetaJ in enumerate(THETAJ):
 print "Finished computing H0/H2."
 
 for index, value in np.ndenumerate(SNR_RATIO):
+        print "Working on: ", index
 	if np.abs(value - 1.0) > 0.25:
 		_thetaJ = index[1]
 		_psiJ   = index[3]
@@ -45,3 +46,7 @@ for index, value in np.ndenumerate(SNR_RATIO):
 		H0H2_RATIO[index] = np.nan
 
 print "Finished constructing H0H2 bounds matrix"
+
+print "H0/H2 Max: ", np.amax(H0H2_RATIO[np.isfinite(H0H2_RATIO)])
+print "H0/H2 Min: ", np.amin(H0H2_RATIO[np.isfinite(H0H2_RATIO)])
+
