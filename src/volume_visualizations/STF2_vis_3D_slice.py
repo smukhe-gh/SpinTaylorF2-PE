@@ -71,7 +71,8 @@ print "Finished modidying the array."
 CHI_BOUNDS   = np.zeros(50)
 KAPPA_BOUNDS = np.zeros(50)
 
-for _chi in range(30):
+
+for _chi in range(50):
 
 	"""
 	Explicitly mention what you're choosing here.
@@ -82,14 +83,16 @@ for _chi in range(30):
 	here.
 	"""
 
-	SLICE = SRATIO[_chi, :, :]
-	CHI1  = DATA["CHI1"][_chi]
+	SLICE = SRATIO[:, _chi, :]
+	CHI1  = np.linspace(0.2, 0.8, 50)
 	INDEX = np.argwhere(np.isfinite(SLICE))
 
-	MAX = np.amax(SLICE[np.isfinite(SLICE)])
-	MIN = np.amin(SLICE[np.isfinite(SLICE)])
+
 
 	if INDEX.size > 0:
+		print _chi
+		MAX = np.amax(SLICE[np.isfinite(SLICE)])
+		MIN = np.amin(SLICE[np.isfinite(SLICE)])
 
 		"""
 		KAPPA_U = SLICE[:, 0]
@@ -102,7 +105,7 @@ for _chi in range(30):
 		KAPPA_BOUNDS[_chi] = DATA["KAPPA"][np.amax(INDEX[:, 1])]
 		"""
 
-		plt.contourf(DATA["KAPPA"], DATA["THETAJ"], SLICE, vmin=MIN, vmax=MAX)
+		plt.contourf(DATA["CHI"], DATA["KAPPA"], SLICE, vmin=MIN, vmax=MAX)
 
 		"""
 		if CL.size > 0:
@@ -113,10 +116,10 @@ for _chi in range(30):
 
 		plt.xlabel(r"$\kappa$")
 		plt.ylabel(r"$\theta_{J}$")
-		plt.title(r"$\psi_{J}=%1.2f$"%CHI1)
+		plt.title(r"$\psi_{J}=%1.2f$"%CHI1[_chi])
 		plt.colorbar()
 		plt.tight_layout()
-		plt.savefig("./bounds/SNR2_SNR0_thetaJ_kappa_slice_psiJ_%1.2f.pdf"%(CHI1))
+		plt.savefig("./bounds/SNR2SNR0_thetaJ_kappa_slice_psiJ_%1.2f.pdf"%(CHI1))
 		plt.close()
 
 #=======================================================================

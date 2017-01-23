@@ -31,7 +31,7 @@ matplotlib.rcParams.update({
 options = {
 
     'ALPHA0' : 0.001,
-    'KAPPA'  : -0.3,
+    'KAPPA'  : 0.3,
     'CHI1'   : 0.5,
     'PSIJ'   : 0.001,
     'M1'     : 50.0,
@@ -43,7 +43,7 @@ options = {
     'F_MIN'  : 20.,
     'F_INJ'  : 20.,
     'F_MAX'  : 2000.,
-    'BAND'   : 0,
+    'BAND'   : 2,
     }
 
 SAMPLES = int(options['F_MAX']/options['DEL_F']) + 1
@@ -65,7 +65,7 @@ chi for a fixed value of kappa.
 for index, chi1 in enumerate(CHI1):
 
     options['CHI1'] = chi1
-    print "Generating SpinTaylorF2  \t chi1: %1.1 \t kappa: %1.1" %(chi1, options["KAPPA"])
+    print "Generating SpinTaylorF2  \t chi1: %1.1f \t kappa: %1.1f" %(chi1, options["KAPPA"])
 
     FDW = STF2.generate_template(**options)
     TDW = FDW.to_timeseries()
@@ -135,5 +135,5 @@ if string == "plot_param":
 
     # Change the file name here if you like.
     plt.xlabel(r'$t$')
-    plt.savefig('./SB_%1.2f.pdf'%options["BAND"])
+    plt.savefig('./immediate/SB_%1.2f_kappa_%1.2f.pdf'%(options["BAND"], options["KAPPA"]))
     plt.close()
