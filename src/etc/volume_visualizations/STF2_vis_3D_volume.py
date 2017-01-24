@@ -43,7 +43,6 @@ resolution is not that great.
 Additionally, you can also choose the mass ratio you would want to look at: just
 load the required file.
 """
-THRESHOLD = 7.0
 
 def cube_show_slider(cube, axis=0, **kwargs):
 
@@ -51,12 +50,13 @@ def cube_show_slider(cube, axis=0, **kwargs):
     Set what you want to plot here.
     """
     cube = data['SNR_00']
-    cube = np.divide(data['SNR_02'], data['SNR_00'])
+    # cube = np.divide(data['SNR_02'], data['SNR_00'])
 
-    ##add to mask regions
-    for index, value in np.ndenumerate(cube):
-      if np.abs(value - 0.98) > 0.1 or data['SNR_00'][index] < THRESHOLD or data['SNR_02'][index] < THRESHOLD:
-          cube[index] = np.nan
+    # add to mask regions
+    #for index, value in np.ndenumerate(cube):
+    #    # if value < 1:
+    #   if np.abs(value - 0.98) > 0.1:
+    #       cube[index] = np.nan
 
 
     fig = plt.figure()
@@ -67,7 +67,6 @@ def cube_show_slider(cube, axis=0, **kwargs):
         im = cube[0, :, :]  #select the thetaJ, kappa plane
     elif axis == 1:
         im = cube[:, 0, :]  #select the chi1, kappa plane
-        im = cube[:, 3, :]
     elif axis == 2:
         im = cube[:, :, 0]  #select the chi1, thetaJ plane
 
@@ -77,30 +76,30 @@ def cube_show_slider(cube, axis=0, **kwargs):
     ax.set_yticks(x)
     ax.set_xticks(y)
 
-    # if axis == 0:
-    #     ax.set_xticklabels([r"$%.2f$"%data['KAPPA'][i] for i in x])
-    #     ax.set_yticklabels([r"$%.2f$"%data['THETAJ'][50-i] for i in y])
-    # elif axis == 2:
-    #     ax.set_xticklabels([r"$%.2f$"%data['CHI1'][i] for i in x])
-    #     ax.set_yticklabels([r"$%.2f$"%data['THETAJ'][50-i] for i in y])
-    # elif axis == 1:
-    #     ax.set_yticklabels([r"$%.2f$"%data['CHI1'][i] for i in x])
-    #     ax.set_xticklabels([r"$%.2f$"%data['KAPPA'][i] for i in y])
+    if axis == 0:
+        ax.set_xticklabels([r"$%.2f$"%data['KAPPA'][i] for i in x])
+        ax.set_yticklabels([r"$%.2f$"%data['THETAJ'][50-i] for i in y])
+    elif axis == 1:
+        ax.set_xticklabels([r"$%.2f$"%data['CHI1'][i] for i in x])
+        ax.set_yticklabels([r"$%.2f$"%data['THETAJ'][50-i] for i in y])
+    elif axis == 2:
+        ax.set_xticklabels([r"$%.2f$"%data['CHI1'][i] for i in x])
+        ax.set_yticklabels([r"$%.2f$"%data['KAPPA'][50-i] for i in y])
 
     if axis == 0:
         ax.set_xlabel(r"$\kappa$")
         ax.set_ylabel(r"$\theta_{J}$")
-    elif axis == 2:
+    elif axis == 1:
         ax.set_xlabel(r"$\chi_{1}$")
         ax.set_ylabel(r"$\theta_{J}$")
-    elif axis == 1:
+    elif axis == 2:
         ax.set_xlabel(r"$\chi_{1}$")
         ax.set_ylabel(r"$\kappa$")
 
 
     # display image
     l = ax.imshow(np.flipud(im))
-    # fig.colorbar(l)
+    fig.colorbar(l)
 
     # define slider
     axcolor = 'white'
@@ -109,10 +108,10 @@ def cube_show_slider(cube, axis=0, **kwargs):
     if axis == 0:
         slider = Slider(ax, r"$\chi_{1}$", 0, 49,
                     valinit=0, valfmt='%i')
-    elif axis == 2:
+    elif axis == 1:
         slider = Slider(ax, r"$\kappa$", 0, 49,
                     valinit=0, valfmt='%i')
-    elif axis == 1:
+    elif axis == 2:
         slider = Slider(ax, r"$\theta_{J}$", 0, 49,
                     valinit=0, valfmt='%i')
 
@@ -122,7 +121,6 @@ def cube_show_slider(cube, axis=0, **kwargs):
             l.set_data(np.flipud(cube[ind, :, :]), **kwargs)
         elif axis == 1:
             l.set_data(np.flipud(cube[:, ind, :]), **kwargs)
-            l.set_data(np.flipud(cube[:, ind+3, :]), **kwargs)
         elif axis == 2:
             l.set_data(np.flipud(cube[:, :, ind]), **kwargs)
 
@@ -131,5 +129,5 @@ def cube_show_slider(cube, axis=0, **kwargs):
     slider.on_changed(update)
     plt.show()
 
-data = np.load('../../output/datasets/output-2017_01_16_00_36_16/overlaps_eta_0.04_chi1_0.90_N_50.npz')
-cube_show_slider(data, axis=1)
+data = np.load('../../output/datasets/output-2016_10_19_19_24_50/overlaps_eta_0.04_chi1_0.80_N_50.npz')
+cube_show_slider(data, axis=0)

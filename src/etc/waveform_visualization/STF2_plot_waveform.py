@@ -4,11 +4,11 @@ import matplotlib
 
 goldenratio = 2. / (1 + 5**.5)
 matplotlib.rcParams.update({
-        "font.size": 20.0,
-        "axes.titlesize": 20.0,
-        "axes.labelsize": 20.0,
-        "xtick.labelsize": 20.0,
-        "ytick.labelsize": 20.0,
+        "font.size": 24.0,
+        "axes.titlesize": 24.0,
+        "axes.labelsize": 24.0,
+        "xtick.labelsize": 24.0,
+        "ytick.labelsize": 24.0,
         "legend.fontsize": 18.0,
         "figure.figsize": (30.0, 20.3*goldenratio),
         "figure.dpi": 300,
@@ -46,7 +46,8 @@ plt.title(r'A')
 plt.plot(hp.sample_times,hc,label='Non-spinning, $~|\mathbf{S}|=0.0$',c='g')
 plt.ylabel(r'$h_{+}$')
 plt.xlim(lim1)
-plt.locator_params(axis='y',nbins=6)
+plt.locator_params(axis='y',nbins=4)
+plt.ylim(-1.0*1e-19, 1.0*1e-19)
 plt.legend(loc='upper left',frameon=False)
 
 plt.subplot(4,1,2)
@@ -55,7 +56,7 @@ plt.plot(hp1.sample_times,hc1,label='Aligned spin, $~S_{1z}=0.8$',c='r')
 plt.ylabel(r'$h_{+}$')
 plt.xlim(lim1)
 plt.ylim(-1.0*1e-19, 1.0*1e-19)
-plt.locator_params(axis='y',nbins=6)
+plt.locator_params(axis='y',nbins=4)
 plt.legend(loc='upper left',frameon=False)
 
 plt.subplot(4,1,3)
@@ -63,7 +64,7 @@ plt.title(r'C')
 plt.plot(hp2.sample_times,hc2, label='Anti-aligned spin, $~S_{1z}=-0.8$', c='b')
 plt.xlim(lim1)
 plt.ylabel(r'$h_{+}$')
-plt.locator_params(axis='y',nbins=6) #to specify number of ticks on both or any single axes
+plt.locator_params(axis='y',nbins=4) #to specify number of ticks on both or any single axes
 plt.legend(loc='upper left',frameon=False)
 
 plt.subplot(4,1,4)
@@ -72,7 +73,7 @@ plt.plot(hp3.sample_times,hc3, label='Precessing,$~S_{1x}=S_{1y}=-0.7$',c='black
 plt.xlim(lim1)
 plt.ylabel(r'$h_{+}$')
 plt.xlabel(r'$t$')
-plt.locator_params(axis='y',nbins=6)
+plt.locator_params(axis='y', nbins=4)
 plt.legend(loc='upper left', frameon=False)
 
 # plt.subplots_adjust(top=1.85)
