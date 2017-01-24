@@ -49,10 +49,6 @@ def generate_template(**options):
         sideband = options['BAND']   #Input
         )
 
-    #--------------------------------------------------
-    # NOTE: We're only plotting the hpluss strain here.
-    #--------------------------------------------------
-
     # sin2Y, cos2Y = np.sin(2.*psi0), np.cos(2.*psi0)
 
     # hp   = pycbc.DYN_RANGE_FAC*hpluss

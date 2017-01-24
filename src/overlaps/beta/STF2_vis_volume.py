@@ -2,7 +2,6 @@
 # Volume slice visualization.
 # SM 9/2016
 # FIXME: Check if colorbar changes with the plot.
-# FIMME: Change the plotting slice.
 #=================================================================
 
 import numpy as np
@@ -14,8 +13,8 @@ The code below should allow you to explore the [chi1, kappa, thetaJ] 3D space.
 The funtion cube_show_slider takes the entire npz file as input and the axis along
 which you would like to slice the volume. In our case:
     axis 0: chi1
-    axis 1: theta_J
-    axis 2: kappa
+    axis 1: kappa
+    axis 2: thetaJ
 Therefore, you can set the axis appropriately to see the variation in that plane.
 Also, you can set what to plot in the first line of cube_show_slider. I've commented
 out the line where I plot the ratio between SNR_02, and SNR_00.
@@ -39,9 +38,6 @@ The following data is available in the npz file:
 
 Also, note that this data was created with 50 x 50 x 50 points, and therefore the
 resolution is not that great.
-
-Additionally, you can also choose the mass ratio you would want to look at: just
-load the required file.
 """
 
 def cube_show_slider(cube, axis=0, **kwargs):
@@ -50,25 +46,18 @@ def cube_show_slider(cube, axis=0, **kwargs):
     Set what you want to plot here.
     """
     cube = data['SNR_00']
-    # cube = np.divide(data['SNR_02'], data['SNR_00'])
-
-    # add to mask regions
-    #for index, value in np.ndenumerate(cube):
-    #    # if value < 1:
-    #   if np.abs(value - 0.98) > 0.1:
-    #       cube[index] = np.nan
-
+    # cube = np.divide((data['SNR_02'] + 1), (data['SNR_00'] + 1))
 
     fig = plt.figure()
     ax = plt.subplot(111)
     fig.subplots_adjust(left=0.25, bottom=0.25)
 
     if axis == 0:
-        im = cube[0, :, :]  #select the thetaJ, kappa plane
+        im = cube[0, :, :]  #select the kappa, theta_J plane
     elif axis == 1:
-        im = cube[:, 0, :]  #select the chi1, kappa plane
+        im = cube[:, 0, :]  #select the chi1, theta_J plane
     elif axis == 2:
-        im = cube[:, :, 0]  #select the chi1, thetaJ plane
+        im = cube[:, :, 0]  #select the chi1, kappa plane
 
 
     x = np.array([0, 10, 20, 30, 40, 49])
@@ -129,5 +118,11 @@ def cube_show_slider(cube, axis=0, **kwargs):
     slider.on_changed(update)
     plt.show()
 
-data = np.load('../../output/datasets/output-2016_10_19_19_24_50/overlaps_eta_0.04_chi1_0.80_N_50.npz')
+"""
+Load data file and call function with the axis you want:
+    axis 0: chi1
+    axis 1: kappa
+    axis 2: thetaJ
+"""
+data = np.load('/home/soham/SpinTaylorF2_PE/output/datasets/output-2016_10_19_19_24_50/overlaps_eta_0.04_chi1_0.80_N_50.npz')
 cube_show_slider(data, axis=0)

@@ -19,15 +19,3 @@ A few things to note:
     
 The code in beta:
     Is to compute the overlaps between SpinTaylorT2 and SpinTaylorF2 (sidebands).
-
-In case you need to go back:
-# Resets index to former commit; replace '56e05fced' with your commit code
-git reset 56e05fced 
-
-# Moves pointer back to previous HEAD
-git reset --soft HEAD@{1}
-
-git commit -m "Revert to 56e05fced"
-
-# Updates working copy to reflect the new commit
-git reset --hard
