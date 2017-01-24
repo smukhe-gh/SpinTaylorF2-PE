@@ -35,7 +35,7 @@ options = {
     'BAND'   : None,
 
     'N'      : 50,
-    'M'      : 50,
+    'M'      : 2,
 
     'V_MASS1_RANGE' : [2.4, 50.0],
     'V_CHI1_RANGE'  : [0.20, 0.80],
