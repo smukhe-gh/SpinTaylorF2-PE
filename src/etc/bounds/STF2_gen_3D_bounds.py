@@ -67,14 +67,14 @@ def plot_slice():
 BOUNDS = np.zeros((2, 50))
 SNR    = [0.8, 1.2]
 COLORS = ['green', 'red', 'blue', 'magenta']
-files = glob.glob("../../output/datasets/output-2016_10_19_19_24_50/overlaps*")
+files = glob.glob("../../../output/datasets/output-2016_10_19_19_24_50/overlaps*")
 select_plot = "CHI"
 
 #======================================================================
 
 for k, file in enumerate(files):
-	# if not (k+1)%2 == 0:	
-	if not k > 1:
+	if not (k+1)%2 == 0:	
+	# if not k > 1:
 		for j, snr in enumerate(SNR):
 			DATA = np.load(file)
 			print "Working on CHI1 \t eta=%1.2f"%(DATA["ETA"])
@@ -129,11 +129,11 @@ for k, file in enumerate(files):
 		# ax1.plot(XF, BOUNDS[1], alpha = 0.8, linewidth=1.2, color=COLORS[k], label=r'$\eta=%1.2f$'%DATA["ETA"])
 		ax1.plot(XR, BR0, alpha = 0.8, linewidth=1.2, color=COLORS[k])
 		ax1.plot(XR, BR1, alpha = 0.8, linewidth=1.2, color=COLORS[k], label=r'$\eta=%1.2f$'%DATA["ETA"])
-		ax1.fill_between(XF, BOUNDS[0], BOUNDS[1], facecolor=COLORS[k], alpha=0.1)
+		ax1.fill_between(XR, BR0, BR1, facecolor=COLORS[k], alpha=0.1)
 
 ax1.legend(frameon=False, loc='upper left')
 ax1.axvline([0], linewidth=4, color='white')
-ax1.set_xlim(0, 1.5)
+ax1.set_xlim(0, 1.2)
 ax1.set_ylim(0.2, 0.8)
 ax1.set_xlabel(r'$H_{0}/H_{2}$')
 ax1.set_ylabel(r'$\chi_{\rm LB}$')
@@ -146,14 +146,14 @@ ax1.set_title(r'Lower bound on $\chi_{1}$')
 
 BOUNDS = np.zeros((2, 50))
 SNR    = [0.8, 1.2]
-files = glob.glob("../../output/datasets/output-2016_10_19_19_24_50/overlaps*")
+files = glob.glob("../../../output/datasets/output-2016_10_19_19_24_50/overlaps*")
 select_plot = "KAPPA"
 
 #======================================================================
 
 for k, file in enumerate(files):
-	# if not (k+1)%2 == 0:	
-	if not k > 1:
+	if not (k+1)%2 == 0:	
+	# if not k > 1:
 		for j, snr in enumerate(SNR):
 			DATA = np.load(file)
 			print "Working on KAPPA \t eta=%1.2f"%(DATA["ETA"])
@@ -208,12 +208,12 @@ for k, file in enumerate(files):
 		# ax2.plot(XF, BOUNDS[1], alpha = 0.8, linewidth=0.8, color=COLORS[k], label=r'$\eta=%1.2f$'%DATA["ETA"])
 		ax2.plot(XR, BR0, alpha = 0.8, linewidth=1.2, color=COLORS[k])
 		ax2.plot(XR, BR1, alpha = 0.8, linewidth=1.2, color=COLORS[k], label=r'$\eta=%1.2f$'%DATA["ETA"])
-		ax2.fill_between(XF, BOUNDS[0], BOUNDS[1], facecolor=COLORS[k], alpha=0.1)
+		ax2.fill_between(XR, BR0, BR1, facecolor=COLORS[k], alpha=0.1)
 
 
 ax2.legend(frameon=False)
 ax2.axvline([0], linewidth=4, color='white')
-ax2.set_xlim(0, 1.5)
+ax2.set_xlim(0, 1.2)
 ax2.set_ylim(-0.5, 1.0)
 ax2.set_xlabel(r'$H_{0}/H_{2}$')
 ax2.set_ylabel(r'$\kappa_{\rm UB}$')
