@@ -1,8 +1,9 @@
+#LALInference version:16af99e6a7511fd4039c38196476c1a16271d61b
 #-----------------------------------------------------------------------
 # Creating an injection using lalapps_inspinj 
 #-----------------------------------------------------------------------
 
-# Note: LALInference throws up errors with SpinTaylorF2. Can we fix this?
+mkdir ../../output/lalinference/$(date -d "today" +"%Y%m%d%H%M")
 
 echo "============================================================================"
 echo "Starting lalapps_inspinj"
@@ -13,7 +14,7 @@ lalapps_inspinj \
 --i-distr uniform \
 --m-distr fixMasses \
 --fixed-mass1 50 \
---fixed-mass2 50 \
+--fixed-mass2 20 \
 --coa-phase-distr uniform \
 --l-distr random \
 --waveform IMRPhenomPv2threePointFivePN \
@@ -22,9 +23,9 @@ lalapps_inspinj \
 --min-distance 600000 \
 --max-distance 1000000 \
 --gps-start-time 1126258000 \
---gps-end-time 1126258010 \
+--gps-end-time   1126258100 \
 --time-interval  0.5 \
---time-step 5.0 \
+--time-step 10.0 \
 --seed 1990 \
 --amp-order 0 \
 --output ../injections/injections.xml
@@ -37,7 +38,7 @@ echo "==========================================================================
 echo "Starting lalapps_chriplen" 
 echo "============================================================================"
 
-lalapps_chirplen --m1 50 --m2 50 --flow 10
+lalapps_chirplen --m1 50 --m2 20 --flow 10
 
 echo "============================================================================"
 echo "Starting lalinference_nest" 
@@ -45,11 +46,11 @@ echo "==========================================================================
 
 lalinference_nest \
 --L1-flow 10 \
---approx IMRPhenomPv2threePointFivePN \
+--approx SpinTaylorF2onePointFivePN \
 --psdlength 63 \
 --inj ../injections/injections.xml \
 --V1-cache LALSimAdVirgo \
---nlive 1024 \
+--nlive 24 \
 --V1-timeslide 0 \
 --comp-max 80.0 \
 --margphi  \
