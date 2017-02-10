@@ -15,7 +15,7 @@ from joblib import Parallel, delayed
 #=======================================================================
 
 options = {
-    'sideband': None,
+    'sideband': 0,
     'thetaJ'  : 0.01,
     'psiJ'    : 0.01,
     'kappa'   : 0.5,
@@ -28,8 +28,8 @@ options = {
 }
 
 
-N = 10  # number of points in thetaJ kappa space
-M = 2  # number of points in eta, chi1 space 
+N = 50  # number of points in thetaJ kappa space
+M = 2  # number of points in eta, chi1 space
 
 #=======================================================================
 # END CONTROL PANEL
@@ -53,7 +53,7 @@ def generate_GRID(**options):
 
             options['thetaJ'] = V_THETAJ[_thetaJ]
             options['kappa']  = V_KAPPA[_kappa]
-            
+
             print  "thetaJ: %1.2f \t kappa: %1.2f \t M1: %1.2f \t chi1: %1.2f" %(options['thetaJ'], options['kappa'], options['m1'], options['chi1'])
             print 60*"-"
 
@@ -66,10 +66,9 @@ def generate_GRID(**options):
     'FILE_NAME' : "fisherdet_eta_%s_chi1_%s_N_%r.npz" %('{:.2f}'.format(ETA),\
     '{:.2f}'.format(options['chi1']), N)}
 
-    if not os.path.exists("../output/datasets/%s" %save_params['OUTPUT_DIR']):
-        os.makedirs("../output/datasets/%s" %save_params['OUTPUT_DIR'])
 
-    np.savez("../output/datasets/%s/%s" %(save_params["OUTPUT_DIR"], save_params["FILE_NAME"]),
+
+    np.savez("../../output/datasets/%s/%s" %(OUTPUT_DIR, save_params["FILE_NAME"]),
         DATE         = strftime("%Y-%m-%d %H:%M:%S", localtime()),
         FDET         = DET,
         THETAJ       = V_THETAJ,
@@ -88,6 +87,11 @@ def parallel_GRID(_MASS, _CHI1, **options):
 
 V_MASS1   = np.linspace(12, 20, M)
 V_CHI1    = np.linspace(0.5, 0.9, M)
+
+OUTPUT_DIR = "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime())
+
+if not os.path.exists("../../output/datasets/%s" %OUTPUT_DIR):
+    os.makedirs("../../output/datasets/%s" %OUTPUT_DIR)
 
 Parallel(n_jobs=-2, verbose=5)(delayed(parallel_GRID)(_MASS = V_MASS1[m], \
  _CHI1 = V_CHI1[c], **options) for m in xrange(M) for c in xrange(M))
