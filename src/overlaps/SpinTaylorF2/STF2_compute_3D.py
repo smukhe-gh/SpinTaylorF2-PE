@@ -37,8 +37,8 @@ options = {
     'N'      : 50,
     'M'      : 4,
 
-    'V_MASS1_RANGE' : [2.4, 50.0],
-    'V_CHI1_RANGE'  : [0.20, 0.80],
+    'V_MASS1_RANGE' : [12.4, 20],
+    'V_CHI1_RANGE'  : [0.2, 0.998],
 
     'V_KAPPA_RANGE'  : [-0.500, 0.999],
     'V_THETAJ_RANGE' : [0.001, 3.14],
