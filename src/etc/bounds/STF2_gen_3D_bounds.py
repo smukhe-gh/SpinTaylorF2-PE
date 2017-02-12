@@ -220,4 +220,4 @@ ax2.set_ylabel(r'$\kappa_{\rm UB}$')
 ax2.set_title(r'Upper bound on $\kappa$')
 
 GS1.tight_layout(fig)
-plt.savefig('./immediate/chi_kappa_bounds.pdf')
+plt.savefig('./immediate/chi_kappa_bounds.pdf', bbox_inches='tight')
