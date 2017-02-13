@@ -15,7 +15,7 @@ from joblib import Parallel, delayed
 #=======================================================================
 
 options = {
-    'sideband': 0,
+    'sideband': None,
     'thetaJ'  : 0.01,
     'psiJ'    : 0.01,
     'kappa'   : 0.5,
@@ -28,7 +28,7 @@ options = {
 }
 
 
-N = 50  # number of points in thetaJ kappa space
+N = 10  # number of points in thetaJ kappa space
 M = 2  # number of points in eta, chi1 space
 
 #=======================================================================

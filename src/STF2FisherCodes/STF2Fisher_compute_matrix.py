@@ -21,7 +21,9 @@ f_low = 30.
 wf_options = {'approximant': 'SpinTaylorF2',
               'phase_order': 7,
               'spin_order': 6,
-              'amplitude_order': 0 }
+              'amplitude_order': 0,
+              'sideband': None}
+
 psd_choice = 'HPZD'
 psd = psd_cache.load_psd(psd_choice, f_max, delta_f)
 

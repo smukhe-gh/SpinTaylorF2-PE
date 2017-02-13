@@ -26,7 +26,7 @@ def rotateZ(lst, angle):
 
 def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f_inj):
 	# SM: Changed this according to the code in STF2_to_lal_coords.py
-	#	  for consistency. 
+	#	  for consistency.
     v0 = np.power(np.pi*MTSUN_SI*(m1+m2)*f_inj, 1./3.)
     gamma = m1*chi1*v0/m2
     denom = np.sqrt(1. + 2.*kappa*gamma + gamma*gamma)
@@ -51,7 +51,6 @@ def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f_inj):
 
 class template:
 	def __init__(self, m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, phi0, f_inj):
-		#m1, m2 = mchirpeta_to_m1m2(mchirp, eta)
 		incl, psi0, shat = to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f_inj)
 
 		self.mass1, self.mass2 = m1, m2
@@ -75,8 +74,9 @@ class waveform:
 		self._sideband = sideband
 
 	def waveform(self, m1=2., m2=1., chi1=0., kappa=1., thetaJ=0.05, psiJ=0.05, alpha0=0., phi0=0., tC=0., sideband=None):
-
 		template_params = template(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, phi0, self._finj)
+		print "Using sideband: ", self._sideband
+
 		hp, hx = get_fd_waveform(template_params,
 		                         approximant=self._approximant,
 		                         delta_f=self._deltaf,
@@ -85,7 +85,6 @@ class waveform:
 		                         spin_order=self._spinO,
 		                         sideband=self._sideband,
 		                         amplitude_order=self._ampO,**(self._kwargs))
-		#print('time elapsed=%f'%t.elapsed)
 
 		sin2Y, cos2Y = sin(2.*template_params.pol), cos(2.*template_params.pol)
 		wave = pycbc.DYN_RANGE_FAC* (hp*cos2Y+hx*sin2Y)
@@ -97,9 +96,9 @@ class waveform:
 class fisher:
 
 	def __init__(self, psd, wf_gen, f_low, f_high=None):
-		self._psd = psd
+		self._psd   = psd
 		self._wfgen = wf_gen
-		self._flow = f_low
+		self._flow  = f_low
 		self._fhigh = f_high
 
 	def _sigmasq(self, h1):
