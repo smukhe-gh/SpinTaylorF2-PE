@@ -18,6 +18,7 @@ f_low   = 30.
 psd_choice = 'HPZD'
 psd = psd_cache.load_psd(psd_choice, f_max, delta_f)
 
+wf_options={'sideband' : None}
 # Allocate the waveform generator and fisher generator
 wf         = precessing_wf.waveform(f_inj, f_max, delta_f, **wf_options)
 fisher_gen = precessing_wf.fisher(psd, wf, f_low, f_high = None) 
