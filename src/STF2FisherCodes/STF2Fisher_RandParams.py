@@ -33,7 +33,7 @@ Fisher_data = np.zeros([N,7,7])
 Fisher_det  = np.zeros(N)
 Err_flag    = np.zeros(N)
 
-wf_params   = {'phi0': 0.001, 'tC': 1., 'sideband'; None }
+wf_params   = {'phi0': 0.001, 'tC': 1., 'sideband': None }
 
 for mm in xrange(N):
   wf_params['m1']     = m1_vec[mm]
