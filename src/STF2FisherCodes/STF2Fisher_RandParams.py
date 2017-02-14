@@ -9,7 +9,7 @@ import argparse
 
 import numpy as np
 from numpy import pi
-import STF2Fisher_compute_matrix as STF2_FM
+import STF2Fisher_compute_fishermatrix as STF2_FM
 import sys
 
 parser = argparse.ArgumentParser(description='Code randomize the  parameters (m1,m2,chi1,kappa,alpha0,thetaJ,psiJ) and returns a npz file of fisher matrices')

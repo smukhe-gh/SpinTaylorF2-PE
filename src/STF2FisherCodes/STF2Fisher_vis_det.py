@@ -19,7 +19,7 @@ matplotlib.rcParams.update({
 
 
 # files = glob.glob("../../output/datasets/output-2017_02_10_11_59_30/fisher*")   #m=0
-files = glob.glob("../../output/datasets/output-2017_02_04_19_01_15/fisher*")   #m=None
+files = glob.glob("../../output/datasets/output-2017_02_13_11_02_08/fisher*")   #m=None
 # files = glob.glob("../../output/datasets/output-2017_02_10_20_20_58/fisher*")   #m=20
 
 plt.cm = plt.get_cmap('viridis')
@@ -42,31 +42,31 @@ for i, file in enumerate(files):
     # plt.close()
 
 
-# fig, axes = plt.subplots(nrows=2, ncols=2)
-# DAT = np.array(DAT)
-# DAT[np.isnan(DAT)] = np.mean(DAT[np.isfinite(DAT)])
+fig, axes = plt.subplots(nrows=2, ncols=2)
+DAT = np.array(DAT)
+DAT[np.isnan(DAT)] = np.mean(DAT[np.isfinite(DAT)])
 
-# cmax = np.amax(DAT)
-# cmin = np.amin(DAT)
+cmax = np.amax(DAT)
+cmin = np.amin(DAT)
 
-# print "det_max:", cmax
-# print "det_min:", cmin
+print "det_max:", cmax
+print "det_min:", cmin
 
-# for i, ax in enumerate(axes.flat):
-#     data = np.load(files[i])
-#     if i==0:
-#         print data["OPTIONS"]
+for i, ax in enumerate(axes.flat):
+    data = np.load(files[i])
+    if i==0:
+        print data["OPTIONS"]
 
-#     ax.set_xlabel(r"$\kappa$")
-#     ax.set_ylabel(r"$\theta_{J}$")
+    ax.set_xlabel(r"$\kappa$")
+    ax.set_ylabel(r"$\theta_{J}$")
 
-#     thetaJ = np.linspace(0.2, np.pi - 0.2, 50)
-#     kappa = np.linspace(-0.5, 0.8, 50)
-#     ax.set_title(r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
-#     im = ax.contourf(thetaJ, kappa, np.log(np.sqrt(np.abs(data['FDET']))),cmap='viridis', vmin=cmin, vmax=cmax)
-#     plt.subplots_adjust(wspace=0.3, hspace=0.3)
+    thetaJ = np.linspace(0.2, np.pi - 0.2, 10)
+    kappa = np.linspace(-0.5, 0.8, 10)
+    ax.set_title(r'$\chi_{1}=%1.2f$'%data['CHI1'] + r' $\eta=%1.2f$'%data['ETA'])
+    im = ax.contourf(thetaJ, kappa, np.log(np.sqrt(np.abs(data['FDET']))),cmap='viridis', vmin=cmin, vmax=cmax)
+    plt.subplots_adjust(wspace=0.3, hspace=0.3)
 
-# fig.suptitle(r"$m=20$")
-# cb = fig.colorbar(im, ax=axes.ravel().tolist(), spacing='proportional')
-# plt.savefig('./immediate/fisher_det_m_20_grid.pdf', bbbox_inches='tight')
-# plt.close()
+fig.suptitle(r"$m=\rm None$")
+cb = fig.colorbar(im, ax=axes.ravel().tolist(), spacing='proportional')
+plt.savefig('./immediate/fisher_det_m_None_grid.pdf', bbbox_inches='tight')
+plt.close()

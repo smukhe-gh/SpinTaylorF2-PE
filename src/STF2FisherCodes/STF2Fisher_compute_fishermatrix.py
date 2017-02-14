@@ -1,5 +1,3 @@
-#!/usr/bin/python
-import argparse
 __author__ = 'haris.k'
 
 from numpy import load, sqrt, exp, pi, cos, sin, array, arctan2, arccos
@@ -8,21 +6,14 @@ import numpy as np
 import pycbc
 from pycbc.psd import from_txt
 import STF2Fisher_psd_cache as psd_cache
-import STF2Fisher_precessing_waveform as precessing_wf
+import STF2Fisher_compute_waveform as precessing_wf
 import sys
 
-
 # load psd and scale by dynamic range factor
-f_max = 2098.
+f_max   = 2098.
 delta_f = 1/256.
-f_inj = 20.
-f_low = 30.
-
-wf_options = {'approximant': 'SpinTaylorF2',
-              'phase_order': 7,
-              'spin_order': 6,
-              'amplitude_order': 0,
-              'sideband': None}
+f_inj   = 20.
+f_low   = 30.
 
 psd_choice = 'HPZD'
 psd = psd_cache.load_psd(psd_choice, f_max, delta_f)
@@ -43,14 +34,14 @@ deriv_lst = ['chi1',
              'tC']
 
 wf_derivs = {'thetaJ': 2.e-5,
-             'psiJ': 2.e-5,
-             'kappa': 1.e-6,
+             'psiJ'  : 2.e-5,
+             'kappa' : 1.e-6,
              'alpha0': 2.e-5,
-             'chi1': 1.e-6,
-             'm1': 2.e-7,
-             'm2': 2.e-7,
-             'phi0': 2.e-5,
-             'tC': 1.e-6 }
+             'chi1'  : 1.e-6,
+             'm1'    : 2.e-7,
+             'm2'    : 2.e-7,
+             'phi0'  : 2.e-5,
+             'tC'    : 1.e-6 }
 
 def is_invertible(a):
   return a.shape[0] == a.shape[1] and np.linalg.matrix_rank(a) == a.shape[0]
@@ -64,12 +55,13 @@ def FisherMatrix(**wf_params):
   fisher_mat = fisher_gen.calc_matrix(wf_params, wf_derivs, deriv_lst)
   
   if is_invertible(fisher_mat) == False:
-    print "Encountered singular Fisher Matrix."
+    print "Encountered singular Fisher Matrix. Setting value to NaN."
     return 0, np.nan, 1
 
-  Inv_fisher = linalg.inv(fisher_mat)
-  proj_fisher= linalg.inv(Inv_fisher[:7,:7]) #Marginalized fisher over tC and phi0
-  fisher_det = linalg.det(proj_fisher)
+  Inv_fisher  = linalg.inv(fisher_mat)
+  proj_fisher = linalg.inv(Inv_fisher[:7,:7]) #Marginalized fisher over tC and phi0
+  fisher_det  = linalg.det(proj_fisher)
+
   return proj_fisher,fisher_det,err_flag
 
 

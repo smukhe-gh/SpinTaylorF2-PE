@@ -6,7 +6,7 @@
 
 import numpy as np
 import os
-import STF2Fisher_compute_matrix as CM
+import STF2Fisher_compute_fishermatrix as CM
 from time import localtime, strftime
 from joblib import Parallel, delayed
 
@@ -15,21 +15,20 @@ from joblib import Parallel, delayed
 #=======================================================================
 
 options = {
-    'sideband': None,
-    'thetaJ'  : 0.01,
-    'psiJ'    : 0.01,
-    'kappa'   : 0.5,
-    'alpha0'  : 0.001,
-    'chi1'    : 0.8,
-    'm1'      : 12.,
-    'm2'      : 1.4,
-    'phi0'    : 0.01,
-    'tC': 1.,
+    'thetaJ' : 0.01,
+    'psiJ'   : 0.01,
+    'kappa'  : 0.5,
+    'alpha0' : 0.001,
+    'chi1'   : 0.8,
+    'm1'     : 12.,
+    'm2'     : 1.4,
+    'phi0'   : 0.01,
+    'tC'     : 1.,
+    'sideband' : None,
 }
 
-
 N = 10  # number of points in thetaJ kappa space
-M = 2  # number of points in eta, chi1 space
+M = 2   # number of points in eta, chi1 space
 
 #=======================================================================
 # END CONTROL PANEL
@@ -61,14 +60,10 @@ def generate_GRID(**options):
             DET[_thetaJ][_kappa] = fisher_det
 
 
-    save_params = {
-    'OUTPUT_DIR': "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime()),
-    'FILE_NAME' : "fisherdet_eta_%s_chi1_%s_N_%r.npz" %('{:.2f}'.format(ETA),\
-    '{:.2f}'.format(options['chi1']), N)}
+    FILE_NAME = "fisherdet_eta_%s_chi1_%s_N_%r.npz" %('{:.2f}'.format(ETA),\
+    '{:.2f}'.format(options['chi1']), N)
 
-
-
-    np.savez("../../output/datasets/%s/%s" %(OUTPUT_DIR, save_params["FILE_NAME"]),
+    np.savez("../../output/datasets/%s/%s" %(OUTPUT_DIR, FILE_NAME),
         DATE         = strftime("%Y-%m-%d %H:%M:%S", localtime()),
         FDET         = DET,
         THETAJ       = V_THETAJ,
@@ -88,7 +83,7 @@ def parallel_GRID(_MASS, _CHI1, **options):
 V_MASS1   = np.linspace(12, 20, M)
 V_CHI1    = np.linspace(0.5, 0.9, M)
 
-OUTPUT_DIR = "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime())
+OUTPUT_DIR = "fisher_output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime())
 
 if not os.path.exists("../../output/datasets/%s" %OUTPUT_DIR):
     os.makedirs("../../output/datasets/%s" %OUTPUT_DIR)
