@@ -24,7 +24,7 @@ options = {
     'm2'     : 1.4,
     'phi0'   : 0.01,
     'tC'     : 1.,
-    'sideband' : None,
+    'sideband' : 0,
 }
 
 N = 10  # number of points in thetaJ kappa space

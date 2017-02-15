@@ -18,11 +18,6 @@ f_low   = 30.
 psd_choice = 'HPZD'
 psd = psd_cache.load_psd(psd_choice, f_max, delta_f)
 
-wf_options={'sideband' : None}
-# Allocate the waveform generator and fisher generator
-wf         = precessing_wf.waveform(f_inj, f_max, delta_f, **wf_options)
-fisher_gen = precessing_wf.fisher(psd, wf, f_low, f_high = None) 
-
 #Parameter List
 deriv_lst = ['chi1',
              'kappa',
@@ -48,21 +43,27 @@ def is_invertible(a):
   return a.shape[0] == a.shape[1] and np.linalg.matrix_rank(a) == a.shape[0]
 
 def FisherMatrix(**wf_params):
-  err_flag = 0
-  for key, val in fisher_gen.test_derivs(wf_params, wf_derivs, deriv_lst).items():
-     if val < 0.9999:
-       print "Warning, derivative", key, "has accuracy only", val
-       err_flag = 1
-  fisher_mat = fisher_gen.calc_matrix(wf_params, wf_derivs, deriv_lst)
-  
-  if is_invertible(fisher_mat) == False:
-    print "Encountered singular Fisher Matrix. Setting value to NaN."
-    return 0, np.nan, 1
+	
+	wf_options={'sideband' : wf_params["sideband"]}	
+	# Allocate the waveform generator and fisher generator
+	wf         = precessing_wf.waveform(f_inj, f_max, delta_f, **wf_options)
+	fisher_gen = precessing_wf.fisher(psd, wf, f_low, f_high = None) 
 
-  Inv_fisher  = linalg.inv(fisher_mat)
-  proj_fisher = linalg.inv(Inv_fisher[:7,:7]) #Marginalized fisher over tC and phi0
-  fisher_det  = linalg.det(proj_fisher)
+	err_flag = 0
+	for key, val in fisher_gen.test_derivs(wf_params, wf_derivs, deriv_lst).items():
+		 if val < 0.9999:
+		   print "Warning, derivative", key, "has accuracy only", val
+		   err_flag = 1
+	fisher_mat = fisher_gen.calc_matrix(wf_params, wf_derivs, deriv_lst)
 
-  return proj_fisher,fisher_det,err_flag
+	if is_invertible(fisher_mat) == False:
+		print "Encountered singular Fisher Matrix. Setting value to NaN."
+		return 0, np.nan, 1
+
+	Inv_fisher  = linalg.inv(fisher_mat)
+	proj_fisher = linalg.inv(Inv_fisher[:7,:7]) #Marginalized fisher over tC and phi0
+	fisher_det  = linalg.det(proj_fisher)
+
+	return proj_fisher,fisher_det,err_flag
 
 
