@@ -27,7 +27,7 @@ def rotateZ(lst, angle):
 
 def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f0):
 	""" Converts Andy and Richard's preferred coordinates to the antiquated LAL convention
-	
+
 	Returns inclination, psi0, S1hat vector"""
 	v0 = pow(pi*MTSUN_SI*(m1+m2)*f0, 1./3.)
 	gamma = m1*chi1*v0/m2
@@ -39,6 +39,7 @@ def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f0):
 	lhat = rotateZ(rotateY(lhat, thetaJ), psiJ)
 	shat = rotateZ(rotateY(shat, thetaJ), psiJ)
 
+        #Note: extra rotation missing here when compared to to_lal_coords
 	psi0 = arctan2(lhat[1], lhat[0])
 	shat = rotateZ(shat, -psi0)
 	incl = arccos(lhat[2])
@@ -78,6 +79,7 @@ class waveform:
 		                         f_lower=self._finj,
 		                         phase_order=self._phaseO,
 		                         spin_order=self._spinO,
+								 sideband=None,
 		                         amplitude_order=self._ampO,**(self._kwargs))
 		#print('time elapsed=%f'%t.elapsed)
 
