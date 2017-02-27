@@ -45,13 +45,13 @@ def COMPUTE_FISHER(string):
 	wf_params['thetaJ'] = THETAJ[N]
 
 
-	print('M1 = %1.2f \t M2 = %1.2f \t CHI1 = %1.2f \t kappa = %1.2f \t alpha0=%1.2f \t thetaJ=%1.2f \t psiJ=%1.2f' \
-			%(wf_params['m1'], wf_params['m2'], wf_params['chi1'],  wf_params['kappa'], wf_params['alpha0'], wf_params['thetaJ'], wf_params['psiJ']))
+	# print('M1 = %1.2f \t M2 = %1.2f \t CHI1 = %1.2f \t kappa = %1.2f \t alpha0=%1.2f \t thetaJ=%1.2f \t psiJ=%1.2f' \
+			# %(wf_params['m1'], wf_params['m2'], wf_params['chi1'],  wf_params['kappa'], wf_params['alpha0'], wf_params['thetaJ'], wf_params['psiJ']))
 
 	proj_fisher, DET, err_flag = STF2_FM.FisherMatrix(**wf_params)
 	return DET
 
-RESULTS = Parallel(n_jobs=-1, verbose=1, backend="threading")(
+RESULTS = Parallel(n_jobs=-1, verbose=5, backend="threading")(
              map(delayed(COMPUTE_FISHER), INDEX))
 
 RESULTS    = np.array(RESULTS)
