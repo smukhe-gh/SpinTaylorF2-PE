@@ -47,6 +47,8 @@ def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f0):
 	shat = rotateZ(shat, -psi0)
 	shat = rotateY(shat, -incl) # Additional rotation present here.
 
+	print "precessing_wf shat", shat
+	
 	return (incl, psi0, array(shat))
 
 class template:

@@ -1,6 +1,6 @@
 #==============================================================================
 # Code to test the fisher matrix computation. 
-# Expected value for fisher_det : 2.33456435772
+# MARS
 #==============================================================================
 import STF2FisherMatrix
 import numpy as np
@@ -19,11 +19,6 @@ wf_params = {
  
 fisher_matrix, fisher_det, Err_flag = STF2FisherMatrix.FisherMatrix(**wf_params)
  
-print "Sqrt[DET] : ", np.sqrt(fisher_det)
-print "Expected  : ", 2.33456435772
+print "Log10[Sqrt[DET]] : ", np.log10(np.sqrt(fisher_det))
 
-np.savez("./fisher_test_wf_params_P256.npz",
-	FISHER_MATRIX = fisher_matrix,
-	FISHER_DET    = fisher_det,
-	ERR_FLAG      = Err_flag,
-	OPTIONS       = wf_params)
+
