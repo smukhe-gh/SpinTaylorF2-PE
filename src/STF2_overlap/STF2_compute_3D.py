@@ -8,9 +8,6 @@ import numpy as np
 from STF2_overlaps import compute_overlap
 from time import localtime, strftime
 from joblib import Parallel, delayed
-import STF2_vis_overlaps as vs
-import STF2_vis_grid as vsg
-import STF2_mask as gs
 import os
 
 #=======================================================================
@@ -34,18 +31,17 @@ options = {
     'F_MAX'  : 2000.,
     'BAND'   : None,
 
-    'N'      : 50,
+    'N'      : 40,
     'M'      : 4,
 
     'V_MASS1_RANGE' : [12.4, 20],
     'V_CHI1_RANGE'  : [0.2, 0.998],
 
     'V_KAPPA_RANGE'  : [-0.500, 0.999],
-    'V_THETAJ_RANGE' : [0.001, 3.14],
+    'V_THETAJ_RANGE' : [0.001, 3.13],
 
-    'OUTPUT_DIR'     : "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime()),
-    'GENERATE_PLOTS' : 0,
-    'THRESHOLD'      : 0.3}
+    'OUTPUT_DIR'     : "output-%s" %strftime("%Y_%m_%d_%H_%M_%S", localtime())
+    }
 
 #=======================================================================
 # END CONTROL PANEL
@@ -85,10 +81,9 @@ def generate_GRID(**options):
 
 	            OVLP[_chi1][_thetaJ][_kappa][:] = compute_overlap(**options)
 
-    filename = "overlaps_eta_%s_chi1_%s_N_%r.npz" %('{:.2f}'.format(ETA),\
-    '{:.2f}'.format(options['CHI1']), options['N'])
+    filename = "overlaps_eta_%s_N_%r.npz" %('{:.2f}'.format(ETA), options['N'])
 
-    np.savez("../../../output/datasets/%s/%s" %(options['OUTPUT_DIR'], filename),
+    np.savez("../../output/datasets/%s/%s" %(options['OUTPUT_DIR'], filename),
         DATE         = strftime("%Y-%m-%d %H:%M:%S", localtime()),
         SNR_0F       = OVLP[:, :, :, 0],
         SNR_02       = OVLP[:, :, :, 1],
@@ -99,7 +94,6 @@ def generate_GRID(**options):
         OLVP_0F_M1   = OVLP[:, :, :, 6],
         OLVP_0F_M2   = OVLP[:, :, :, 7],
         OLVP_0F_P2P0 = OVLP[:, :, :, 8],
-        # OLVP_MASK    = mask(OVLP[:, :, :, 3], OVLP[:, :, :, 5], options['THRESHOLD']),
         THETAJ       = V_THETAJ,
         KAPPA        = V_KAPPA,
         CHI1         = V_CHI1,
@@ -115,14 +109,7 @@ def parallel_GRID( _MASS, **options):
 V_MASS1   = np.linspace(options['V_MASS1_RANGE'][0], \
 options['V_MASS1_RANGE'][1], options['M'])
 
-if not os.path.exists("../../../output/datasets/%s" %options['OUTPUT_DIR']):
-        os.makedirs("../../../output/datasets/%s" %options['OUTPUT_DIR'])
+if not os.path.exists("../../output/datasets/%s" %options['OUTPUT_DIR']):
+        os.makedirs("../../output/datasets/%s" %options['OUTPUT_DIR'])
 
 Parallel(n_jobs=-2, verbose=5)(delayed(parallel_GRID)(_MASS = V_MASS1[m], **options) for m in xrange(options['M']))
-
-if options['GENERATE_PLOTS'] == 1:
-    print "\n[Generating plots]"
-    vs.visualize_OVLP(options['OUTPUT_DIR'])
-    vsg.visualize_OLVP_grid(options['OUTPUT_DIR'])
-    gs.visualize_masked_OLVP_grid(options['OUTPUT_DIR'])
-
