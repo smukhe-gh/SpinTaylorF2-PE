@@ -1,5 +1,0 @@
-LAL Version:         6.14.0.1
-Git ID:              ae8c8485af218c2399bbd6a3b92b14e5ea9c91e6
-Git Tag:             None
-Build Date:          2015-06-02T10:02:46+0200
-Configure Date:      2015-06-02T09:43:16+0200
