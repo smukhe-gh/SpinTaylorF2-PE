@@ -3,7 +3,8 @@
 # The following code is used to convert kappa, thetaJ to lal_coordinates.
 # The code returns inclination angle, psi0, and spin components of M1.
 
-# Note : This version of the code works on lal-version: 6.16.1.1. It may not work in earlier versions (you may have to remove or modify line 53) since the
+# Note : This version of the code works on lal-version: 6.16.1.1. 
+# It may not work in earlier versions since the
 # coordinate coversion implemented in LALSimInspiral.c is different in the earlier versions, namely: 6.14.0.1
 # For a detailed review of the coordinates used in lal, see DCC LIGO-T1600045.
 #===============================================================================
@@ -51,10 +52,10 @@ def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f_inj):
     psi0 = np.arctan2(lhat[1], lhat[0])
     incl = np.arccos(lhat[2])
 
-    lhat = rotateZ(shat, -psi0) 
-    
+    lhat = rotateZ(shat, -psi0)
+
     shat = rotateZ(shat, -psi0)
-    shat = rotateY(shat, -incl)
+    shat = rotateY(shat, -incl) # Additional rotation [Added for LAL version 6.16]
 
     spin = chi1*np.array(shat)  # Returns spin, not Shat.
 
