@@ -14,7 +14,7 @@ from pycbc.types import TimeSeries, FrequencySeries, zeros
 from pycbc.waveform import get_fd_waveform, get_td_waveform
 from pycbc.waveform import td_approximants, fd_approximants
 from lal import MTSUN_SI
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 def m1m2_to_mchirpeta(m1, m2):
 	eta    = m1*m2/(m1+m2)/(m1+m2)
