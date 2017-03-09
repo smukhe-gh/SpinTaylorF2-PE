@@ -27,10 +27,10 @@ ZEROS = np.zeros((N, N))
 
 for index, value in np.ndenumerate(ZEROS):
 	INDEX.append("%r.%r"%(index[0], index[1]))
-	
-wf_params   = {'phi0': 0.001, 
+
+wf_params   = {'phi0': 0.001,
               'tC': 1. }
-			 
+
 def COMPUTE_FISHER(string):
 	IND = string.split(".")
 	M, N   = int(IND[0]), int(IND[1])
@@ -40,13 +40,9 @@ def COMPUTE_FISHER(string):
 	wf_params['chi1']   = 0.8
 	wf_params['alpha0'] = 0.001
 	wf_params['psiJ']   = 0.001
-	
+
 	wf_params['kappa']  = KAPPA[M]
 	wf_params['thetaJ'] = THETAJ[N]
-
-
-	# print('M1 = %1.2f \t M2 = %1.2f \t CHI1 = %1.2f \t kappa = %1.2f \t alpha0=%1.2f \t thetaJ=%1.2f \t psiJ=%1.2f' \
-			# %(wf_params['m1'], wf_params['m2'], wf_params['chi1'],  wf_params['kappa'], wf_params['alpha0'], wf_params['thetaJ'], wf_params['psiJ']))
 
 	proj_fisher, DET, err_flag = STF2_FM.FisherMatrix(**wf_params)
 	return DET
@@ -56,10 +52,10 @@ RESULTS = Parallel(n_jobs=-1, verbose=5, backend="threading")(
 
 RESULTS    = np.array(RESULTS)
 FISHER_DET = RESULTS.reshape((N,N))
-			   
+
 filename = ('./immediate/FISHER_parallel' + str(tag))
 
 np.savez(filename,
          FISHER_DET = FISHER_DET,
-		 OPTIONS    = wf_params) 
+		 OPTIONS    = wf_params)
 
