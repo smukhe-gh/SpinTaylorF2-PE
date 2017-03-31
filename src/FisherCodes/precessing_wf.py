@@ -74,7 +74,7 @@ class waveform:
 	def waveform(self, m1=2., m2=1., chi1=0., kappa=1., thetaJ=0.05, psiJ=0.05, alpha0=0., phi0=0., tC=0., sideband=None):
 
 		template_params = template(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, phi0, self._finj)
-                print "Working on SB: ", sideband
+                #print "Working on SB: ", sideband
 
                 hp, hx = get_fd_waveform(template_params,
 		                         approximant=self._approximant,
@@ -120,13 +120,13 @@ class fisher:
 		temp_SB = wf_params["sideband"]
 
 		wf_params["sideband"] = None
-		print 40*"-"
-		print "==> Temporary SB: ", wf_params["sideband"]
+		#print 40*"-"
+		#print "==> Temporary SB: ", wf_params["sideband"]
 		h0 = self._wfgen.waveform(**wf_params) 
 
 		wf_params["sideband"] = temp_SB
-		print "==> Reverted SB: ",  wf_params["sideband"]
-		print 40*"-"
+		#print "==> Reverted SB: ",  wf_params["sideband"]
+		#print 40*"-"
 		
 		norm = 1./self._sigmasq(h0)
 		derivs = {'norm': norm}

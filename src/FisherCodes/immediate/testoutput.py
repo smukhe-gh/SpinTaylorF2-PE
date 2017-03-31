@@ -4,9 +4,16 @@
 #======================================================================
 
 import numpy as np
+import argparse
 
-DATA = np.load("FISHER_SB_parallel_N2_test_SB.npz")
+parser = argparse.ArgumentParser(description='Code to compute Fisher Matrix at Random points in Parallel')
+parser.add_argument('-file','--file', help='FileTag',required=True)
+args = parser.parse_args()
+file =  args.file
+
+DATA = np.load("%s"%file)
 print "SHAPE: ", DATA["FISHER_DET"].shape
 
 for slice in DATA["FISHER_DET"]:
-	print slice
+	if not np.isnan(slice[1]):
+		print slice
