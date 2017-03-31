@@ -15,8 +15,9 @@ from numpy import pi
 import STF2FisherMatrix as STF2_FM
 from joblib import Parallel, delayed
 import sys
+import os
 
-parser = argparse.ArgumentParser(description='Code randomize the  parameters (m1,m2,chi1,kappa,alpha0,thetaJ,psiJ) and returns a npz file of fisher matrices')
+parser = argparse.ArgumentParser(description='Code to compute Fisher Matrix at Random points in Parallel')
 parser.add_argument('-tag','--tag', help='FileTag',required=True)
 parser.add_argument('-N','--N', help='N',type=int,required=True)
 
@@ -43,24 +44,40 @@ def COMPUTE_FISHER(mm):
   wf_params['thetaJ'] = thetaJ_vec[mm]
   wf_params['psiJ']   = psiJ_vec[mm]
 
-  # Compute for different sidebands here.
-  PROJ_FISHER_None, FISHER_DET_None, ERR_FLAG_NONE = STF2_FM.FisherMatrix(sideband=None, **wf_params)
-  PROJ_FISHER_M2, FISHER_DET_M2, ERR_FLAG_M2       = STF2_FM.FisherMatrix(sideband=2,**wf_params)
-  PROJ_FISHER_M0, FISHER_DET_M0, ERR_FLAG_M0       = STF2_FM.FisherMatrix(sideband=0, **wf_params)
+  # Compute for different sidebands here. 
+  # FIXME: This is a very crude hacky way to do this. Fix this.
 
-  # Also store the index somewhere to be able to reproduce the scatter plot.
+  wf_params['sideband'] = None
+  print 80*"="
+  print "Computing Fisher DET for sideband: %r \t Iteration: %r" %(wf_params['sideband'], mm)
+  print 80*"="
+  PROJ_FISHER_None, FISHER_DET_None, ERR_FLAG_NONE = STF2_FM.FisherMatrix(**wf_params)
+  
+  wf_params['sideband'] = 2
+  print 80*"="
+  print "Computing Fisher DET for sideband: %r \t Iteration: %r" %(wf_params['sideband'], mm)
+  print 80*"="
+  PROJ_FISHER_M2, FISHER_DET_M2, ERR_FLAG_M2       = STF2_FM.FisherMatrix(**wf_params)
+  
+  wf_params['sideband'] = 0
+  print 80*"="
+  print "Computing Fisher DET for sideband: %r \t Iteration: %r" %(wf_params['sideband'], mm)
+  print 80*"="
+  PROJ_FISHER_M0, FISHER_DET_M0, ERR_FLAG_M0       = STF2_FM.FisherMatrix( **wf_params)
+
   return np.array([mm, FISHER_DET_None, FISHER_DET_M2, FISHER_DET_M0])
   
-RESULTS    = Parallel(n_jobs=1, verbose=5, backend="threading")(
+INDEX      = np.arange(0, N, 1)
+RESULTS    = Parallel(n_jobs=2, verbose=5)(
              map(delayed(COMPUTE_FISHER), INDEX))
 
 RESULTS    = np.array(RESULTS)
-FISHER_DET = RESULTS.reshape((3,N))
+FISHER_DET = RESULTS.reshape((N,4))
 
 if not os.path.exists("./immediate"):
         os.makedirs("./immediate")
 
-FILENAME = ('./immediate/FISHER_SB_parallel' + str(tag))
+FILENAME = ('./immediate/FISHER_SB_parallel_N%r_%s'%(N, str(tag)))
 
 np.savez(FILENAME,
          FISHER_DET = FISHER_DET,

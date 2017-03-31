@@ -115,7 +115,19 @@ class fisher:
 		return (h2-h1)/(2.*dval)
 
 	def _calc_derivs(self, wf_params, wf_derivs, deriv_lst):
-		h0 = self._wfgen.waveform(**wf_params) # TODO: Change this norm to that of the full waveform.
+		# XXX: Changing the wf_params for h0 to compute for full Waveform
+		
+		temp_SB = wf_params["sideband"]
+
+		wf_params["sideband"] = None
+		print 40*"-"
+		print "==> Temporary SB: ", wf_params["sideband"]
+		h0 = self._wfgen.waveform(**wf_params) 
+
+		wf_params["sideband"] = temp_SB
+		print "==> Reverted SB: ",  wf_params["sideband"]
+		print 40*"-"
+		
 		norm = 1./self._sigmasq(h0)
 		derivs = {'norm': norm}
 
