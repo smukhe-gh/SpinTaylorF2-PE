@@ -19,15 +19,21 @@ wf_params = {
 	'tC'     : 1. 		# Check with Haris
 }
 
-fisher_matrix, fisher_det, Err_flag = STF2FisherMatrix.FisherMatrix(**wf_params)
+sidebands = [None, 2, 0]
 
-print "LAL source" 
+
+print "\n==> LAL source"
 os.system("which lalapps_version")
 print 60*"-"
-print "Sideband = ", wf_params["sideband"]
-print "Log10[Sqrt[DET]] : %r DET: %r" %(np.log10(np.sqrt(fisher_det)), fisher_det)
-print "Expected output" 
-print 60*"-"
-if wf_params["sideband"] == None:
-    print "Log10[Sqrt[DET]] : %r DET: %r" %(0.91234778852914733, 66.787559955346467)
-    print "Residual: ", np.log10(np.sqrt(fisher_det)) - 0.91234778852914733
+
+for _sideband in sidebands:
+	wf_params["sideband"] = _sideband
+	print "==> Sideband = ", wf_params["sideband"]
+	fisher_matrix, fisher_det, Err_flag = STF2FisherMatrix.FisherMatrix(**wf_params)
+	print "DET: %r" %(fisher_det)
+	if wf_params["sideband"] == None:
+	    print "==> Expected output"
+	    print "DET: %r" %(66.787559955346467)
+	    print "Residual: ", fisher_det - 66.787559955346467
+
+	print 60*"-"

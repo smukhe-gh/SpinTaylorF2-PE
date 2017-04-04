@@ -25,8 +25,8 @@ def rotateZ(lst, angle):
 
 def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f0):
 	"""
-	Converts Andy and Richard's preferred coordinates to the antiquated LAL convention
-	Returns inclination, psi0, S1hat vector
+	Converts Andy and Richard's preferred coordinates to the antiquated LAL
+	convention Returns inclination, psi0, S1hat vector
 	"""
 	v0 = pow(pi*MTSUN_SI*(m1+m2)*f0, 1./3.)
 	gamma = m1*chi1*v0/m2
@@ -44,7 +44,13 @@ def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f0):
 	incl = arccos(lhat[2])
 
 	shat = rotateZ(shat, -psi0)
-	#shat = rotateY(shat, -incl) # Additional rotation present here.
+
+	"""
+	XXX: This addition rotation should be switched on
+	in the LAL versions > 6.14 June 2015.
+	"""
+	if(0):
+            shat = rotateY(shat, -incl)
 
 	return (incl, psi0, array(shat))
 
@@ -74,8 +80,6 @@ class waveform:
 	def waveform(self, m1=2., m2=1., chi1=0., kappa=1., thetaJ=0.05, psiJ=0.05, alpha0=0., phi0=0., tC=0., sideband=None):
 
 		template_params = template(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, phi0, self._finj)
-                #print "Working on SB: ", sideband
-
                 hp, hx = get_fd_waveform(template_params,
 		                         approximant=self._approximant,
 		                         delta_f=self._deltaf,
@@ -115,18 +119,22 @@ class fisher:
 		return (h2-h1)/(2.*dval)
 
 	def _calc_derivs(self, wf_params, wf_derivs, deriv_lst):
-		# XXX: Changing the wf_params for h0 to compute for full Waveform
+		"""
+		XXX: FLAG to compute Sqrt(h_m|m_m) = Sqrt(h|h)
+		i.e. the normalization factor used in Fisher Det.
+		This is necessary for computing the Fisher Det for m=2
+		in region A. One needs to check how valid this approximation
+		actually is.
+		"""
 
-		temp_SB = wf_params["sideband"]
-
-		wf_params["sideband"] = None
-		#print 40*"-"
-		#print "==> Temporary SB: ", wf_params["sideband"]
-		h0 = self._wfgen.waveform(**wf_params)
-
-		wf_params["sideband"] = temp_SB
-		#print "==> Reverted SB: ",  wf_params["sideband"]
-		#print 40*"-"
+		if(0):
+			temp_SB = wf_params["sideband"]
+			wf_params["sideband"] = None
+			print "==> Computing Sqrt(h_m|h_m) as Sqrt(h|h)"
+			h0 = self._wfgen.waveform(**wf_params)
+			wf_params["sideband"] = temp_SB
+		else:
+			h0 = self._wfgen.waveform(**wf_params)
 
 		norm = 1./self._sigmasq(h0)
 		derivs = {'norm': norm}
