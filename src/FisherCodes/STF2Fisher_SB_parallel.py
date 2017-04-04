@@ -49,11 +49,7 @@ def CHECK_BOUNDARY(m1, m2, chi1, thetaJ, kappa):
   RESA = K_AC - C_AC*(thetaJ - np.pi/2)**2.0 - kappa
   RESB = K_CB - C_CB*(thetaJ - np.pi/2)**2.0 - kappa
 
-  #print "==> m1= %1.2f \t m2= %1.2f \t chi1= %1.2f \t thetaJ= %1.2f \t kappa= %1.2f \t RESA= %1.2f" %(m1, m2, chi1, thetaJ, kappa, RESA)
-
-
-  #if RESA > 0:  # REGION A
-  if RESA < 0:  # REGION B + C Using the reverse condition to check [SM: 2/3/2014].
+  if RESA > 0:  # REGION A
       return True
   else:
     return False
@@ -70,46 +66,43 @@ def COMPUTE_FISHER(mm):
   # Check if the point is inside the boundary
   FLAG = CHECK_BOUNDARY(wf_params['m1'], wf_params['m2'], wf_params['chi1'], wf_params['thetaJ'], wf_params['kappa'])
 
-  # Compute for different sidebands here. FIXME: This is a very crude hacky way to do this. Fix this.
+  # Compute for different sidebands here.
   if FLAG==True:
     wf_params['sideband'] = None
-    #print 80*"="
-    #print "Computing Fisher DET for sideband: %r \t Iteration: %r" %(wf_params['sideband'], mm)
-    # print 80*"="
     PROJ_FISHER_None, FISHER_DET_None, ERR_FLAG_NONE = STF2_FM.FisherMatrix(**wf_params)
 
     wf_params['sideband'] = 2
-    #print 80*"="
-    #print "Computing Fisher DET for sideband: %r \t Iteration: %r" %(wf_params['sideband'], mm)
-    #print 80*"="
     PROJ_FISHER_M2, FISHER_DET_M2, ERR_FLAG_M2       = STF2_FM.FisherMatrix(**wf_params)
 
     wf_params['sideband'] = 0
-    #print 80*"="
-    #print "Computing Fisher DET for sideband: %r \t Iteration: %r" %(wf_params['sideband'], mm)
-    #print 80*"="
     PROJ_FISHER_M0, FISHER_DET_M0, ERR_FLAG_M0       = STF2_FM.FisherMatrix( **wf_params)
 
-    return np.array([mm, FISHER_DET_None, FISHER_DET_M2, FISHER_DET_M0])
+    return np.array([mm, kappa_vec[mm], thetaJ_vec[mm], FISHER_DET_None, FISHER_DET_M2, FISHER_DET_M0])
 
   else:
     print "Point outside our region of interest. Setting VALS to zero."
-    return np.array([mm, np.nan, np.nan, np.nan])
+    return np.array([mm, kappa_vec[mm], thetaJ_vec[mm], np.nan, np.nan, np.nan])
 
 INDEX      = np.arange(0, N, 1)
 RESULTS    = Parallel(n_jobs=procs, verbose=5)(
              map(delayed(COMPUTE_FISHER), INDEX))
 
 RESULTS    = np.array(RESULTS)
-FISHER_DET = RESULTS.reshape((N,4))
+FISHER_DET = RESULTS.reshape((N, 6))
 
 if not os.path.exists("./immediate"):
         os.makedirs("./immediate")
 
 FILENAME = ('./immediate/FISHER_SB_parallel_N%r_%s'%(N, str(tag)))
 
-np.savez(FILENAME,
+np.savez(filename,
          FISHER_DET = FISHER_DET,
          KAPPA_VEC  = kappa_vec,
-         THETAJ_VEC = thetaJ_vec)
+         ALPHA0_VEC = alpha0_vec,
+         THETAJ_VEC = thetaJ_vec,
+         PSIJ_VEC   = psiJ_vec,
+         CHI1       = wf_params['chi1'],
+         M1         = wf_params['m1'],
+         M2         = wf_params['m2'],
+         WF_PARAMS  = wf_params)
 
