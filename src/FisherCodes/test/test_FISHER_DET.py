@@ -6,7 +6,7 @@ import STF2FisherMatrix
 import numpy as np
 
 wf_params = {
-	'sideband': 2,
+	'sideband': None,
 	'thetaJ' : 2.96015263036,
 	'psiJ'   : 3.86315672024,
 	'kappa'  : 0.0860697805227,

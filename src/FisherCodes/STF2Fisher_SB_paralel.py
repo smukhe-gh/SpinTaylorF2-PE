@@ -52,8 +52,9 @@ def CHECK_BOUNDARY(m1, m2, chi1, thetaJ, kappa):
   #print "==> m1= %1.2f \t m2= %1.2f \t chi1= %1.2f \t thetaJ= %1.2f \t kappa= %1.2f \t RESA= %1.2f" %(m1, m2, chi1, thetaJ, kappa, RESA)
 
 
-  if RESA > 0:  # CHECK this condition.
-    return True
+  #if RESA > 0:  # REGION A
+  if RESA < 0:  # REGION B + C Using the reverse condition to check [SM: 2/3/2014].
+      return True
   else:
     return False
 
