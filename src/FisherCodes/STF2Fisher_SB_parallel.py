@@ -61,10 +61,15 @@ def COMPUTE_FISHER(mm):
   wf_params['kappa']  = kappa_vec[mm]
   wf_params['alpha0'] = alpha0_vec[mm]
   wf_params['thetaJ'] = thetaJ_vec[mm]
-  wf_params['psiJ']   = psiJ_vec[mm]  #Note: Setting this to 0.01
 
-  # Check if the point is inside the boundary
-  FLAG = CHECK_BOUNDARY(wf_params['m1'], wf_params['m2'], wf_params['chi1'], wf_params['thetaJ'], wf_params['kappa'])
+
+  # Check if the point is inside the boundary. Switch to control how points are chosen
+  if(1):
+    FLAG = CHECK_BOUNDARY(wf_params['m1'], wf_params['m2'], wf_params['chi1'], wf_params['thetaJ'], wf_params['kappa'])
+    wf_params['psiJ']   = 0.001
+  else:
+    FLAG = True
+    wf_params['psiJ'] = psiJ_vec[mm]
 
   # Compute for different sidebands here.
   if FLAG==True:
@@ -95,14 +100,11 @@ if not os.path.exists("./immediate"):
 
 FILENAME = ('./immediate/FISHER_SB_parallel_N%r_%s'%(N, str(tag)))
 
-np.savez(filename,
+np.savez(FILENAME,
          FISHER_DET = FISHER_DET,
          KAPPA_VEC  = kappa_vec,
          ALPHA0_VEC = alpha0_vec,
          THETAJ_VEC = thetaJ_vec,
          PSIJ_VEC   = psiJ_vec,
-         CHI1       = wf_params['chi1'],
-         M1         = wf_params['m1'],
-         M2         = wf_params['m2'],
          WF_PARAMS  = wf_params)
 

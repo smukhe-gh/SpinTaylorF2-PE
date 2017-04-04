@@ -27,7 +27,7 @@ if(1):
 	alpha0_vec = np.random.uniform(low=0.,   high=2*pi, size=N)
 	thetaJ_vec = np.random.uniform(low=0.,   high=pi,   size=N)
 	psiJ_vec   = np.random.uniform(low=0.,   high=2*pi, size=N)
-else: 
+else:
 	# Choose points from Haris's computaion.
 	print "==> Loading points from Haris's data."
 	DATA = np.load("./immediate/fisher_data_4.npz")
@@ -51,6 +51,8 @@ def COMPUTE_FISHER(mm):
 	wf_params['thetaJ'] = thetaJ_vec[mm]
 	wf_params['psiJ']   = psiJ_vec[mm]
 
+        wf_params['sideband'] = None
+
 	proj_fisher, DET, err_flag = STF2_FM.FisherMatrix(**wf_params)
 	return DET
 
@@ -63,13 +65,12 @@ FISHER_DET = RESULTS
 
 FILENAME = ('./immediate/FISHER_SB_None_parallel_N%r_%s'%(N, str(tag)))
 
-np.savez(filename,
+np.savez(FILENAME,
          FISHER_DET = FISHER_DET,
 		 CHI1_VEC 	= chi1_vec,
 		 KAPPA_VEC	= kappa_vec,
 		 ALPHA0_VEC = alpha0_vec,
 		 THETAJ_VEC = thetaJ_vec,
 		 PSIJ_VEC	= psiJ_vec,
-		 M1         = wf_params['m1'],
-		 M2         = wf_params['m2'])
+		 WF_PARAMS  = wf_params)
 
