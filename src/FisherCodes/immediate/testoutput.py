@@ -14,6 +14,11 @@ file =  args.file
 DATA = np.load("%s"%file)
 print "SHAPE: ", DATA["FISHER_DET"].shape
 
+count = 0
+
 for slice in DATA["FISHER_DET"]:
 	if not np.isnan(slice[1]):
-		print slice
+		print slice	
+		count = count + 1
+
+print "DATA PTS: ", count
