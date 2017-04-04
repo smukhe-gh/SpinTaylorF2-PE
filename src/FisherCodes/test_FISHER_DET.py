@@ -6,7 +6,7 @@ import STF2FisherMatrix
 import numpy as np
 
 wf_params = {
-	'sideband': None,
+        'sideband' : None,
 	'thetaJ' : 2.96015263036,
 	'psiJ'   : 3.86315672024,
 	'kappa'  : 0.0860697805227,
@@ -20,6 +20,6 @@ wf_params = {
 
 fisher_matrix, fisher_det, Err_flag = STF2FisherMatrix.FisherMatrix(**wf_params)
 
-print "Log10[Sqrt[Abs[DET]]] : ", np.log10(np.sqrt(np.abs(fisher_det)))
-
-
+print "Log10[Sqrt[DET]] : ", np.log10(np.sqrt(fisher_det))
+print "Exptected Output : Log10[Sqrt[DET]] :  0.912347788529 "
+print "Residual: ", np.log10(np.sqrt(fisher_det)) - 0.912347788529

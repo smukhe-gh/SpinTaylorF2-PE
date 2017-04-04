@@ -44,7 +44,7 @@ def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f0):
 	incl = arccos(lhat[2])
 
 	shat = rotateZ(shat, -psi0)
-	shat = rotateY(shat, -incl) # Additional rotation present here.
+	#shat = rotateY(shat, -incl) # Additional rotation present here.
 
 	return (incl, psi0, array(shat))
 
@@ -116,18 +116,18 @@ class fisher:
 
 	def _calc_derivs(self, wf_params, wf_derivs, deriv_lst):
 		# XXX: Changing the wf_params for h0 to compute for full Waveform
-		
+
 		temp_SB = wf_params["sideband"]
 
 		wf_params["sideband"] = None
 		#print 40*"-"
 		#print "==> Temporary SB: ", wf_params["sideband"]
-		h0 = self._wfgen.waveform(**wf_params) 
+		h0 = self._wfgen.waveform(**wf_params)
 
 		wf_params["sideband"] = temp_SB
 		#print "==> Reverted SB: ",  wf_params["sideband"]
 		#print 40*"-"
-		
+
 		norm = 1./self._sigmasq(h0)
 		derivs = {'norm': norm}
 
