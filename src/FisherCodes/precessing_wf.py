@@ -33,17 +33,14 @@ def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f0):
 	denom = sqrt(1. + 2.*kappa*gamma + gamma*gamma)
 	sinB, cosB = gamma*sqrt(1.-kappa*kappa)/denom, (1. + kappa*gamma)/denom
 	sinA, cosA = sin(alpha0), cos(alpha0)
-
 	lhat = [sinB*cosA, sinB*sinA, cosB]
 	shat = [-sinB*cosA/gamma, -sinB*sinA/gamma, (kappa+gamma)/denom]
-
 	lhat = rotateZ(rotateY(lhat, thetaJ), psiJ)
 	shat = rotateZ(rotateY(shat, thetaJ), psiJ)
 
 	psi0 = arctan2(lhat[1], lhat[0])
-	incl = arccos(lhat[2])
-
 	shat = rotateZ(shat, -psi0)
+	incl = arccos(lhat[2])
 
 	"""
 	XXX: This addition rotation should be switched on
@@ -86,7 +83,7 @@ class waveform:
 		                         f_lower=self._finj,
 		                         phase_order=self._phaseO,
 		                         spin_order=self._spinO,
-                                         sideband=sideband,
+		                         sideband=sideband,
 		                         amplitude_order=self._ampO,**(self._kwargs))
 
 		sin2Y, cos2Y = sin(2.*template_params.pol), cos(2.*template_params.pol)
