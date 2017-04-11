@@ -14,12 +14,22 @@ $(h|h)$, where $(a|b)$ is the noise-weighted scalar product defined as
 \end{equation}
 where $S_{n}(f)$ is the one-sided noise power spectral density (PSD) of the
 detector~\cite{PSD}, and $a^{*}(f)$ is the complex conjugate of the frequency
-domain waveform amplitude $a(f)$. The SNR --- as the name suggests --- indicates
-how \textit{loud} the GW signal is compared to the background noise of the
-detector. 
+domain waveform amplitude $a(f)$. The SNR --- as the name suggests ---
+indicates how \textit{loud} the GW signal is compared to the background noise
+of the detector. However, since we are more interested in the fractional SNR
+contribution by the sidebands to the total SNR of the SpinTaylorF2 waveform,
+we computed the overlap of each of the sidebands with the full waveform. The
+overlap between two frequency domain amplitudes $a(f)$ and $b(f)$ is defined
+as (see~\cite{Lundgren2014}):
+\begin{equation} 
+O_{ab} \equiv \dfrac{(a|b)}{\sqrt{(a|a)(b|b)}},
+\end{equation} 
+where $(a|b)$ is the noise-weighted inner product defined in
+Eq.~(\ref{inner_product}). 
 
 \section{SNR study in the $(\theta_J, \kappa)$ parameter space}
-We compute the SNR of full SpinTaylorF2 waveform for binary systems
+
+We computed the SNR of full SpinTaylorF2 waveform for binary systems
 with  different $\chi$ and $\eta$ values, and investigate the variation of SNR
 with variation in $\theta_{J}$ which specifies the orientation of the plane
 binary, and $\kappa$, which indicates the the alignment of the alignment between
@@ -63,20 +73,11 @@ $\kappa$, can aslo be explained using Eq.~(\ref{amplitudes}); the argument
 however, is more involved.
 
 \section{Overlap study in the $(\theta_J, \kappa)$ parameter space}
-To evaluate the fractional SNR contribution by the sidebands to the total SNR of
-the SpinTaylorF2 waveform,  we computed the overlap of each of the sidebands
-with the full waveform. The overlap between two frequency domain amplitudes
-$a(f)$ and $b(f)$ is defined as (see~\cite{Lundgren2014}):
-
-\begin{equation} 
-O_{ab} \equiv \dfrac{(a|b)}{\sqrt{(a|a)(b|b)}},
-\end{equation} 
-where $(a|b)$ is the noise-weighted inner product defined in
-Eq.~(\ref{inner_product}). We computed the overlaps for all the sidebands $m=-2$
+We computed the overlaps for all the sidebands $m=-2$
 to $m=2$ and observed that the $m=0$ and  $m=2$ sidebands are the dominant
 contributors to the total SNR of the full SpinTaylorF2 waveform. In addition, we
 found  that the sidebands $m=2$ and $m=0$ dominate in roughly complimentary
-regions of the  $(\theta_J, \kappa)$ parameter space -- if the system is highly
+regions of the  $(\theta_J, \kappa)$ parameter space --- if the system is highly
 precessing, most of the SNR is captured by the $m=0$ sideband, whereas if the
 system is mildly precessing the $m=2$ has the dominant contribution to the SNR of
 the signal. See Fig.~(\ref{fig:P2}), which shows overlap  of the sidebands $m=2$
@@ -87,12 +88,8 @@ $\text{SNR}_{20}/\text{SNR}_{22}$ can be used as a diagnostic to quantify the
 extent of precession in the system. Most importantly, the overlap plots indicate
 that the $m=2$ and $m=0$ sidebands can be used for parameter estimation in
 appropriate regions of parameter space (i.e regions with high overlap), instead
-of the full SpinTaylorF2 waveform, which would to lead a massive reduction in
+of the full SpinTaylorF2 waveform, which has the potential to lead a massive reduction in
 computational cost associated with waveform generation. 
-
-It would be therefore very interesting to see how faithfully one can infer the parameters of the source, 
-if one uses --- instead of the full SpinTaylorF2 waveform --- a specific sideband of the waveform model, 
-which would be the main focus of our future work.
 
 \label{fig:P2}  \begin{figure}[t]
 \includegraphics[width=\textwidth]{./images/OVLP_GRID_P2.pdf}
@@ -103,48 +100,3 @@ $\eta$ values, where $\chi$ changes over the horizontal  axis of the grid and
 $\eta$ varies over the vertical axis of the grid.}  
 \centering  
 \end{figure}
-
-\section{Bounds on spin-aligment parameters}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
