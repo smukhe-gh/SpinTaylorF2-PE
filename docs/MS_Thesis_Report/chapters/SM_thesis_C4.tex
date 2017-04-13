@@ -6,16 +6,26 @@
 
 \chapter{Bounds on astrophysical parameters}
 
-Given the two harmonics that capture most of the SNR over a large, but
-complimentary regions of the parameter space, naturally leads to 3 possible
-cases---the first two, where either $m=0$ mode or $m=2$ dominates over the
-other, and the third, where both of these modes have comparable contribution
-to the total SNR. Taking into account these 3 possibilities, we divided the
-entire $(\theta_J, \kappa)$ parameter space into 3 regions (a, b and c) that
-correpond to strongly precessing, moderately precessing, or midly
-(non)-precessing systems. 
+In the previous chapter, we observed that the total SNR of the SpinTaylorF2
+waveform is primarily divided between the $m=0$ and $m=2$ sidebands for a
+large fraction of the spin-precession parameter space. Further, these two
+sidebands dominate in almost complimentary regions of $(\theta_J, \kappa)$
+parameter space: the $m=0$ mode appears to dominate for mildly precessing
+systems, whereas $m=0$ mode dominates over the $m=2$ mode for strongly
+precessing, edge-on binaries.
 
-\begin{figure}[!bp]
+The fact that two sidebands capture most of the SNR over a large, but
+complimentary regions of the parameter space, naturally leads to 3 possible
+scnearios---the first two, where either $m=0$ or $m=2$ mode dominates over the
+other, and the third, where both of these modes have comparable contribution
+to the total SNR. In the sections below, we identify three regions $(\theta_J,
+\kappa)$ space associated with strongly precessing, moderately precessing, and
+midly (non)-precessing systems, depending on the relative contribution of the
+two sidebands to the full waveform.
+
+\section{Partioning the spin-precession parameter space}
+
+\begin{figure}[!tp]
 \centering
 \includegraphics[width=0.8\linewidth]{images/OVLP_cut.pdf}
 \caption{\small{Comparison of the overlaps, ${\cal{O}}_2$ and ${\cal{O}}_0$
@@ -26,39 +36,80 @@ where ${\cal{O}}_0 - {\cal{O}}_2 > 0.3$, region~(b) where ${\cal{O}}_2 -
 \label{FIG:OVLP_cut_regions}
 \end{figure}
 
-Fig.~\ref{FIG:OVLP_cut_regions} shows these three regions
-in the $(\theta_J, \kappa)$ space for a specific NSBH system with $m_{1}=14
-M_\odot$, $\chi_1=0.8$, $\psi_J=0.001$ and $\alpha_0 =0.001$. The left panel
-and right panel show the contours of ${\cal O}_0$ and ${\cal O}_2$ in
-region~(c), respectively. The boundaries of region~(c) correspond
-approximately to two parabolas symmetric around $\theta_J=\pi/2$, viz.
+We identified three regions in the $(\theta_J, \kappa)$ parameter space:
+region~(a) where ${\cal{O}}_0$ is dominant $({\cal{O}}_0 - {\cal{O}}_2 >
+0.3)$, region~(b) where ${\cal{O}}_2$ is dominant $({\cal{O}}_2 - {\cal{O}}_0
+> 0.3)$, and finally, region~(c) where ${\cal O}_2$ and ${\cal O}_0$ are
+comparable $(|{\cal{O}}_2-{\cal{O}}_0|< 0.3)$ to each other. We also enforced
+the condition that both ${\cal O}_2$ and ${\cal O}_0$ are greater than or
+equal to $0.4$ in all regions, in order to ensure both the sidebands are above
+above the detectable threshold. The results is shown in
+Fig.~\ref{FIG:OVLP_cut_regions}, which shows the three regions in the
+$(\theta_J,\kappa)$ space for an NSBH system with BH mass $m_{1}=14 M_\odot$,
+$\chi_1=0.8$, $\psi_J=0.001$ and $\alpha_0 =0.001$.
+
+
+We approximated the boundaries of region~(c) by using two parabolas symmetric
+around $\theta_J=\pi/2$, as functions of $\eta$ and $\chi_1$:
 \begin{equation}
-\kappa = \kappa_{0} - C(\theta_J-\pi/2)^2, 
+\kappa(\eta, \chi_1) = \kappa_{0}(\eta, \chi_1) - C(\eta, \chi_1)(\theta_J-\pi/2)^2, 
 \label{EQ:boundary_region}
 \end{equation}
-where $\kappa_0$ and $C$ depend on $\eta$ and $\chi_1$. As the BH mass or spin
-increases, the inner boundary that separates region~(b) and region~(c) shifts
-$m=2$ mode increases.
+where $\kappa_{0}(\eta, \chi_1)$ and $C(\eta, \chi_1)$ is given by
+\begin{align}
+\begin{split}
+\kappa_{0a}(\eta, \chi_{1})~&\approx  (145.83 \chi_{1} - 155.92)\, \eta^2 -
+(1.10 \chi_{1} + 0.16)\, \eta+ 0.08 \, \chi_{1}+0.50,\\
+\kappa_{0b}(\eta, \chi_{1})~&\approx (48.98\chi_{1} - 57.13) \,\eta^2 +
+(1.96{\chi_{1}}-2.39)\, \eta - 0.09 \, \chi_{1} +0.82,
+\label{EQ:kappa_boundary}
+\end{split}
+\end{align}
+\vspace{-10mm}
+\begin{align}
+\begin{split}
+C_{a}(\eta, \chi_{1})~&\approx  (-6.23{\chi_{1}} + 10.47)\,
+\eta +  0.01\, \chi_{1}+ 0.72,\\
+C_{b}(\eta, \chi_{1})~&\approx  (-8.37{\chi_{1}} + 10.62)\, \eta +  0.10\,
+\chi_{1}+ 0.30.
+\label{EQ:phi_boundary}
+\end{split}
+\end{align}
+where the subscript `$a$' and `$b$' represent the boundaries of region~(a) and
+region~(b) with region~(c), respectively. We obtained the expressions for
+$\kappa_{0}(\eta, \chi_1)$ and $C(\eta, \chi_1)$ by fitting a quadratic
+function to the points on the boundaries of these regions over a range of
+values for $\eta$ and $\chi_1$ ($0.08 < \eta < 0.24$ and $0 < \chi_1 < 1$).
+As the extent of precession increases (i.e., for higher values of BH
+mass/spin), the inner boundary that separates region~(b) and region~(c) shifts
+to higher values of $\kappa$, since the contribution of the $m=0$ mode
+increases. These fits, therefore, can used to probe the extent of precession
+in the system, depending on where the system lies in the $(\theta_J,
+\kappa)$ space.
 
 \section{Upper bound on $\kappa$}
-In the case where the $m=0$ sideband has the largest SNR, one can thus assert that
-the system lies in region~(a) in Fig.~\ref{FIG:OVLP_cut_regions}, which
-implies that the system is strongly precessing. In such a scenario, using
-numerical fits for the boundaries of these regions, one can put an upper bound
-on the value of $\kappa$. For example, Fig.~\ref{FIG:kappa_max_bounds} shows
-the allowed values for $\kappa$ when $m_1 = 14 M_{\odot}$ or $\eta=0.08$.
-Note that even for $\chi_1=1$ (highest possible BH spin), there exists an
-upper bound on $\kappa
-\leq 0.64$.
+
+Figure ~\ref{FIG:OVLP_cut_regions} immediately suggests that there exists an
+upper bound on the spin-alignment parameter $\kappa$ for strongly and
+moderately precessing systems, i.e., systems in in region~(a) and region~(c).
+In the case where the $m=0$ sideband has a significantly larger SNR than
+$m=2$, we can assert that the system lies in region~(a) in
+Fig.~\ref{FIG:OVLP_cut_regions}, which implies that the system is strongly
+precessing. We can then use
+Eqs.~(\ref{EQ:boundary_region})--(\ref{EQ:phi_boundary}), given we are able to
+estimate $\eta$ using the total and the chirp mass of the binary, to bound the
+spin orientation $\kappa$, depending on the BH spin. As an example, in
+Fig.~\ref{FIG:kappa_max_bounds} we show the allowed values for $\kappa$ when
+$m_1 = 14 M_{\odot}$ or $\eta=0.08$.  Note that even for $\chi_1=1$ (highest
+possible BH spin), there exists an upper bound on $\kappa$ for strongly
+precessing systems $(\kappa\leq 0.42)$, as well as for systems that show moderate precession $(\kappa
+\leq 0.64)$.
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.65\linewidth]{images/kappa_max_bound.pdf} 
+\includegraphics[width=0.6\linewidth]{images/kappa_max_bound.pdf} 
 \caption{\small{The dashed line corresponds to the maximum value of $\kappa$ for
     a strongly precessing system, i.e, region~(a) and moderately precessing
-    systems that lie in region~(b) in Fig.~\ref{FIG:OVLP_cut_regions}, for
-    $m_1 = 14 M_{\odot}$ or $\eta=0.08$. The shaded region represents the
-    allowed values of $\kappa$ for a given $\chi_1$. For $\chi_1=1$, $\kappa
-    \lesssim 0.64$.}}
+    systems that lie in region~(b) in Fig.~\ref{FIG:OVLP_cut_regions}.}}
 \label{FIG:kappa_max_bounds}
 \end{figure}
