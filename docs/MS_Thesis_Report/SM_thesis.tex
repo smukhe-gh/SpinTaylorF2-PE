@@ -24,6 +24,8 @@
 \usepackage{subcaption}
 \usepackage{xcolor}
 \usepackage{afterpage}
+% \usepackage{minted}
+\usepackage[parfill]{parskip}
 
 %--------------------------------------
 % setup packages
@@ -62,116 +64,131 @@
 
 %\pagenumbering{arabic} \setcounter{page}{1}
 
-%=========================================================================
-% TITLE PAGE
-%=========================================================================
-\begin{titlepage}
-\enlargethispage{10mm}
-\begin{center}
-\vspace*{10mm}
+% %=========================================================================
+% % TITLE PAGE
+% %=========================================================================
+% \begin{titlepage}
+% \enlargethispage{10mm}
+% \begin{center}
+% \vspace*{10mm}
 
-\textbf{\textsc{\LARGE Investigating SpinTaylorF2: A Single Spin Precessing Frequency Domain Waveform}}\\
+% \textbf{\textsc{\LARGE Investigating SpinTaylorF2: A Single Spin Precessing
+% Frequency Domain Waveform}}\\
 
-\vspace*{10mm}
+% \vspace*{10mm}
 
-A thesis submitted in partial fulfillment \\ of the requirements for the degree of \\
+% A thesis submitted in partial fulfillment \\ of the requirements for the
+% degree of \\
 
-\vspace{5mm}
+% \vspace{5mm}
 
-\textbf{\textsc{\Large Master of Science}}\\
-in \\
-{\large \bf Physics} \\
-\vspace{7mm}
-{{by}} \\ \vspace{2mm}
-{\textbf{\large Soham Mukherjee}}\\
-{\textbf{IMS12109}}\\
+% \textbf{\textsc{\Large Master of Science}}\\
+% in \\
+% {\large \bf Physics} \\
+% \vspace{7mm}
+% {{by}} \\ \vspace{2mm}
+% {\textbf{\large Soham Mukherjee}}\\
+% {\textbf{IMS12109}}\\
 
-\vspace*{6.5mm}
+% \vspace*{6.5mm}
 
-\begin{figure}[h]
-  \begin{center}
-  \includegraphics[scale=0.15, angle=-90]{./images/IISER_Logo.pdf}
-  \end{center}
-\end{figure}
-\vspace*{3.5mm}
-{to} \\ 
-\vspace{2mm}
-{\bf\large School of Physics} \\
-{\bf\large \mbox{Indian Institute of Science Education and Research}}\\
-{\bf\large Thiruvananthapuram, 695016, India}\\ 
-\vspace{2mm}
-\today
-\end{center}
-\end{titlepage}
-\clearpage
+% \begin{figure}[h]
+%   \begin{center}
+%   \includegraphics[scale=0.15, angle=-90]{images/IISER_Logo.pdf}
+%   \end{center}
+% \end{figure}
+% \vspace*{3.5mm}
+% {to} \\ 
+% \vspace{2mm}
+% {\bf\large School of Physics} \\
+% {\bf\large \mbox{Indian Institute of Science Education and Research}}\\
+% {\bf\large Thiruvananthapuram, 695016, India}\\ 
+% \vspace{2mm}
+% \today
+% \end{center}
+% \end{titlepage}
+% \clearpage
 
-% =========================================================================
-% CERTIFICATE
-% =========================================================================
-\pagenumbering{arabic}\setcounter{page}{2}
-\begin{center}
-{\textbf{DECLARATION}}
-\end{center}
-%\thispagestyle{empty}
+% % =========================================================================
+% % CERTIFICATE
+% % =========================================================================
+% \pagenumbering{roman}\setcounter{page}{2}
+% \begin{center}
+% {\textbf{DECLARATION}}
+% \end{center}
+% %\thispagestyle{empty}
 
-\noindent
-This is to certify that the work contained in this project report entitled
-\textbf{``Investigating SpinTaylorF2: A Single Spin Precessing Frequency
-Domain Waveform''}  submitted by \textbf{Soham Mukherjee} (\textbf{Roll No:
-IMS12109}) to the Indian Institute of Science Education and Research,
-Thiruvananthapuram, in partial fulfillment of the requirements for the degree
-of {\bf Master of Science in Physics}, has been carried out by
-him under my supervision and that it has not been submitted elsewhere for the
-award of any degree.
+% \noindent
+% This is to certify that the work contained in this project report entitled
+% \textbf{``Investigating SpinTaylorF2: A Single Spin Precessing Frequency
+% Domain Waveform''}  submitted by \textbf{Soham Mukherjee} (\textbf{Roll No:
+% IMS12109}) to the Indian Institute of Science Education and Research,
+% Thiruvananthapuram, in partial fulfillment of the requirements for the degree
+% of {\bf Master of Science in Physics}, has been carried out by
+% him under my supervision and that it has not been submitted elsewhere for the
+% award of any degree.
 
-\vspace{4cm}
+% \vspace{4cm}
 
-\noindent Thiruvananthapuram, 695016 \hfill Dr. Archana Pai\\
-\noindent April 2013 \hfill (Project Supervisor)
+% \noindent Thiruvananthapuram, 695016 \hfill Dr. Archana Pai\\
+% \noindent April 2013 \hfill (Project Supervisor)
 
-\clearpage
+% \clearpage
 
-% =========================================================================
-% ACKNOWLEDGEMENTS
-% =========================================================================
-\begin{center}
-\textbf{ACKNOWLEDGEMENTS}\\
-\end{center}
+% % =========================================================================
+% % ACKNOWLEDGEMENTS
+% % =========================================================================
+% \begin{center}
+% \textbf{ACKNOWLEDGEMENTS}\\
+% \end{center}
 
-I would like to express my sincere gratitude to my guide Dr.~Archana Pai,
-for suggesting this project, and guiding me at every step of the journey, 
-often with great patience and perseverance owing to my own stupidity. 
-I'm also thankful to K. Atmjeet and K. Haris, for the several discussions I've 
-had and problems I've bored them with.
+% Over the past year several people have provided me with invaluable help and
+% support. They have made my time at IISER Thiruvananthapuram a bearable and
+% productive experience.
 
+% First and foremost, I would like to thank Archana Pai for agreeing to be my
+% supervisor, and for suggesting and guiding me through every step of this
+% project. Her support and encouragement has been instrumental towards my growth
+% as a researcher, and my decision to continue in the field of GW astronomy. I'm
+% also thankful to my colleagues K. Haris and Kumar Atmjeet, for the many useful
+% discussions and brain-storming sessions we have had over the past year. I have
+% also been extremely fortunate to meet Nathan Johnson-McDaniel at ICTS. Over
+% the past year Nathan has been much more than a collaborator; he has been a
+% mentor and a constant source of inspiration.
 
-\clearpage
+% Finally, I would like to expression my sincere gratitude to my friends
+% Gayathri, Vinaya, and especially Navya, without whom, this journey would
+% surely have been lonelier than usual. Navya is probably the reason why I even
+% decided to jump into astrophysics, and I'd forever be thankful to her for
+% sharing with me her enthusiasm for the subject.
 
-% =========================================================================
-% ABSTRACT
-% =========================================================================
-\begin{center}
-\textbf{ABSTRACT}\\
-\end{center}
+% \clearpage
 
-We study the SpinTaylorF2 waveform---a closed-form, frequency domain waveform
-model that is ideally suited for describing the gravitational radiation from
-the inspiral phase of a single spin compact binary system, such as a neutron
-star--black hole binary. The quadrupole $(2,2)$ mode of the waveform model can
-be expressed as a sum of five spin-harmonics, where each spin harmonic
-corresponds to a modulation of a leading order function. We investigate the
-feasibility of using the sidebands of SpinTaylorF2 for inferring astrophysical
-parameters from gravitational waves emitted by a precessing neutron 
-star--black hole binary by computing the relative contribution of the individual
-spin-harmonics to the full waveform, and further, use this information to put
-bounds on the spin-alignment parameters of the astrophysical source.
+% % =========================================================================
+% % ABSTRACT
+% % =========================================================================
+% \begin{center}
+% \textbf{ABSTRACT}\\
+% \end{center}
 
-\clearpage
-\tableofcontents
-\listoffigures
-\newpage
-\pagenumbering{arabic}
-\setcounter{page}{1}
+% We study the SpinTaylorF2 waveform---a closed-form, frequency domain waveform
+% model that is ideally suited for describing the gravitational radiation from
+% the inspiral phase of a single spin compact binary system, such as a neutron
+% star--black hole binary. The quadrupole $(2,2)$ mode of the waveform model can
+% be expressed as a sum of five spin-harmonics, where each spin harmonic
+% corresponds to a modulation of a leading order function. We investigate the
+% feasibility of using the sidebands of SpinTaylorF2 for inferring astrophysical
+% parameters from gravitational waves emitted by a precessing neutron 
+% star--black hole binary by computing the relative contribution of the individual
+% spin-harmonics to the full waveform, and further, use this information to put
+% bounds on the spin-alignment parameters of the astrophysical source.
+
+% \clearpage
+% \tableofcontents
+% \listoffigures
+% \newpage
+% \pagenumbering{arabic}
+% \setcounter{page}{1}
 
 %=========================================================================
 % CHAPTERS
@@ -179,9 +196,10 @@ bounds on the spin-alignment parameters of the astrophysical source.
 
 \input chapters/SM_thesis_C1.tex
 \input chapters/SM_thesis_C2.tex
-\input chapters/SM_thesis_C3.tex
-\input chapters/SM_thesis_C4.tex
-\input chapters/SM_thesis_C5.tex
+% \input chapters/SM_thesis_C3.tex
+% \input chapters/SM_thesis_C4.tex
+% \input chapters/SM_thesis_C5.tex
+% \input chapters/SM_thesis_C6.tex
 
 %=========================================================================
 % CHAPTERS
