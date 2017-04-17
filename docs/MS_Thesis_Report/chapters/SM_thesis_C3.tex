@@ -6,109 +6,158 @@
 
 \chapter{SNR and Overlap Study of SpinTaylorF2}
 
-The signal-to-noise ratio (SNR) of a frequency domain waveform $h(f)$ is given by 
-$(h|h)$, where $(a|b)$ is the noise-weighted scalar product defined as 
+In this chapter we investigate how the signal-to-noise ratio of the full
+SpinTaylorF2 waveform for a generic NSBH binary varies over extrinsic $(\theta_J,
+\psi_J)$ and $(\chi_1, \kappa, \eta)$ intrinsic parameters. We find that precession
+as well as the orientation of the binary in the sky have an observable imprint 
+on the SNR variation of the full waveform across the spin-precession $(\theta_J,
+\kappa)$ parameter space. We then investigate how the total SNR is
+distributed among the individual sidebands by computing the overlap of the
+sideband with the full waveform, in the exact same regions of the 
+spin-precession parameter space.
+
+\section{Definitions of SNR and overlap}
+
+The characteristic signal-to-noise ratio (SNR) of a frequency domain waveform
+$h(f)$ is given by $(h|h)$, where $(a|b)$ is the noise-weighted scalar product
+defined as
 \label{inner_product}  
 \begin{equation} (a|b) = 4 \text{Re} \left[
-\int_{f_{1}}^{f_{2}}  \dfrac{a^{*}(f)b(f)}{S_{n}(f)} df\right] 
+\int_{f_{1}}^{f_{2}}  \dfrac{a^{*}(f)b(f)}{S_{n}(f)} df\right].
 \end{equation}
-where $S_{n}(f)$ is the one-sided noise power spectral density (PSD) of the
-detector~\cite{PSD}, and $a^{*}(f)$ is the complex conjugate of the frequency
-domain waveform amplitude $a(f)$. The SNR --- as the name suggests ---
-indicates how \textit{loud} the GW signal is compared to the background noise
-of the detector. However, since we are more interested in the fractional SNR
-contribution by the sidebands to the total SNR of the SpinTaylorF2 waveform,
-we computed the overlap of each of the sidebands with the full waveform. The
-overlap between two frequency domain amplitudes $a(f)$ and $b(f)$ is defined
-as (see~\cite{Lundgren2014}):
+In the above equation $S_{n}(f)$ is the one-sided noise power spectral density
+(PSD) of the detector~\cite{PSD}, and $a^{*}(f)$ is the complex conjugate of
+the frequency domain waveform amplitude $a(f)$. The SNR---as the name
+suggests---indicates how \textit{loud} the GW signal is compared to the
+background noise of the detector. 
+
+However, given the mathematical construction of the SpinTaylorF2 waveform, we
+are more interested in the fractional SNR contribution by the sidebands to the
+total SNR of the SpinTaylorF2 waveform. To do this, we compute the overlap of
+each of the sidebands with the full waveform. The overlap between two
+frequency domain amplitudes $a(f)$ and $b(f)$ is defined as
+(see~\cite{Lundgren2014}):
 \begin{equation} 
 O_{ab} \equiv \dfrac{(a|b)}{\sqrt{(a|a)(b|b)}},
 \end{equation} 
 where $(a|b)$ is the noise-weighted inner product defined in
-Eq.~(\ref{inner_product}). 
+Eq.~(\ref{inner_product}). For our analyses, we define the overlap of the
+$m^{\rm th}$ sideband with the full waveform as:
+\begin{equation} 
+O_{m} \equiv \dfrac{(h_m|h)}{\sqrt{(h_m|h_m)(h|h)}},
+\end{equation} 
+where $h_m$ corresponds to the $m^{\rm th}$ sideband, and $h$ represents the
+full SpinTaylorF2 waveform. Note that the overlap function is normalized, and
+is equal to zero if the waveforms are `orthogonal' to each other, and equal to
+one, if they are exactly equal.
 
 \section{SNR study in the $(\theta_J, \kappa)$ parameter space}
 
-We computed the SNR of full SpinTaylorF2 waveform for binary systems
-with  different $\chi$ and $\eta$ values, and investigate the variation of SNR
-with variation in $\theta_{J}$ which specifies the orientation of the plane
-binary, and $\kappa$, which indicates the the alignment of the alignment between
-$\mathbf{L}$ and $\mathbf{S}$. We fix the neutron star mass $(m_{1})$ to $1.4$,
-since the observations of neutron masses in BNS systems have reported a narrow
-mass distribution bounded by $1.0$ to $1.4$ solar masses~\cite{Lorimer}.
-Fig.~(\ref{fig:SNR}) shows the variation SNR of the SpinTaylorF2 waveform   over
-$(\theta_J, \kappa)$ the parameter space, for different $\chi$ and $\eta$
-values. Since we have fixed the mass of the neutron star to $1.4 M_{\odot}$, the
-lower values of $\eta$ correspond to higher black hole masses.
+We computed the variation of SNR of full SpinTaylorF2 waveform in the
+$(\theta_J, \kappa)$  space, for NSBH binaries with different $\chi_1$ and
+$\eta$ values. We fixed the neutron star mass $(m_{2})$ to $1.4\,M_{\odot}$,
+in agreement with the NS mass distribution in observed BNS systems reported
+by~\cite{Lorimer}. Fig.~(\ref{fig:SNR}) shows the variation SNR of the
+SpinTaylorF2 waveform over $(\theta_J, \kappa)$ the parameter space, for
+different $\chi$ and $\eta$ values. We considered three BH masses
+$m_1=2M_\odot, ~8M_\odot$ and $14 M_\odot$ (or equivalently $\eta = 0.24,
+0.13$ and $0.08$) and two spin magnitudes  $\chi_1 = 0.5$ and $0.8$, and
+constructed a $(2\times 3)$ panel, where the BH mass increases along each
+column (top to bottom), and BH spin increases along each row (left to right).
+For all the simulations, the source distance was fixed at $D=400$~Mpc.
 
-\label{fig:SNR} 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{./images/SNR_GRID_0F.pdf}
 \caption{Variation of SNR in the $(\theta_J, \kappa)$ parameter space for 
 different $\chi$ and $\eta$ values, where $\chi$ changes over the horizontal 
 axis of the grid and $\eta$ varies over the vertical axis of the grid.}
 \centering 
+\label{fig:SNR} 
 \end{figure}
 
-We see that the maximum SNR increases with the increase in black hole mass
-(i.e. lower $\eta$). Further, we observe that the SNR is the highest in the
-region where  $\theta_{J} = 0$ or $\pi$ which corresponds to the situation where
-the the plane of  the binary is directly overhead or underneath us, and for
-$\kappa = 1$ which means that  $\mathbf{S}$ is along the direction of
-$\mathbf{L}$. Both these features can be explained by simply comparing the
-results with expression for the frequency independent part of waveform amplitude 
-in the presence of precession (see Eq.~(A4) in~\cite{Apostolatos1994}):
+We observe that the maximum SNR increases with the increasing BH mass (i.e.
+lower $\eta$). Further, for non-precessing systems (top right panel, with
+$m=14 M_\odot$ and $\chi_1=0.2$), the SNR is the highest in the face-on and
+face-off regions $(\theta_{J} = 0/\pi)$. This represents a typical SNR map for
+non-precessing systems, where the observed SNR of the signal only depends on
+orientation of the binary in the sky. However, for a strongly precessing
+system, i.e, with high mass asymmetry and high BH spin (bottom row, extreme
+right panel), the SNR pattern shows variation over the spin-alignment
+parameter $\kappa$. For $\kappa \sim 1$, the system is essentially a non-
+precessing system and shows similar features (SNR is maximum in the face-on
+and face-off regions) as discussed before. However, for $\kappa < 0$, the
+system is strongly precessing and for these values of $\kappa$ the SNR pattern
+is reversed, and the SNR is maximum near the edge-on regions.
+
+All of these features can be explained by comparing the results with
+expression for the frequency independent part of waveform amplitude in the
+presence of precession; see Eq.~(A4) in~\cite{Apostolatos1994}:
 \label{amplitudes}
 \begin{equation}
 H_{+} = \frac{1}{2}\frac{4 m_{1}m_{2}}{rD} \left[1 + (\hat{\mathbf{L}}\cdot\hat{\mathbf{N}})^{2}\right], 
 H_{\times} = \frac{4 m_{1}m_{2}}{rD}\left[\hat{\mathbf{L}}\cdot\hat{\mathbf{N}}\right].
 \end{equation}
-The above equation suggests that the SNR --- which is directly proportional to
-the square of the  amplitude of the waveform -- increases with increasing mass,
-and also the fact the amplitudes  are maximum when $\mathbf{L}$ is along the
-line of sight $\hat{\mathbf{L}}$. The second condition is precisely what the
-combination of $(\theta_J, \kappa)$ satisfies, in regions where the SNR peaks.
-The fact that the SNR also peaks near $\theta_J = \pi/2$ for lower values of
-$\kappa$, can aslo be explained using Eq.~(\ref{amplitudes}); the argument
-however, is more involved.
+The above equation suggests that the SNR---which is directly proportional to
+the square of the  amplitude of the waveform---increases with increasing mass,
+and that the amplitudes are maximum when $\mathbf{L}$ is along the line of
+sight $\hat{\mathbf{N}}$. The second condition is precisely what the
+combination of $(\theta_J, \kappa)$ satisfies, in regions where
+the SNR peaks in the spin-precession parameter space.
+
+Thus, Fig.~\ref{fig:SNR} clearly demonstrates that precession leads to
+observable consequences for asymmetric, highly-spinning systems. For $\kappa$
+close to 1 (aligned spin), the emission pattern is similar to non-precessing
+systems (maximum SNR obtained for face-on or face-off cases). However, for
+negative $\kappa$ values with anti-aligned spin (systems which show high
+precession- induced modulations), the emission pattern is reversed (maximum
+SNR for edge-on systems). In the intermediate region, however, the SNR results show an
+interplay between the parameters $\kappa$ and $\theta_J$.
 
 \section{Overlap study in the $(\theta_J, \kappa)$ parameter space}
-We computed the overlaps for all the sidebands $m=-2$
-to $m=2$ and observed that the $m=0$ and  $m=2$ sidebands are the dominant
-contributors to the total SNR of the full SpinTaylorF2 waveform. In addition, we
-found  that the sidebands $m=2$ and $m=0$ dominate in roughly complimentary
-regions of the  $(\theta_J, \kappa)$ parameter space --- if the system is highly
-precessing, most of the SNR is captured by the $m=0$ sideband, whereas if the
-system is mildly precessing the $m=2$ has the dominant contribution to the SNR of
-the signal. See Fig.~(\ref{fig:P2}), which shows overlap  of the sidebands $m=2$
-and $m=0$ with the full SpinTaylorF2 waveform: regions of high overlap
-correspond to regions where the fractional contribution  to the total SNR would
-be high. Therefore, the ratio of the SNR's of the two sidebands i.e.
-$\text{SNR}_{20}/\text{SNR}_{22}$ can be used as a diagnostic to quantify the
-extent of precession in the system. Most importantly, the overlap plots indicate
-that the $m=2$ and $m=0$ sidebands can be used for parameter estimation in
-appropriate regions of parameter space (i.e regions with high overlap), instead
-of the full SpinTaylorF2 waveform, which has the potential to lead a massive reduction in
-computational cost associated with waveform generation. 
+We further computed the overlaps of all the sidebands $m=-2$ to $m=2$ with the
+full SpinTaylorF2 waveform. We observed that the $m=0$ and  $m=2$ sidebands
+are the dominant contributors to the total SNR of the full waveform over a
+large region of the parameter space, except for a small region
+$(\theta_J=0/\pi, \kappa \sim -0.5)$, where the $m=1$ seems to dominate.
+However, since the total SNR in these regions is very low, we chose to study
+the overlap variation of only the $m=0$ and  $m=2$ modes.
 
-\label{fig:P2}  \begin{figure}[t]
+\label{fig:P2}  
+\begin{figure}[!htp]
 \includegraphics[width=\textwidth]{./images/OVLP_GRID_P2.pdf}
 \includegraphics[width=\textwidth]{./images/OVLP_GRID_P0.pdf} \caption{Variation
 of overlap of $m=2$ and $m=0$ sideband with the SpinTaylorF2
 waveform in the $(\theta_J, \kappa)$ parameter space for  different $\chi$ and
-$\eta$ values, where $\chi$ changes over the horizontal  axis of the grid and
+$\eta$ values, where $\chi$ changes over the horizontal axis of the grid and
 $\eta$ varies over the vertical axis of the grid.}  
 \centering  
 \end{figure}
 
-In the previous chapter, we observed that the total SNR of the SpinTaylorF2
-waveform is primarily divided between the $m=0$ and $m=2$ sidebands for a
-large fraction of the spin-precession parameter space. Further, these two
-sidebands dominate in almost complimentary regions of $(\theta_J, \kappa)$
-parameter space: the $m=0$ mode appears to dominate (${\cal O}_2 \gg {\cal
-O}_0$) for the binaries with near-equal mass, or asymmetric mass binaries with
-low- spin, both of which correposnd to mildly (non)-precessing systems. The
-$m=0$ mode gains overlap near the edge-on region ($\theta_J=\pi/2$) as the
-spin or mass asymmetry increases. This mode dominates over the $m=2$ mode for
-strongly precessing binaries, i.e., with asymmetric masses (low $\eta$) and
-high, misaligned BH spin.
+Similar to the SNR study, we investigated the variation of overlap the
+$(\theta_J, \kappa)$ space using the exact same mass and spin parameters used
+for studying the SNR variation. In Fig.~\ref{fig:P2}, we summarize our results
+in two $(2 \times 3)$ panels, for $m=2$ and $m=0$ sidebands, respectively. We
+must point out that regions of high overlap correspond to regions where there
+is high fractional contribution of the sideband to the total SNR.
+
+We immediately observe that the two maps of ${\cal{O}}_2$ and ${\cal{O}}_0$
+exhibit strongly complementary features which indicate that the total SNR is
+divided into these two dominant modes. Concretely, if the
+system is highly precessing, most of the SNR is captured by the $m=0$
+sideband, whereas if the system is mildly precessing the $m=2$ has the
+dominant contribution to the SNR of the signal.  
+
+Concretely, the $m=2$ mode appears to dominate (${\cal O}_2 \gg {\cal O}_0$)
+for binaries with low mass-asymmetry (top row), or asymmetric mass binaries
+with low-spin (left column). As the BH mass and spin increases, i.e., approach
+towards strongly precessing systems, $m=2$ mode is dominant only for regions
+where $\kappa \sim 1$, which are essentially non (mildly)-precessing systems.
+In contrast, the $(m=0)$ mode shows high overlap (${\cal O}_0 \gg {\cal O}_2$)
+near the edge-on region ($\theta_J=\pi/2$), and progressively covers more area
+in the $(\theta_J, \kappa)$ space, as the spin or mass asymmetry increases,
+i.e. for strongly precessing systems. In between, there exists be a region
+where both for $m=2$ and $m=0$ sidebands contribute almost equally to the
+total SNR (${\cal O}_2 \sim {\cal O}_0$), and we discuss this case in further
+detail in the next chapter.
+
+
