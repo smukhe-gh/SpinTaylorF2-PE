@@ -13,6 +13,9 @@
 *.dvi
 *.glg
 *.gls
+*.fls
+*.nav
+*.fdb_latexmk
 *.ilg
 *.ind
 *.lof
