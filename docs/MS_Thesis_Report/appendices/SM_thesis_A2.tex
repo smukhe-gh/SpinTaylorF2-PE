@@ -4,4 +4,37 @@
 % Investigations of SpinTaylorF2
 %=======================================================================
 
-\chapter{Construction of SpinTaylorF2: Stationary Phase Approximation}
+\chapter{The Stationary Phase Approximation}
+
+The stationary phase approximation is commonly used to compute the Fourier
+transforms of oscillatory signals. For a time-domain GW signal of the form
+\begin{equation}
+h_{+}(t) = A(t_{\rm ret}) \cos\Phi(t_{\rm ret}), 
+\end{equation}
+where $t_{\rm ret}$ is the retarded time at coalescence, the Fourier 
+transform of the signal would be given by
+\begin{eqnarray}
+\tilde{h}_{+}(f) &=& \int dt A(t_{\rm ret}) \cos\Phi(t_{\rm ret}) e^{2\pi i f t},\\
+ &=& \dfrac{1}{2} e^{2\pi i f r/c} \int dt_{\rm ret}\, A(t_{\rm ret}) \left[
+ e^{i \Phi(t_{\rm ret})} + e^{-i \Phi(t_{\rm ret})} \right] e^{2\pi i f t_{\rm
+ ret}} \nonumber
+ \label{td}
+\end{eqnarray}
+where we rename the integration variable from $t$ to $t_{\rm ret}$. We can
+compute this integral using the Stationary Phase Approximation (SPA). The main
+idea behind the approximation is that the contribution to the above integral,
+provided the amplitude varies slowly, would come only from points where the
+phase is stationary; in the rest of the regions, the oscillatory nature of the
+phase would cancel out to give a negligible net contribution to the integral.
+
+We note that the phase term proportional to $e^{i \Phi(t) + 2 i \pi f
+t}$ has no stationary points, and hence has no effect on the value of the
+integral. However, $e^{-i \Phi(t) + 2 i \pi f t}$, has a stationary
+point $t_s (f)$ given by the condition $2 \pi f = \dot{\Phi}(t_s)$. Hence, we 
+focus on the following integral
+\begin{equation}
+h_{+}(t) = \dfrac{1}{2} e^{2\pi i f r/c} \int dt_{\rm ret}\, A(t_{\rm ret})
+ \left[e^{-i \Phi(t) + 2\pi i f t} \right]  \nonumber,
+\end{equation}
+
+
