@@ -1,0 +1,87 @@
+%=======================================================================
+% SM 4/2017
+% Master's thesis Report IISER Thiruvananthapuram
+% Investigations of SpinTaylorF2
+%=======================================================================
+
+\chapter{Fisher Matrix Study of SpinTaylorF2}
+
+The standard approach used for searching for a GW signal $h(t,\bar{\mu})$ with
+unknown set of parameters $\bar{\mu}$ in the data $(x)$, is to compute the
+maximum of the log likelihood ratio $(\log\Lambda)$
+\begin{equation}
+\log{\Lambda} = \langle x\, |\, h(t,\bar{\mu})\rangle - \dfrac{1}{2}\langle h(t,\bar{\mu})\, |\, h(t,\bar{\mu})\rangle
+\end{equation}
+over a bank of templates $\{h(t,\bar{\mu_i})\}$, and find the point
+$\bar{\mu}$ in the parameter space, where $\log{\Lambda}$ is maximum. For this
+to work, the template bank should sample the parameter space \textit{finely
+enough}, so that that any true signal would lie \textit{close enough} to one of the
+templates in the bank. In this chapter, we first discuss what determines how
+finely the parameter space needs to be sampled, or equivalently, the density
+of templates required for constructing a template bank for a generic system,
+and then discuss the implications of using the SpinTaylorF2 model or its
+sidebands in constructing a template bank for precessing systems.
+
+\section{Geometric approach to template bank construction}
+
+The idea is to construct a template bank such that the mismatch between the
+true signal $h(t, \bar{\lambda}) = u(\bar{\lambda})$ and the nearest template $u(t,
+\bar{\lambda} + \Delta\bar{\lambda})$ in the discretized bank is below some level of
+tolerance. This mismatch can be quantified in terms of an ambiguity function
+$\mathcal{A}$ defined in terms of the fractional loss in the expected
+SNR given by the match between the template and the true signal:
+\begin{equation}
+\mathcal{A} = \langle u(t,\bar{\lambda} )\,|\, u(t,
+\bar{\lambda} + \Delta\bar{\lambda}) \rangle
+\end{equation}
+The fractional loss in SNR is given by $1-\mathcal{A}$, and therefore, for a
+perfectly matched template, the fractional loss in the expected SNR would be
+equal zero. Note that we assume all the templates in the template bank are
+normalized, i.e., $\langle u(t,\bar{\lambda} )\,|\, u(t,\bar{\lambda}) \rangle =1$. 
+Therefore, one needs to appropriately choose the parameter
+mismatch $\Delta\bar{\lambda}$ between any two templates in the bank, such that
+the maximum fractional SNR loss, for any given signal is below a certain
+threshold. Assuming that $\Delta\bar{\lambda}$ is small, we can Taylor expand $u(t,
+\bar{\lambda} + \Delta\bar{\lambda})$ and compute the ambiguity function maximized over of $\Delta\lambda$ to get
+\begin{eqnarray}
+\mathcal{A} &=& \langle u(\bar{\lambda})\,|\, u(\bar{\lambda}) + \Delta\lambda_i
+\dfrac{\partial u}{\partial \lambda_i} (\bar{\lambda}) + \dfrac{1}{2} \Delta \lambda_i \Delta\lambda_j\dfrac{\partial^2
+u}{\partial\lambda_i\lambda_j}\,(\bar{\lambda})\rangle + O\left[(\Delta\lambda)^3\right]\\
+\mathcal{A}\rvert_{\Delta\lambda=0} &=& 1 + \dfrac{1}{2} \Delta \lambda_i \Delta\lambda_j \langle
+u(\lambda)\,|\,\dfrac{\partial^2
+u}{\partial\lambda_i\lambda_j}\,(\bar{\lambda})\rangle + O\left[(\Delta\lambda)^3\right]
+\label{metric}
+\end{eqnarray}
+The above equation motivates the definition for a metric $g^{ij}$ using which
+we can define distances $(ds^2 = 1 - \mathcal{A})$ in the parameter space as
+\begin{equation}
+g^{ij} = -\dfrac{1}{2}\langle u(\bar{\lambda})\,|\,\dfrac{\partial^2
+u}{\partial \lambda_i \partial \lambda_j} \rangle \qquad ds^2 =
+g^{ij}d\lambda_i d\lambda_j
+\end{equation}
+The above metric is useful for quantifying the template density required in a
+particular region of parameter space. Concretely, since the volume element in
+a m-dimensional manifold scales as $\sqrt{|g|}$, where $|g|$ is the
+determinant of $g^{ij}$, higher the metric determinant implies template
+density, for a fixed value of maximum allowed mismatch. One can re-express
+$g^{ij}$, by exploiting the fact that the templates are normalized, and
+therefore partial derivatives of norms of the templates are zero, as
+\begin{equation}
+g^{ij} = -\dfrac{1}{2}\langle \dfrac{\partial
+u}{\partial\lambda_i}\,|\,\dfrac{\partial
+u}{\partial\lambda_j} \rangle,
+\end{equation}
+and is the expression we use in our computations. Further, under the assumptions
+of Gaussian stationery noise, one can show that the metric $g^{ij}$ is related to 
+the Fisher information matrix~\cite{Fisher} by a constant factor of 1/2. 
+
+\section{Fisher matrix computations for SpinTaylorF2}
+
+
+
+
+
+
+
+
+

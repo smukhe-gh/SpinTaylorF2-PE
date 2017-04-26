@@ -1,10 +1,14 @@
 %=========================================================================
-% SM 11/2016
-% Mid Term Report IISER Thiruvananthapuram
-% Overlap analysis of SpinTaylorF2
+% SM 4/2017
+% Master's thesis Report IISER Thiruvananthapuram
+% Investigations of SpinTaylorF2
 %=========================================================================
 
 \documentclass[12pt, a4wide]{report}
+
+%--------------------------------------
+% list packages
+%--------------------------------------
 
 \usepackage{amsthm,amssymb,mathrsfs,setspace,pstcol}
 \usepackage{amsmath}
@@ -19,8 +23,15 @@
 \usepackage[font={footnotesize}]{caption}
 \usepackage{subcaption}
 \usepackage{xcolor}
+\usepackage{afterpage}
+\usepackage[toc,page]{appendix}
+\usepackage[parfill]{parskip}
+\usepackage{breqn}
 
-%setup packages
+%--------------------------------------
+% setup packages
+%--------------------------------------
+
 \geometry{margin=1in}
 % \geometry{bindingoffset=1cm}
 \geometry{textwidth=390pt}
@@ -33,47 +44,41 @@
     citecolor=violet,
 }
 
+%--------------------------------------
+% New commands
+%--------------------------------------
+
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\renewcommand{\baselinestretch}{1.5}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
 
 \input xy
 \xyoption{all}
 
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
-
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{notation}[theorem]{Notation}
-
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-
-\renewcommand{\baselinestretch}{1.5}
 \begin{document}
-
-%\pagenumbering{arabic} \setcounter{page}{1}
+\pagenumbering{arabic} \setcounter{page}{1}
 
 %=========================================================================
 % TITLE PAGE
 %=========================================================================
-
 \begin{titlepage}
 \enlargethispage{10mm}
 \begin{center}
-\vspace*{-10mm}
+\vspace*{10mm}
 
-\textbf{\textsc{\Large Investigating SpinTaylorF2: A Single Spin Precessing Frequency Domain Waveform}}\\
+\textbf{\textsc{\LARGE Investigating SpinTaylorF2: A Single Spin Precessing
+Frequency Domain Waveform}}\\
 
 \vspace*{10mm}
 
-A Mid-Term Project Report Submitted \\
-in Partial Fulfilment of the Requirements  \\
-for the Degree of  \\
+A thesis submitted in partial fulfillment \\ of the requirements for the
+degree of \\
 
 \vspace{5mm}
 
@@ -81,89 +86,105 @@ for the Degree of  \\
 in \\
 {\large \bf Physics} \\
 \vspace{7mm}
-{\textit{by}} \\ \vspace{2mm}
+{{by}} \\ \vspace{2mm}
 {\textbf{\large Soham Mukherjee}}\\
 {\textbf{IMS12109}}\\
 
-\vspace*{5.5mm}
+\vspace*{6.5mm}
 
 \begin{figure}[h]
   \begin{center}
-  \includegraphics[scale=0.15, angle=-90]{./images/IISER_Logo.pdf}
+  \includegraphics[scale=0.15, angle=-90]{images/IISER_Logo.pdf}
   \end{center}
 \end{figure}
 \vspace*{3.5mm}
-{\em to} \\ 
+{to} \\ 
 \vspace{2mm}
 {\bf\large School of Physics} \\
 {\bf\large \mbox{Indian Institute of Science Education and Research}}\\
-{\bf\large Thiruvananthapuram -- 695016, India}\\ 
+{\bf\large Thiruvananthapuram, 695016, India}\\ 
 \vspace{2mm}
-\DTMlangsetup{showdayofmonth=false}
 \today
-\DTMlangsetup{showdayofmonth=true}
 \end{center}
 \end{titlepage}
 \clearpage
 
-
-%=========================================================================
+% =========================================================================
 % CERTIFICATE
-%=========================================================================
+% =========================================================================
+\pagenumbering{roman}\setcounter{page}{2}
+\begin{center}
+{\textbf{CERTIFICATE}}
+\end{center}
+%\thispagestyle{empty}
 
-% \pagenumbering{roman} \setcounter{page}{2}
-% \begin{center}
-% {\large{\bf{CERTIFICATE}}}
-% \end{center}
-% %\thispagestyle{empty}
+\noindent
+This is to certify that the work contained in this project report entitled
+\textbf{``Investigating SpinTaylorF2: A Single Spin Precessing Frequency
+Domain Waveform''}  submitted by \textbf{Soham Mukherjee} (\textbf{Roll No:
+IMS12109}) to the Indian Institute of Science Education and Research,
+Thiruvananthapuram, in partial fulfillment of the requirements for the degree
+of {\bf Master of Science in Physics}, has been carried out by
+him under my supervision and that it has not been submitted elsewhere for the
+award of any degree.
 
+\vspace{4cm}
 
-% \noindent
-% This is to certify that the work contained in this project report
-% entitled \textbf{``[Title of the project report]''}  submitted
-% by \textbf{[Your Name]} (\textbf{Roll No: [Your roll number]}) to Indian Institute of Science Education and Research Thiruvananthapuram
-% towards partial requirement of {\bf Master of Science} in Mathematics   has been carried out
-% by [him/her] under my supervision and that it has not been submitted elsewhere
-% for the award of any degree.
+\noindent Thiruvananthapuram, 695016 \hfill Dr. Archana Pai\\
+\noindent April 2013 \hfill (Project Supervisor)\\
 
+\clearpage
 
-% \vspace{4cm}
+% =========================================================================
+% ACKNOWLEDGEMENTS
+% =========================================================================
+\begin{center}
+\textbf{ACKNOWLEDGEMENTS}\\
+\end{center}
 
-% \noindent Thiruvananthapuram - 695 016 \hfill (Dr. XYZ)
-% \noindent April  2013 \hfill Project Supervisor
+Over the past year, several people have provided me with invaluable help and
+support. They have made my time at IISER Thiruvananthapuram a bearable and
+productive experience.
 
-% \clearpage
+First and foremost, I would like to thank Archana Pai for agreeing to be my
+supervisor, and for suggesting and guiding me through every step of this
+project. Her support and encouragement have been instrumental towards my growth
+as a researcher, and my decision to continue in the field of GW astronomy. I'm
+also thankful to my colleagues K. Haris and Kumar Atmjeet, for sharing their
+codes and their data, and for many useful discussions, we have had over the
+past year. I've also been extremely fortunate to have Nathan Johnson-McDaniel
+as a collaborator, a mentor, and a constant source of inspiration over the
+past two years I've known him.
 
-%=========================================================================
+Finally, I would like to express my sincere gratitude to my fellow 
+passengers---Gayathri, Vinaya, Yash, Lexi, Maya, BB8, and especially Navya,
+without whom, this journey would surely have been lonelier than usual.
+
+\clearpage
+
+% =========================================================================
 % ABSTRACT
-%=========================================================================
+% =========================================================================
+\begin{center}
+\textbf{ABSTRACT}\\
+\end{center}
 
-% \begin{center}
-% \textbf{ABSTRACT}\\
-% \end{center}
+We study the SpinTaylorF2 waveform---a closed-form, frequency domain waveform
+model that is ideally suited for describing the gravitational radiation from
+the inspiral phase of a single spin compact binary system, such as a neutron
+star--black hole binary. The quadrupole $(2,2)$ mode of the waveform model can
+be expressed as a sum of five spin-harmonics, where each spin harmonic
+corresponds to a modulation of a leading order function. We investigate the
+feasibility of using the sidebands of SpinTaylorF2 for inferring astrophysical
+parameters from gravitational waves emitted by a precessing neutron 
+star--black hole binary by computing the relative contribution of the individual
+spin-harmonics to the full waveform, and further, use this information to put
+bounds on the spin-alignment parameters of the astrophysical source.
 
-% We study the SpinTaylorF2 waveform, a closed-form, single spin, frequency 
-% domain waveform. The the dominant (2,2) mode can be further decomposed 
-% into sidebands. The SpinTaylorF2 waveform is most suited for neutron star 
-% black hole binaries, since in such systems the neutron star is expected to 
-% have negligible spin compared to that of the black hole. In thus study, we 
-% compare the contribution to the total SNR from the sidebands. We find that 
-% (2,2,2) and (2,2,0) are dominant in complimentary regions of the parameter 
-% space -- (2,2,2) mode dominates when there is no precession and (2,2,0) is 
-% seen to dominate when the system is highly precessing. This would allow us 
-% to use a particular sideband of the SpinTaylorF2 waveform, instead of the
-% full SpinTaylorF2 (which more significantly more computationally expensive) 
-% for parameter estimation. 
-
-% \clearpage
-
-% % \tableofcontents
-% % \clearpage
-% % \listoffigures
-% % \listoftables
-
-% \newpage
-
+\clearpage
+\tableofcontents
+\listoffigures
+\newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
@@ -171,14 +192,24 @@ in \\
 % CHAPTERS
 %=========================================================================
 
-\input SM_thesis_C1.tex
-\input SM_thesis_C2.tex
+\input chapters/SM_thesis_C1.tex
+\input chapters/SM_thesis_C2.tex
+\input chapters/SM_thesis_C3.tex
+\input chapters/SM_thesis_C4.tex
+% \input chapters/SM_thesis_C5.tex
+\input chapters/SM_thesis_C6.tex
 
 %=========================================================================
-% CHAPTERS
+% APPENDIX
 %=========================================================================
+\appendix
+\input appendices/SM_thesis_A1.tex
+\input appendices/SM_thesis_A2.tex
+\input appendices/SM_thesis_A3.tex
 
-\bibliographystyle{unsrt}
-\bibliography{SM_thesis_bib}
+
+\bibliographystyle{utphys.bst}
+{\normalsize
+\bibliography{SM_thesis_bib}}
 \end{document}
 
