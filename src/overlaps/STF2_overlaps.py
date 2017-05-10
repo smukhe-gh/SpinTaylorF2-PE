@@ -48,17 +48,21 @@ def compute_overlap(**options):
     OLVP = np.zeros(9)
 
     #SNR
-    OLVP[0]  = norm(H[0], psd, options['F_MIN'], options['F_MAX'])
-    OLVP[1]  = norm(H[1], psd, options['F_MIN'], options['F_MAX'])
-    OLVP[2]  = norm(H[3], psd, options['F_MIN'], options['F_MAX'])
+    if (0):
+        OLVP[0]  = norm(H[0], psd, options['F_MIN'], options['F_MAX'])
+        OLVP[1]  = norm(H[1], psd, options['F_MIN'], options['F_MAX'])
+        OLVP[2]  = norm(H[3], psd, options['F_MIN'], options['F_MAX'])
 
     #Overlaps
-    OLVP[3]  = overlap(H[0], H[1], psd, options['F_MIN'], options['F_MAX'])
-    OLVP[4]  = overlap(H[0], H[2], psd, options['F_MIN'], options['F_MAX'])
-    OLVP[5]  = overlap(H[0], H[3], psd, options['F_MIN'], options['F_MAX'])
-    OLVP[6]  = overlap(H[0], H[4], psd, options['F_MIN'], options['F_MAX'])
-    OLVP[7]  = overlap(H[0], H[5], psd, options['F_MIN'], options['F_MAX'])
+    if (1):
+        OLVP[3]  = overlap(H[0], H[1], psd, options['F_MIN'], options['F_MAX'])
+        OLVP[5]  = overlap(H[0], H[3], psd, options['F_MIN'], options['F_MAX'])
 
-    OLVP[8]  = overlap(H[0], H[1] + H[3], psd, options['F_MIN'], options['F_MAX'])
+    if (0):
+        OLVP[4]  = overlap(H[0], H[2], psd, options['F_MIN'], options['F_MAX'])
+        OLVP[5]  = overlap(H[0], H[3], psd, options['F_MIN'], options['F_MAX'])
+        OLVP[6]  = overlap(H[0], H[4], psd, options['F_MIN'], options['F_MAX'])
+        OLVP[7]  = overlap(H[0], H[5], psd, options['F_MIN'], options['F_MAX'])
+        OLVP[8]  = overlap(H[0], H[1] + H[3], psd, options['F_MIN'], options['F_MAX'])
 
     return OLVP

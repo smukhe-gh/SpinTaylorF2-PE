@@ -83,7 +83,7 @@ def generate_GRID(**options):
 
     filename = "overlaps_eta_%s_N_%r.npz" %('{:.2f}'.format(ETA), options['N'])
 
-    np.savez("../../output/datasets/%s/%s" %(options['OUTPUT_DIR'], filename),
+    np.savez("./immediate/%s/%s" %(options['OUTPUT_DIR'], filename),
         DATE         = strftime("%Y-%m-%d %H:%M:%S", localtime()),
         SNR_0F       = OVLP[:, :, :, 0],
         SNR_02       = OVLP[:, :, :, 1],
@@ -109,7 +109,7 @@ def parallel_GRID( _MASS, **options):
 V_MASS1   = np.linspace(options['V_MASS1_RANGE'][0], \
 options['V_MASS1_RANGE'][1], options['M'])
 
-if not os.path.exists("../../output/datasets/%s" %options['OUTPUT_DIR']):
-        os.makedirs("../../output/datasets/%s" %options['OUTPUT_DIR'])
+if not os.path.exists("./immediate/%s" %options['OUTPUT_DIR']):
+        os.makedirs("./immediate/%s" %options['OUTPUT_DIR'])
 
-Parallel(n_jobs=-2, verbose=5)(delayed(parallel_GRID)(_MASS = V_MASS1[m], **options) for m in xrange(options['M']))
+Parallel(n_jobs=4, verbose=5)(delayed(parallel_GRID)(_MASS = V_MASS1[m], **options) for m in xrange(options['M']))

@@ -14,12 +14,17 @@ def load_psd(psd_choice, f_max, delta_f):
 	""" Load PSD, options: early, HPZD """
 	n_samples = int(f_max/delta_f)+1
         sample_rate = int(2*f_max)
-	asd_txt_file = os.path.join(psd_loc, {'HPZD': "ZERO_DET_high_P.txt", 'early': "early_gaussian_asd.dat"}[psd_choice])
+	asd_txt_file = os.path.join(psd_loc, {'HPZD': "ZERO_DET_high_P.txt", \
+		'LPZD': "ZERO_DET_low_P.txt", 'early': "early_gaussian_asd.dat",\
+		'NO_SRM': "NO_SRM.txt",}[psd_choice])
 	psd_cache_file = os.path.join(psd_loc, "%s_%u_%u.npy" % (psd_choice, f_max, sample_rate))
 
 	try: # For speed, use the numpy file
 		temp = load(psd_cache_file)[:,1]
-		psd = FrequencySeries(temp, delta_f=delta_f, dtype=np.double)
+                if (1):
+			temp = temp + np.abs(np.random.normal(0,1,len(temp))*1e-4) # adding perturbation
+                print np.mean(temp)
+                psd = FrequencySeries(temp, delta_f=delta_f, dtype=np.double)
 	except IOError:
 		psd = from_txt(asd_txt_file, n_samples, delta_f, f_low)
 		psd *= DYN_RANGE_FAC ** 2

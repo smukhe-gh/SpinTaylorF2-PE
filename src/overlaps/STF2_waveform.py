@@ -17,7 +17,6 @@ def generate_template(**options):
                         options['CHI1'], options['KAPPA'], options['THETAJ'], \
                         options['PSIJ'], options['ALPHA0'], options['F_INJ'])
 
-    # FIXME: Number of samples of the waveform.
     nsamples  = int((options['F_MAX'])/options['DEL_F']) + 1
 
     hpluss, hcross = get_fd_waveform(

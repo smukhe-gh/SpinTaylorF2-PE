@@ -27,7 +27,7 @@ psd = psd_cache.load_psd(psd_choice, f_max, delta_f)
 
 # Allocate the waveform generator and fisher generator
 wf = precessing_wf.waveform(f_inj, f_max, delta_f, **wf_options)
-fisher_gen = precessing_wf.fisher(psd, wf, f_low, f_high = None) 
+fisher_gen = precessing_wf.fisher(psd, wf, f_low, f_high = None)
 
 #Parameter List
 deriv_lst = ['chi1',
@@ -35,8 +35,8 @@ deriv_lst = ['chi1',
              'alpha0',
              'thetaJ',
              'psiJ',
-             'm1',
-             'm2',
+#             'm1',
+#             'm2',
              'phi0',
              'tC']
 
@@ -61,7 +61,7 @@ def FisherMatrix(**wf_params):
   Inv_fisher = linalg.inv(fisher_mat)
   proj_fisher= linalg.inv(Inv_fisher[:7,:7]) #Marginalized fisher over tC and phi0
   fisher_det = linalg.det(proj_fisher)
-  
-  return proj_fisher,fisher_det,err_flag
+
+  return fisher_mat, fisher_det, err_flag
 
 

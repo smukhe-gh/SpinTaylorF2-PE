@@ -61,5 +61,5 @@ def generate_template(**options):
     # waveform =  hp*cos2Y + hc*sin2Y
     # waveform.resize(nsamples)
 
-    return hpluss
+    return hpluss, hcross
 

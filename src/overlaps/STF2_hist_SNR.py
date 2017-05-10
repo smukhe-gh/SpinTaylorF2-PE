@@ -54,20 +54,18 @@ procs = args.procs
 
 # Choose to compute at random points
 print "==> Choosing random points for computation"
-m1_vec     = np.random.uniform(low=12.0, high=50.,  size=N)
-m2_vec     = np.random.uniform(low=1.2,  high=2.0,  size=N)
-chi1_vec   = np.random.uniform(low=0.,   high=1.,   size=N)
-kappa_vec  = np.random.uniform(low=-0.5, high=1.,   size=N)
-alpha0_vec = np.random.uniform(low=0.,   high=2*pi, size=N)
-thetaJ_vec = np.random.uniform(low=0.,   high=pi,   size=N)
-psiJ_vec   = np.random.uniform(low=0.,   high=2*pi, size=N)
-phi0_vec   = np.random.uniform(low=0.,   high=2*pi, size=N)
-
+m1_vec     = np.random.uniform(low=12.0, high=100.,  size=N)
+m2_vec     = np.random.uniform(low=1.2,  high=2.0,   size=N)
+chi1_vec   = np.random.uniform(low=0.,   high=1.,    size=N)
+kappa_vec  = np.random.uniform(low=-0.5, high=1.,    size=N)
+alpha0_vec = np.random.uniform(low=0.,   high=2*pi,  size=N)
+thetaJ_vec = np.random.uniform(low=0.,   high=pi,    size=N)
+psiJ_vec   = np.random.uniform(low=0.,   high=2*pi,  size=N)
+phi0_vec   = np.random.uniform(low=0.,   high=2*pi,  size=N)
 
 def norm(H, psd, f_low, f_cut):
     return pycbc.filter.sigma(H, psd=psd, low_frequency_cutoff=f_low, \
     high_frequency_cutoff=f_cut)
-
 
 def compute_SNR(**options):
     psd_choice = 'HPZD'
@@ -78,16 +76,14 @@ def compute_SNR(**options):
     return SNR
 
 def generate_SNR(mm):
-
-    options['M1']     = 20.2 #m1_vec[mm]
-    options['M2']     = 1.4  #m2_vec[mm]
-
-    options['CHI1']     = chi1_vec[mm]
-    options['KAPPA']    = kappa_vec[mm]
-    options['ALPHA0']   = alpha0_vec[mm]
-    options['THETAJ']   = thetaJ_vec[mm]
-    options['PSIJ']     = psiJ_vec[mm]
-    options['PHI0']     = phi0_vec[mm]
+    options['M1']       = m1_vec[mm]
+    options['M2']       = 1.4    #m2_vec[mm]
+    options['CHI1']     = 0.001  #chi1_vec[mm]
+    options['KAPPA']    = 1.000  #kappa_vec[mm]
+    options['ALPHA0']   = 0.001  #alpha0_vec[mm]
+    options['THETAJ']   = 1.570  #thetaJ_vec[mm]
+    options['PSIJ']     = 0.001  #psiJ_vec[mm]
+    options['PHI0']     = 0.001  #phi0_vec[mm]
     options['SIDEBAND'] = None
 
     SNR = compute_SNR(**options)
@@ -99,7 +95,6 @@ RESULTS    = Parallel(n_jobs=procs, verbose=5)(
              map(delayed(generate_SNR), INDEX))
 
 RESULTS    = np.array(RESULTS)
-FISHER_DET = RESULTS
 
 FILENAME = ('./immediate/SNR_distribution_N%r_%s'%(N, str(tag)))
 

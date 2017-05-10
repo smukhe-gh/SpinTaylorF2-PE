@@ -19,7 +19,7 @@ tag   =  args.tag
 N     = args.N
 procs = args.procs
 
-if(1):
+if(0):
 	# Choose to compute at random points
 	print "==> Choosing random points for computation"
 	chi1_vec   = np.random.uniform(low=0.,   high=1.,   size=N)
@@ -53,8 +53,13 @@ def COMPUTE_FISHER(mm):
 
         wf_params['sideband'] = None
 
-	proj_fisher, DET, err_flag = STF2_FM.FisherMatrix(**wf_params)
-	return DET
+	fisher_mat, DET, err_flag = STF2_FM.FisherMatrix(**wf_params)
+
+        if mm==2:
+            print fisher_mat.astype(int)
+            quit()
+
+        return DET
 
 INDEX      = np.arange(0, len(kappa_vec), 1)
 RESULTS    = Parallel(n_jobs=procs, verbose=5)(

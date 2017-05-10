@@ -46,7 +46,7 @@ def to_lal_coords(m1, m2, chi1, kappa, thetaJ, psiJ, alpha0, f0):
 	XXX: This addition rotation should be switched on
 	in the LAL versions > 6.14 June 2015.
 	"""
-	if(0):
+	if(1):
             shat = rotateY(shat, -incl)
 
 	return (incl, psi0, array(shat))
