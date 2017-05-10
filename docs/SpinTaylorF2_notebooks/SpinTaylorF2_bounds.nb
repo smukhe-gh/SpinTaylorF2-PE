@@ -1,0 +1,421 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     15210,        412]
+NotebookOptionsPosition[     13745,        366]
+NotebookOutlinePosition[     14098,        382]
+CellTagsIndexPosition[     14055,        379]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Use the numerical fits to put bounds on chi and kappa.", "Section",
+ CellChangeTimes->{{3.697960532548397*^9, 3.697960559643258*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Expresssions for the boudaries", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10000.},
+ CellChangeTimes->{{3.69796064432942*^9, 3.697960650930105*^9}, 
+   3.701349420854731*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Kappa]", "1"], "[", 
+   RowBox[{"\[Eta]_", ",", " ", "\[Chi]_"}], "]"}], " ", ":=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"48.98", " ", "\[Chi]"}], " ", "-", " ", "57.13"}], ")"}], 
+    SuperscriptBox["\[Eta]", "2"]}], " ", "+", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1.96", " ", "-", " ", "2.39"}], ")"}], "\[Eta]"}], "-", 
+   RowBox[{"0.09", "\[Chi]"}], " ", "+", " ", 
+   "0.82"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Kappa]", "0"], "[", 
+   RowBox[{"\[Eta]_", ",", " ", "\[Chi]_"}], "]"}], " ", ":=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"145.83", " ", "\[Chi]"}], " ", "-", " ", "155.92"}], ")"}], 
+    SuperscriptBox["\[Eta]", "2"]}], " ", "-", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1.10", " ", "+", "0.16"}], ")"}], "\[Eta]"}], "+", 
+   RowBox[{"0.08", "\[Chi]"}], " ", "+", " ", "0.50"}]}]}], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10000.},
+ CellChangeTimes->{{3.6979606270763187`*^9, 3.697960798357335*^9}, {
+   3.6979610988631887`*^9, 3.6979611007504168`*^9}, {3.6979611325993567`*^9, 
+   3.697961132836918*^9}, 3.701349420854999*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["C", "1"], "[", 
+   RowBox[{"\[Eta]_", ",", " ", "\[Chi]_"}], "]"}], " ", ":=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "8.37"}], "\[Chi]"}], " ", "+", " ", "10.62"}], ")"}], 
+    "\[Eta]"}], " ", "+", " ", 
+   RowBox[{"0.10", "\[Chi]"}], " ", "+", " ", 
+   "0.30"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["C", "0"], "[", 
+   RowBox[{"\[Eta]_", ",", " ", "\[Chi]_"}], "]"}], " ", ":=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "6.23"}], "\[Chi]"}], " ", "+", " ", "10.47"}], ")"}], 
+    "\[Eta]"}], " ", "+", " ", 
+   RowBox[{"0.01", "\[Chi]"}], " ", "+", " ", "0.72"}]}]}], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10000.},
+ CellChangeTimes->{{3.697960805633688*^9, 3.697960892567713*^9}, {
+   3.6979611025747643`*^9, 3.6979611039741287`*^9}, {3.6983215645442877`*^9, 
+   3.698321567854043*^9}, 3.701349420855081*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Kappa]", "AC"], "[", 
+   RowBox[{"\[Eta]_", ",", " ", "\[Chi]_", ",", "\[Theta]_"}], "]"}], " ", ":=", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["\[Kappa]", "0"], "[", 
+    RowBox[{"\[Eta]", ",", " ", "\[Chi]"}], "]"}], " ", "-", " ", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["C", "0"], "[", 
+     RowBox[{"\[Eta]", ",", " ", "\[Chi]"}], "]"}], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"\[Theta]", " ", "-", " ", 
+       FractionBox["\[Pi]", "2"]}], ")"}], 
+     "2"]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Kappa]", "BC"], "[", 
+   RowBox[{"\[Eta]_", ",", " ", "\[Chi]_", ",", " ", "\[Theta]_"}], "]"}], 
+  " ", ":=", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["\[Kappa]", "1"], "[", 
+    RowBox[{"\[Eta]", ",", " ", "\[Chi]"}], "]"}], " ", "-", " ", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["C", "1"], "[", 
+     RowBox[{"\[Eta]", ",", " ", "\[Chi]"}], "]"}], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"\[Theta]", " ", "-", " ", 
+       FractionBox["\[Pi]", "2"]}], ")"}], "2"]}]}]}]}], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10000.},
+ CellChangeTimes->{{3.697960921022084*^9, 3.6979610252587633`*^9}, {
+   3.698321466708177*^9, 3.698321471195298*^9}, {3.698321571648539*^9, 
+   3.698321574375692*^9}, 3.701349420855147*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Standard bounds for \[Kappa] for strongly precessing and moderately \
+precessing systems.\
+\>", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10001.},
+ CellChangeTimes->{{3.697961260518167*^9, 3.697961289272008*^9}, 
+   3.701349415564084*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Kappa]", "0"], "[", 
+   RowBox[{"0.08", ",", " ", "1"}], "]"}], ";"}]], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10001.},
+ CellChangeTimes->{{3.697961090561799*^9, 3.697961117765545*^9}, {
+   3.697961152405159*^9, 3.6979611799131927`*^9}, {3.697961233920163*^9, 
+   3.697961234003674*^9}, 3.701349415564172*^9, 3.701349456788623*^9, 
+   3.701401746463801*^9, 3.7014859459392242`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Kappa]", "1"], "[", 
+   RowBox[{"0.08", ",", " ", "1"}], "]"}], ";"}]], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10001.},
+ CellChangeTimes->{{3.697961090561799*^9, 3.697961117765545*^9}, {
+   3.697961152405159*^9, 3.6979611799131927`*^9}, {3.697961235537171*^9, 
+   3.697961257218504*^9}, 3.701349415564241*^9, 3.701349458115148*^9, 
+   3.701401748279441*^9, 3.701485948252091*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"eta", "[", "m_", "]"}], " ", ":=", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"m", " ", "1.4"}], ")"}], "/", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"m", "+", " ", "1.4"}], ")"}], "2"]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.701485986512289*^9, 3.701486029014731*^9}}],
+
+Cell["\<\
+Variation of kappa (y axis) with chi1 (x axis) for various values of eta. \
+\>", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10000.},
+ CellChangeTimes->{{3.697961260518167*^9, 3.697961314618492*^9}, {
+   3.697961351466702*^9, 3.697961354673362*^9}, 3.701249379098262*^9, {
+   3.701349260249805*^9, 3.7013492784317102`*^9}, {3.701349319976066*^9, 
+   3.7013493332862873`*^9}, {3.701349365349424*^9, 3.7013494086516438`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["\[Kappa]", "1"], "[", 
+        RowBox[{
+         RowBox[{"eta", "[", 
+          SubscriptBox["m", "1"], "]"}], ",", " ", "\[Chi]"}], "]"}], " ", 
+       ",", 
+       RowBox[{
+        SubscriptBox["\[Kappa]", "0"], "[", 
+        RowBox[{
+         RowBox[{"eta", "[", 
+          SubscriptBox["m", "1"], "]"}], ",", " ", "\[Chi]"}], "]"}]}], " ", 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Chi]", ",", "0", ",", "1"}], "}"}], ",", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<\[Chi]\>\"", ",", "\"\<\[Kappa]\>\""}], "}"}]}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}], ",", 
+     RowBox[{"PlotRangeClipping", "\[Rule]", "True"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["m", "1"], ",", "12", ",", "60"}], "}"}]}], "]"}]], "Input",\
+
+ CellGroupingRules->{GroupTogetherGrouping, 10001.},
+ CellChangeTimes->{{3.701348954902685*^9, 3.701349009119041*^9}, 
+   3.701349103148005*^9, {3.701349738047235*^9, 3.7013497458034563`*^9}, 
+   3.701349852504517*^9, {3.701401836577504*^9, 3.701401841914379*^9}, 
+   3.701485604669188*^9, {3.7014857662908077`*^9, 3.7014857950167418`*^9}, {
+   3.701486039936455*^9, 3.7014860900199614`*^9}, {3.701486120939076*^9, 
+   3.701486135968213*^9}, {3.701486561302641*^9, 3.7014865715346403`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`$1490$$ = 12., Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`$1490$$], 12, 
+       RawBoxes[
+        SubscriptBox["m", "1"]]}, 12, 60}}, Typeset`size$$ = {
+    360., {110., 115.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`$1490$13612$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`$1490$$ = 12}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`$1490$$, $CellContext`$1490$13612$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[{
+         Subscript[$CellContext`\[Kappa], 1][
+          $CellContext`eta[$CellContext`$1490$$], $CellContext`\[Chi]], 
+         Subscript[$CellContext`\[Kappa], 0][
+          $CellContext`eta[$CellContext`$1490$$], $CellContext`\[Chi]]}, \
+{$CellContext`\[Chi], 0, 1}, AxesLabel -> {"\[Chi]", "\[Kappa]"}, 
+        PlotRange -> {{0, 1}, {-1, 1}}, PlotRangeClipping -> True], 
+      "Specifications" :> {{{$CellContext`$1490$$, 12, 
+          RawBoxes[
+           SubscriptBox["m", "1"]]}, 12, 60}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{405., {154., 159.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Input",
+ CellChangeTimes->{3.701486732856225*^9}],
+
+Cell["\<\
+Variation of kappa (y axis) with eta (x axis) for various values of chi1.\
+\>", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10001.},
+ CellChangeTimes->{{3.697961260518167*^9, 3.697961314618492*^9}, {
+   3.697961351466702*^9, 3.697961354673362*^9}, 3.701249379098262*^9, {
+   3.701349260249805*^9, 3.7013492784317102`*^9}, {3.701349319976066*^9, 
+   3.701349355333632*^9}, {3.701349429289324*^9, 3.701349447210585*^9}, 
+   3.701349852504846*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["\[Kappa]", "1"], "[", 
+        RowBox[{"\[Eta]", ",", " ", "\[Chi]"}], "]"}], " ", ",", 
+       RowBox[{
+        SubscriptBox["\[Kappa]", "0"], "[", 
+        RowBox[{"\[Eta]", ",", " ", "\[Chi]"}], "]"}]}], " ", "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Eta]", ",", "0.01", ",", "0.13"}], "}"}], ",", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<\[Eta]\>\"", ",", "\"\<\[Kappa]\>\""}], "}"}]}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0.01", ",", "0.13"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}], ",", 
+     RowBox[{"PlotRangeClipping", "\[Rule]", "True"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Chi]", ",", "0", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7014870309999647`*^9, 3.701487074170814*^9}, {
+  3.701487164505333*^9, 3.7014871854593773`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`\[Chi]$$ = 0.886, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`\[Chi]$$], 0, 1}}, Typeset`size$$ = {
+    360., {117., 122.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Chi]$27325$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`\[Chi]$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`\[Chi]$$, $CellContext`\[Chi]$27325$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[{
+         Subscript[$CellContext`\[Kappa], 
+          1][$CellContext`\[Eta], $CellContext`\[Chi]$$], 
+         Subscript[$CellContext`\[Kappa], 
+          0][$CellContext`\[Eta], $CellContext`\[Chi]$$]}, {$CellContext`\
+\[Eta], 0.01, 0.13}, AxesLabel -> {"\[Eta]", "\[Kappa]"}, 
+        PlotRange -> {{0.01, 0.13}, {-1, 1}}, PlotRangeClipping -> True], 
+      "Specifications" :> {{$CellContext`\[Chi]$$, 0, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{405., {161., 166.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.701487074622012*^9, 3.701487186169818*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1280, 711},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 139, 1, 64, "Section"],
+Cell[CellGroupData[{
+Cell[744, 27, 190, 3, 30, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10000.}],
+Cell[937, 32, 1241, 33, 52, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10000.}],
+Cell[2181, 67, 1018, 29, 46, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10000.}],
+Cell[3202, 98, 1354, 38, 83, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10000.}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4593, 141, 258, 6, 30, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10001.}],
+Cell[4854, 149, 449, 9, 28, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10001.}],
+Cell[5306, 160, 447, 9, 28, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10001.}]
+}, Open  ]],
+Cell[5768, 172, 339, 10, 34, "Input"],
+Cell[6110, 184, 441, 7, 30, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10000.}],
+Cell[6554, 193, 1659, 43, 46, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10001.}],
+Cell[8216, 238, 1994, 41, 330, InheritFromParent],
+Cell[10213, 281, 462, 8, 30, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10001.}],
+Cell[CellGroupData[{
+Cell[10700, 293, 1136, 30, 46, "Input"],
+Cell[11839, 325, 1878, 37, 344, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

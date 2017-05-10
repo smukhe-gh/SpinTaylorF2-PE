@@ -1,0 +1,70 @@
+%=======================================================================
+% SM 4/2017
+% Master's thesis Report IISER Thiruvananthapuram
+% Investigations of SpinTaylorF2
+%=======================================================================
+
+\chapter{Discussions and Future Directions}
+
+In this thesis, we focused our study on the single spin, precessing
+gravitational waveform model SpinTaylorF2, and explored numerically, the
+consequences of the mathematical structure of the waveform, in terms of the
+fractional SNR contribution of the individual sidebands to the total SNR of
+the full waveform model. We showed that precession has observable consequences
+on the total SNR pattern in the spin-precession parameter space. Specifically,
+we investigated how the observed patterns vary over the mass-spin parameter
+space, a task that is not analytically tractable. Our results, however, are in
+agreement with what one would predict from the analytical form of the
+expressions for precessing waveforms~\cite{Apostolatos1994}.
+
+Further, we explored how the total SNR is distributed among the various
+sidebands of the waveform model. We discovered that only two of the sidebands
+($m=2$ and $m=0$) are dominant throughout the entire parameter space, and show
+strong complementarity in their regions of dominance: the $m=0$ mode is
+dominant for strongly precessing systems, whereas $m=2$ dominates when the
+extent of precession in the system is low or non-existent. This complementary
+nature of the two sidebands, allowed us to partition the spin-precession
+parameter space into 3 regions (strongly precessing, moderately precessing,
+and mildly precessing systems), based on the overlap difference between the
+two sidebands. We obtained the numerical expressions for the boundaries of
+these regions, which, for strongly and moderately precessing systems allowed
+us to put an upper bound on the value of the spin-alignment parameter
+$\kappa$. Most of this work is a part of a manuscript in
+preparation~\cite{STF2}.
+
+However, a few open questions remain, which require further attention. For
+example, we are unsure about the origin of a set of discontinuous points (see
+last panel in Fig.~\ref{fig:P2}~b) in the $(\theta_J,
+\kappa)$ space, and the `beats' we observe in the overlap
+(Fig.~\ref{fig:P2}~b) and SNR (Fig.~\ref{fig:SNR}) figures. We expect the
+latter to be due to the interference terms in the overlap computation between
+the sidebands, but further investigations are required on this front. One
+would also to like generalize our numerical fits to any arbitrary $\psi_J$
+(currently we use $\psi_J = 0.001$ for all our analyses) and test their
+robustness against different detector noise realizations. It would also be
+very interesting explore whether one can put a bound on the BH spin $\chi_1$
+using the existing numerical data, similar to what has been for $\kappa$.
+
+A particularly promising avenue of investigation, which we are currently
+working on, is to carry about a Fisher matrix study~\cite{Fisher}, followed by
+a fitting factor analysis, to investigate the feasibility and efficacy of
+constructing a template bank for precessing systems using only the $m=0$ mode
+of the waveform. To our knowledge, currently no robust and efficient method to
+construct a template bank for generic precessing systems exists in literature.
+A recent study~\cite{Nat2017}, investigated this problem and used the
+SpinTaylorF2 waveform model to construct a template bank for face-on and 
+face-off systems undergoing precession. However, for the edge-on cases, they found
+that the number of templates required increase exponentially, which
+significantly pushes up the computation cost. Our preliminary results suggest
+that using a single sideband ($m=0$) instead of the full waveform to construct
+the template bank, may help ameliorate the issue.
+
+A major part of this project involved elaborate code development to
+efficiently compute the SNR and the overlaps over multiple dimensions of
+parameter space, and our codes relied heavily on the existing GW data analysis
+infrastructure provided by the PyCBC~\cite{Canton:2014ena,Usman:2015kfa}
+library and the LALSuite software package. The codes used in this project are
+available upon request.
+
+
+

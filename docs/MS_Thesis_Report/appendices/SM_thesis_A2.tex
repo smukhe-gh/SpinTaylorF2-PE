@@ -1,0 +1,75 @@
+%=======================================================================
+% SM 4/2017
+% Master's thesis Report IISER Thiruvananthapuram
+% Investigations of SpinTaylorF2
+%=======================================================================
+
+\chapter{The Stationary Phase Approximation}
+
+The stationary phase approximation is commonly used to compute the Fourier
+transforms of oscillatory signals. For a time-domain GW signal of the form
+\begin{equation}
+h_{+}(t) = A(t_{\rm ret}) \cos\Phi(t_{\rm ret}), 
+\end{equation}
+where $t_{\rm ret}$ is the retarded time at coalescence, the Fourier 
+transform of the signal would be given by
+\begin{eqnarray}
+\tilde{h}_{+}(f) &=& \int dt A(t_{\rm ret}) \cos\Phi(t_{\rm ret}) e^{2\pi i f t},\\
+ &=& \dfrac{1}{2} e^{2\pi i f r/c} \int dt_{\rm ret}\, A(t_{\rm ret}) \left[
+ e^{i \Phi(t_{\rm ret})} + e^{-i \Phi(t_{\rm ret})} \right] e^{2\pi i f t_{\rm
+ ret}} \nonumber
+ \label{td}
+\end{eqnarray}
+where we rename the integration variable from $t$ to $t_{\rm ret}$. We can
+compute this integral using the Stationary Phase Approximation (SPA). The main
+idea behind the approximation is that the contribution to the above integral,
+provided the amplitude varies slowly, would come only from points where the
+phase is stationary; in the rest of the regions, the oscillatory nature of the
+phase would cancel out to give a negligible net contribution to the integral.
+
+We note that the phase term proportional to $e^{i \Phi(t) + 2 i \pi f
+t}$ has no stationary points, and hence has no effect on the value of the
+integral. However, $e^{-i \Phi(t) + 2 i \pi f t}$, has a stationary
+point $t_s (f)$ given by the condition $2 \pi f = \dot{\Phi}(t_s)$. Hence, we 
+focus on the following integral
+\begin{equation}
+\tilde{h}_{+}(f) = \dfrac{1}{2} e^{2\pi i f r/c} \int dt_{\rm ret}\, A(t_{\rm ret})
+ \left[e^{-i \Phi(t) + 2\pi i f t} \right]  \nonumber,
+\end{equation}
+and Taylor expand the phase factor $(-i \Phi(t) + 2\pi i f t)$ around the
+stationary point $t_s$, which, after a change of variables gives
+\begin{equation}
+\tilde{h}_{+}(f) = \dfrac{1}{2} e^{2\pi i f r/c} A(t_{s})\,
+e^{i  \left[-\Phi(t_s) + 2\pi i f t_s\right]} 
+\sqrt{\dfrac{2}{\ddot{\Phi}(t_s)}}\int dx\, e^{-i x^2}.
+\end{equation}
+The last integral is a Fresnel integral
+\begin{equation}
+\int_{-\infty}^{\infty} dx\, e^{i x^2} =  \sqrt{\pi} e^{-i\pi/4}.
+\end{equation}
+Using the above result, we arrive at the final expression for the waveform in
+the frequency domain
+\begin{equation}
+\tilde{h}_{+}(f) = \dfrac{1}{2} A(t_{s})\,\sqrt{\dfrac{2}{\ddot{\Phi}(t_s)}}\,
+e^{i\left[2\pi f(t_s - r/c) - \Phi(t_s) - \pi/4 \right]}.
+\end{equation}
+For the SpinTaylorF2 waveform, we start with the time domain expression of the
+form
+\begin{equation}
+h_{+}(t) = \dfrac{2 M \eta}{D}v^2 \text{Re} \left[z(\alpha - \phi, \theta,
+\psi, \beta) e^{2 i (\Phi - \zeta)}\right]
+\end{equation}
+Upon subsituting the expression for $z_m$'s, the total phase is given by the
+combination $\Phi_m = 2 (\Phi - \zeta) + m \alpha$. At the level of
+approximation employed here, we assume that the factor $e^{i(-2\zeta +
+m\alpha)}$ is a slowly-varying term, and therefore, is pulled out of the
+integration. The resulting phase, after the Fourier transform, is given by
+$\Psi(f) = 2\pi f t(f) - 2\Phi(t(f))$. By approximating the stationary phase
+amplitude $1/\sqrt{\ddot\Phi}$ by the leading order term proportionaly to
+$f^{-7/6}$, we finally arrive at the expression for the waveform model in the
+frequency domain
+
+\begin{equation}
+\tilde{h}_{+}(f) = \dfrac{2\pi M_{c}^{2}}{D}\sqrt{\dfrac{5}{96\pi}}(\pi M
+f)^{-7/6}\sum_{m}z_{m}e^{i(\Psi(f) - 2\zeta(f)) + i m \alpha(f)}
+\end{equation}

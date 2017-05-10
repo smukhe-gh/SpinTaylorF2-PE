@@ -1,0 +1,132 @@
+\ProvidesPackage{beamerthemeI6pd2}  
+% this style was created by Thomas Deselaers an Philippe Dreuw
+
+%=====================================================================================
+\RequirePackage{tangocolors}
+\selectcolormodel{cmyk}
+\mode<presentation>
+%=====================================================================================
+
+\setbeamercolor{headline}{fg=blue,bg=white}
+\setbeamercolor{footline}{fg=tabutter, bg=green}
+\setbeamerfont{footline}{size=\large,series=\tt}
+\setbeamercolor{separation line}{bg=ta2orange}
+\setbeamercolor{title in headline}{fg=blue}
+\setbeamercolor{author in headline}{fg=orange}
+\setbeamercolor{institute in headline}{fg=ta3orange}
+
+\setbeamercolor{framesubtitle}{fg=ta3orange, bg=blue}
+\setbeamercolor{author in head/foot}{fg=ta2orange, bg=blue}
+\setbeamercolor{title in head/foot}{fg=ta2orange, bg=blue}
+
+\setbeamercolor*{normal text}{fg=black, bg=black}
+\setbeamercolor*{block body}{bg=white,fg=black}
+\setbeamercolor*{block title}{fg=white,bg=blue}
+\setbeamerfont{block title}{size=\large,series=\bf}
+\setbeamercolor{upper separation line head}{fg=black}
+\setbeamercolor{lower separation line head}{fg=black}
+
+\setbeamercolor*{example body}{fg=ta3aluminium,bg=blue}
+\setbeamercolor*{example text}{fg=ta3aluminium,bg=blue}
+\setbeamercolor*{example title}{bg=taorange,fg=blue}
+
+%\setbeamercolor{alerted text}{fg=ta3gray}
+%\setbeamercolor{example text}{fg=taorange}
+\setbeamercolor{structure}{fg=ta3skyblue}
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+%=====================================================================================
+% Define block
+%=====================================================================================
+\setbeamertemplate{block begin}{
+\vskip1.25ex
+\begin{beamercolorbox}[ht=3.7ex, dp=0.3ex, center, leftskip=-1em, colsep*=.5ex]{block title}%
+\usebeamerfont*{block title}%
+{\phantom{Gg}\insertblocktitle}% phantom because of baseline problem
+\end{beamercolorbox}%
+
+{\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+\vskip1.00ex
+\usebeamerfont{block body}%
+\begin{beamercolorbox}[leftskip=1em, colsep*=.1ex, sep=0.1ex, vmode]{block body}%
+\ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+\setbeamertemplate{block end}{
+\end{beamercolorbox}
+}
+
+%=====================================================================================
+% Define title
+%=====================================================================================
+\setbeamertemplate{headline}{  
+\leavevmode
+\begin{beamercolorbox}[wd=\paperwidth]{headline}
+\begin{columns}[T]
+\begin{column}{.02\paperwidth}
+\end{column}
+\begin{column}{.8\paperwidth}
+\vskip5ex
+\raggedleft
+\usebeamercolor{title in headline}{\color{blue}\textbf{\Large{\inserttitle}}\\[1ex]}
+\usebeamercolor{author in headline}{\color{black}{\insertauthor}\\[1ex]}
+\usebeamercolor{institute in headline}{\color{black}{\small\insertinstitute}\\[1ex]}     
+\end{column}
+\begin{column}{.2\paperwidth}
+\vskip6ex
+\begin{center}
+\includegraphics[width=.24\linewidth]{figures/logo_iiser.png}
+\hspace{3mm}
+\includegraphics[width=.19\linewidth]{figures/logo_apc.png}
+\hspace{3mm}
+\includegraphics[width=.30\linewidth]{figures/logo_indigo.png}
+\end{center}
+\begin{center}
+\vspace{3mm}
+\includegraphics[width=.25\linewidth]{figures/logo_lsc.png}
+\hspace{3mm}
+\includegraphics[width=.35\linewidth]{figures/logo_virgo.png}
+\hspace{3mm}
+% \includegraphics[width=.2\linewidth]{figures/logo_iiser.png}
+\end{center}
+\vskip2ex
+\end{column}
+\begin{column}{.01\paperwidth}
+\end{column}
+\end{columns}
+\vskip2ex
+\end{beamercolorbox}
+
+\begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+\rule{0pt}{1.5pt}
+\end{beamercolorbox}
+}
+
+%=====================================================================================
+\setbeamertemplate{footline}{
+\begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+\rule{0pt}{1.5pt}
+\end{beamercolorbox}
+\vspace*{3mm}
+\hspace*{22mm}\color{black}{\leftfoot}
+\hfill
+\color{black}{\rightfoot}\hspace*{22mm}
+\vspace*{3mm}
+}
+%=====================================================================================
+% Display a grid to help align images ... and it looks nice with this color scheme
+% \beamertemplategridbackground[5mm]
+
+%=====================================================================================
+\mode<all>
+
+% adapt height of imtemize rectangles
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{itemize item}{\raisebox{0.12ex}{$\blacktriangleright$}\hskip0.2em}
+\setbeamertemplate{itemize subitem}{\raisebox{0.12ex}{$\triangleright$}\hskip0.2em}
+
+
+% equal font sizes for all levels
+\setbeamerfont{itemize/enumerate body}{size=\small}
+\setbeamerfont{itemize/enumerate subbody}{size=\small}
+\setbeamerfont{itemize/enumerate subsubbody}{size=\small}
