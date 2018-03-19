@@ -1,5 +1,5 @@
 # SpinTaylorF2-PE
-The code is designed as a wrapper to work with PyCBC [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1183449.svg)](https://doi.org/10.5281/zenodo.1183449) and LALSuite 
+The code is designed as a wrapper to work with and [PyCBC](https://github.com/ligo-cbc/pycbc) and [LALSuite](https://wiki.ligo.org/DASWG/LALSuite) 
 functionalities to compute the SNR and overlaps of a waveform model, 
 in particular, SpinTaylorF2 [(1)](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.89.044021). 
 The code is written in Python, and uses 
@@ -12,4 +12,4 @@ sidebands of SpinTaylorF2 waveform. However, the code is still quite
 useful to run systematic overlap or SNR computations for a multi-dimensional parameter space.
  
 ---
-(1) A. Lundgren and R. O’Shaughnessy, [https://journals.aps.org/prd/abstract/10.1103/PhysRevD.89.044021](Phys. Rev. D 89, 044021 (2014).)
+(1) A. Lundgren and R. O’Shaughnessy, [Phys. Rev. D 89, 044021 (2014)](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.89.044021)
